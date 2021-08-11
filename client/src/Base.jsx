@@ -3,6 +3,7 @@ import { loadUser } from './actions/auth';
 import './App.css';
 import Calendar from './components/Calendar.jsx';
 import Login from './components/Login';
+import Forecast from './components/Forecast';
 
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,6 +22,7 @@ const Base = ({ loadUser }) => {
         <Switch>
           <Route exact path='/' component={Login} />
           <Route exact path='/calendar' component={Calendar} />
+          <Route exact path='/forecast' component={Forecast} />
         </Switch>
       </section>
     </Fragment>

@@ -1,8 +1,15 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const cors = require('cors');
+const corsOptions = {
+  origin: 'http://localhost:5000',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 
 const app = express();
+app.use(cors(corsOptions));
 
 connectDB();
 
@@ -10,6 +17,7 @@ app.use(express.json({ extend: false }));
 
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/weather', require('./routes/api/weather'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
