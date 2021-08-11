@@ -1,0 +1,12 @@
+.Background {
+  background-color: rgb(24, 24, 24);
+  position: fixed;
+  z-index: -4;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  color: white;
+  overflow: auto;
+}
