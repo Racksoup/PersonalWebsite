@@ -6,3 +6,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GOT_FORECAST = 'GOT_FORECAST';
 export const FORECAST_ERROR = 'FORECAST_ERROR';
+export const GOT_ONE_CALL_WEATHER = 'GOT_ONE_CALL_WEATHER';
+export const WEATHER_ERROR = 'WEATHER_ERROR';

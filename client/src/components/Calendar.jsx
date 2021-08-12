@@ -8,8 +8,8 @@ const Calendar = () => {
     <Fragment>
       <div>
         <Button>
-          <Link style={{ color: 'white' }} to='/forecast'>
-            Forecast
+          <Link style={{ color: 'white' }} to='/weather'>
+            Weather
           </Link>
         </Button>
       </div>
