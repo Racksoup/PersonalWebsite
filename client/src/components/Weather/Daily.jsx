@@ -29,11 +29,59 @@ const Daily = ({ daily, getOneCallWeather }) => {
           <thead>
             <tr style={{ color: 'white' }}>
               <th>Day</th>
+              <th>Sunrise</th>
+              <th>Sunset</th>
+              <th>Moonrise</th>
+              <th>Moonset</th>
+              <th>Moon Phase</th>
+              <th>Max Temp</th>
+              <th>Min Temp</th>
+              <th>Pressure</th>
+              <th>Humidity</th>
+              <th>Wind Speed</th>
+              <th>Weather</th>
+              <th>Clouds</th>
+              <th>Rain</th>
             </tr>
           </thead>
           <tbody>
             {daily.map((day) => {
-              return <tr style={{ color: 'white' }}></tr>;
+              let theDay = new Date(day.dt * 1000)
+                .toLocaleString()
+                .split(' ')
+                .shift()
+                .replace(/,/g, '');
+              theDay = theDay.substring(theDay.length - 7, theDay.length - 5);
+              let sunrise = new Date(day.sunrise * 1000).toLocaleString().split(' ');
+              sunrise.shift();
+              sunrise[0] = sunrise[0].substring(0, sunrise[0].length - 3);
+              let sunset = new Date(day.sunset * 1000).toLocaleString().split(' ');
+              sunset.shift();
+              sunset[0] = sunset[0].substring(0, sunset[0].length - 3);
+              let moonrise = new Date(day.moonrise * 1000).toLocaleString().split(' ');
+              moonrise.shift();
+              moonrise[0] = moonrise[0].substring(0, moonrise[0].length - 3);
+              let moonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
+              moonset.shift();
+              moonset[0] = moonset[0].substring(0, moonset[0].length - 3);
+              return (
+                <tr style={{ color: 'white' }}>
+                  <td>{theDay}</td>
+                  <td>{sunrise}</td>
+                  <td>{sunset}</td>
+                  <td>{moonrise}</td>
+                  <td>{moonset}</td>
+                  <td>{day.moon_phase}%</td>
+                  <td>{(day.temp.max - 273.15).toFixed(1)}</td>
+                  <td>{(day.temp.min - 273.15).toFixed(1)}</td>
+                  <td>{day.pressure}</td>
+                  <td>{day.humidity}</td>
+                  <td>{day.wind_speed}</td>
+                  <td>{day.weather[0].main}</td>
+                  <td>{day.clouds}</td>
+                  <td>{day.rain}</td>
+                </tr>
+              );
             })}
           </tbody>
         </Table>

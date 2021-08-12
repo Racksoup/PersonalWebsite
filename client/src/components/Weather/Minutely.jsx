@@ -33,7 +33,7 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
               </Link>
             </Button>
           </div>
-          <h1 style={{ margin: 'auto' }}>Minutely</h1>
+          <h1 style={{ margin: 'auto' }}>Minutely Precipitation</h1>
         </div>
         <div
           style={{

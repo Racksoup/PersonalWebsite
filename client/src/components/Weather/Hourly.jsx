@@ -49,7 +49,6 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
           </thead>
           <tbody>
             {hourly.map((hour) => {
-              console.log(new Date(hour.dt * 1000));
               if (hourTag > 11) {
                 hourTag = 0;
                 if (dayNight === 'pm') {
