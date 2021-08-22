@@ -13,13 +13,35 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PropTypes from 'prop-types';
-import { getOneCallWeather } from './actions/weather';
+import {
+  getFourDay,
+  getOneCallWeather,
+  getHistorical,
+  getSavedWeather,
+  postSavedWeather,
+} from './actions/weather';
 
-const Base = ({ loadUser, getOneCallWeather }) => {
+const Base = ({
+  gotHistorical,
+  gotSavedWeather,
+  loadUser,
+  getOneCallWeather,
+  getFourDay,
+  getHistorical,
+  getSavedWeather,
+  postSavedWeather,
+}) => {
   useEffect(() => {
     loadUser();
     getOneCallWeather();
+    getFourDay();
+    getHistorical();
+    getSavedWeather();
   }, []);
+
+  useEffect(() => {
+    postSavedWeather();
+  }, [gotHistorical, gotSavedWeather]);
 
   return (
     <Fragment>
@@ -40,8 +62,26 @@ const Base = ({ loadUser, getOneCallWeather }) => {
 };
 
 Base.propTypes = {
+  gotHistorical: PropTypes.bool,
+  gotSavedWeather: PropTypes.bool,
   loadUser: PropTypes.func.isRequired,
   getOneCallWeather: PropTypes.func.isRequired,
+  getFourDay: PropTypes.func.isRequired,
+  getHistorical: PropTypes.func.isRequired,
+  getSavedWeather: PropTypes.func.isRequired,
+  postSavedWeather: PropTypes.func.isRequired,
 };
 
-export default connect(null, { loadUser, getOneCallWeather })(Base);
+const mapStateToProps = (state) => ({
+  gotHistorical: state.weather.gotHistorical,
+  gotSavedWeather: state.weather.gotSavedWeather,
+});
+
+export default connect(mapStateToProps, {
+  loadUser,
+  getOneCallWeather,
+  getFourDay,
+  getHistorical,
+  getSavedWeather,
+  postSavedWeather,
+})(Base);

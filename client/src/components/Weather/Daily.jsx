@@ -29,11 +29,6 @@ const Daily = ({ daily, getOneCallWeather }) => {
           <thead>
             <tr style={{ color: 'white' }}>
               <th>Day</th>
-              <th>Sunrise</th>
-              <th>Sunset</th>
-              <th>Moonrise</th>
-              <th>Moonset</th>
-              <th>Moon Phase</th>
               <th>Max Temp</th>
               <th>Min Temp</th>
               <th>Pressure</th>
@@ -42,6 +37,12 @@ const Daily = ({ daily, getOneCallWeather }) => {
               <th>Weather</th>
               <th>Clouds</th>
               <th>Rain</th>
+              <th>Pop</th>
+              <th>Sunrise</th>
+              <th>Sunset</th>
+              <th>Moonrise</th>
+              <th>Moonset</th>
+              <th>Moon Phase</th>
             </tr>
           </thead>
           <tbody>
@@ -64,22 +65,30 @@ const Daily = ({ daily, getOneCallWeather }) => {
               let moonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
               moonset.shift();
               moonset[0] = moonset[0].substring(0, moonset[0].length - 3);
+              let clouds = <div>&#9728;</div>;
+              if (day.clouds > 32) {
+                clouds = <div>&#127780;</div>;
+              }
+              if (day.clouds > 66) {
+                clouds = <div>&#9729;</div>;
+              }
               return (
                 <tr style={{ color: 'white' }}>
                   <td>{theDay}</td>
+                  <td>{(day.temp.max - 273.15).toFixed(1)}&#176;</td>
+                  <td>{(day.temp.min - 273.15).toFixed(1)}&#176;</td>
+                  <td>{day.pressure}</td>
+                  <td>{day.humidity}%</td>
+                  <td>{day.wind_speed}</td>
+                  <td>{day.weather[0].main}</td>
+                  <td>{clouds}</td>
+                  <td>{day.rain}</td>
+                  <td>{Math.round(day.pop * 100)}%</td>
                   <td>{sunrise}</td>
                   <td>{sunset}</td>
                   <td>{moonrise}</td>
                   <td>{moonset}</td>
-                  <td>{day.moon_phase}%</td>
-                  <td>{(day.temp.max - 273.15).toFixed(1)}</td>
-                  <td>{(day.temp.min - 273.15).toFixed(1)}</td>
-                  <td>{day.pressure}</td>
-                  <td>{day.humidity}</td>
-                  <td>{day.wind_speed}</td>
-                  <td>{day.weather[0].main}</td>
-                  <td>{day.clouds}</td>
-                  <td>{day.rain}</td>
+                  <td>{Math.round(day.moon_phase * 100)}%</td>
                 </tr>
               );
             })}

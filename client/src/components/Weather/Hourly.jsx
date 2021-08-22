@@ -45,17 +45,17 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
               <th>Pressure</th>
               <th>Wind Speed</th>
               <th>Clouds</th>
+              <th>Pop</th>
             </tr>
           </thead>
           <tbody>
             {hourly.map((hour) => {
               if (hourTag > 11) {
                 hourTag = 0;
-                if (dayNight === 'pm') {
-                  dayNight = 'am';
-                }
-                if (dayNight === 'am') {
-                  dayNight = 'pm';
+                if (dayNight === 'PM') {
+                  dayNight = 'AM';
+                } else if (dayNight === 'AM') {
+                  dayNight = 'PM';
                 }
               }
               hourTag++;
@@ -65,12 +65,13 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
                     {hourTag}
                     {dayNight}
                   </td>
-                  <td>{(hour.feels_like - 273.15).toFixed(2)}</td>
+                  <td>{(hour.feels_like - 273.15).toFixed(2)}&#176;</td>
                   <td>{hour.weather[0].main}</td>
-                  <td>{hour.humidity}</td>
+                  <td>{hour.humidity}%</td>
                   <td>{hour.pressure}</td>
                   <td>{hour.wind_speed}</td>
                   <td>{hour.clouds}%</td>
+                  <td>{Math.round(hour.pop * 100)}%</td>
                 </tr>
               );
             })}
