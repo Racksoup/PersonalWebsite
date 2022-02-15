@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import './weather.css';
+import '../../css/utils.css';
 import { getOneCallWeather } from '../../actions/weather';
 
 import PropTypes from 'prop-types';
@@ -25,39 +26,41 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
   if (minutely) {
     return (
       <Fragment>
-        <div style={{ display: 'flex', overflow: 'hidden' }}>
-          <div style={{ width: '0px' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Back
-              </Link>
-            </Button>
+        <div className='MainWin'>
+          <div style={{ display: 'flex', overflow: 'hidden' }}>
+            <div style={{ width: '0px' }}>
+              <Button>
+                <Link style={{ color: 'white' }} to='/weather'>
+                  Back
+                </Link>
+              </Button>
+            </div>
+            <h1 style={{ margin: 'auto' }}>Minutely Precipitation</h1>
           </div>
-          <h1 style={{ margin: 'auto' }}>Minutely Precipitation</h1>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '245px',
-            flexWrap: 'wrap',
-            marginTop: '30px',
-          }}
-        >
-          {minutely.map((minute, i) => {
-            if (tagMin > 59) {
-              tagMin = 0;
-            }
-            tagMin++;
-            if (i !== 60) {
-              return (
-                <div style={{ display: 'flex' }}>
-                  Min {tagMin}: {minute.precipitation}
-                </div>
-              );
-            } else return null;
-          })}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              height: '245px',
+              flexWrap: 'wrap',
+              marginTop: '30px',
+            }}
+          >
+            {minutely.map((minute, i) => {
+              if (tagMin > 59) {
+                tagMin = 0;
+              }
+              tagMin++;
+              if (i !== 60) {
+                return (
+                  <div style={{ display: 'flex' }}>
+                    Min {tagMin}: {minute.precipitation}
+                  </div>
+                );
+              } else return null;
+            })}
+          </div>
         </div>
       </Fragment>
     );

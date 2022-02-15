@@ -1,0 +1,14 @@
+.MainWin {
+  margin-top: 6vh;
+  margin-bottom: 10vh;
+  margin-right: 15vw;
+  margin-left: 15vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  min-height: 84vh;
+  border-color: aquamarine;
+  border-style: solid;
+  border-radius: 20px;
+}

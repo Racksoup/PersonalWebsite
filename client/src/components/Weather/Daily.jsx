@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import '../../css/utils.css';
 import { getOneCallWeather } from '../../actions/weather';
 
 import { connect } from 'react-redux';
@@ -15,85 +16,87 @@ const Daily = ({ daily, getOneCallWeather }) => {
   if (daily) {
     return (
       <Fragment>
-        <div style={{ display: 'flex', overflow: 'hidden' }}>
-          <div style={{ width: '0px' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Back
-              </Link>
-            </Button>
+        <div className='MainWin'>
+          <div style={{ display: 'flex', overflow: 'hidden' }}>
+            <div style={{ width: '0px' }}>
+              <Button>
+                <Link style={{ color: 'white' }} to='/weather'>
+                  Back
+                </Link>
+              </Button>
+            </div>
+            <h1 style={{ margin: 'auto' }}>Daily</h1>
           </div>
-          <h1 style={{ margin: 'auto' }}>Daily</h1>
+          <Table striped bordered hover style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
+            <thead>
+              <tr style={{ color: 'white' }}>
+                <th>Day</th>
+                <th>Max Temp</th>
+                <th>Min Temp</th>
+                <th>Pressure</th>
+                <th>Humidity</th>
+                <th>Wind Speed</th>
+                <th>Weather</th>
+                <th>Clouds</th>
+                <th>Rain</th>
+                <th>Pop</th>
+                <th>Sunrise</th>
+                <th>Sunset</th>
+                <th>Moonrise</th>
+                <th>Moonset</th>
+                <th>Moon Phase</th>
+              </tr>
+            </thead>
+            <tbody>
+              {daily.map((day) => {
+                let theDay = new Date(day.dt * 1000)
+                  .toLocaleString()
+                  .split(' ')
+                  .shift()
+                  .replace(/,/g, '');
+                theDay = theDay.substring(theDay.length - 7, theDay.length - 5);
+                let sunrise = new Date(day.sunrise * 1000).toLocaleString().split(' ');
+                sunrise.shift();
+                sunrise[0] = sunrise[0].substring(0, sunrise[0].length - 3);
+                let sunset = new Date(day.sunset * 1000).toLocaleString().split(' ');
+                sunset.shift();
+                sunset[0] = sunset[0].substring(0, sunset[0].length - 3);
+                let moonrise = new Date(day.moonrise * 1000).toLocaleString().split(' ');
+                moonrise.shift();
+                moonrise[0] = moonrise[0].substring(0, moonrise[0].length - 3);
+                let moonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
+                moonset.shift();
+                moonset[0] = moonset[0].substring(0, moonset[0].length - 3);
+                let clouds = <div>&#9728;</div>;
+                if (day.clouds > 32) {
+                  clouds = <div>&#127780;</div>;
+                }
+                if (day.clouds > 66) {
+                  clouds = <div>&#9729;</div>;
+                }
+                return (
+                  <tr style={{ color: 'white' }}>
+                    <td>{theDay}</td>
+                    <td>{(day.temp.max - 273.15).toFixed(1)}&#176;</td>
+                    <td>{(day.temp.min - 273.15).toFixed(1)}&#176;</td>
+                    <td>{day.pressure}</td>
+                    <td>{day.humidity}%</td>
+                    <td>{day.wind_speed}</td>
+                    <td>{day.weather[0].main}</td>
+                    <td>{clouds}</td>
+                    <td>{day.rain}</td>
+                    <td>{Math.round(day.pop * 100)}%</td>
+                    <td>{sunrise}</td>
+                    <td>{sunset}</td>
+                    <td>{moonrise}</td>
+                    <td>{moonset}</td>
+                    <td>{Math.round(day.moon_phase * 100)}%</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
         </div>
-        <Table striped bordered hover style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
-          <thead>
-            <tr style={{ color: 'white' }}>
-              <th>Day</th>
-              <th>Max Temp</th>
-              <th>Min Temp</th>
-              <th>Pressure</th>
-              <th>Humidity</th>
-              <th>Wind Speed</th>
-              <th>Weather</th>
-              <th>Clouds</th>
-              <th>Rain</th>
-              <th>Pop</th>
-              <th>Sunrise</th>
-              <th>Sunset</th>
-              <th>Moonrise</th>
-              <th>Moonset</th>
-              <th>Moon Phase</th>
-            </tr>
-          </thead>
-          <tbody>
-            {daily.map((day) => {
-              let theDay = new Date(day.dt * 1000)
-                .toLocaleString()
-                .split(' ')
-                .shift()
-                .replace(/,/g, '');
-              theDay = theDay.substring(theDay.length - 7, theDay.length - 5);
-              let sunrise = new Date(day.sunrise * 1000).toLocaleString().split(' ');
-              sunrise.shift();
-              sunrise[0] = sunrise[0].substring(0, sunrise[0].length - 3);
-              let sunset = new Date(day.sunset * 1000).toLocaleString().split(' ');
-              sunset.shift();
-              sunset[0] = sunset[0].substring(0, sunset[0].length - 3);
-              let moonrise = new Date(day.moonrise * 1000).toLocaleString().split(' ');
-              moonrise.shift();
-              moonrise[0] = moonrise[0].substring(0, moonrise[0].length - 3);
-              let moonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
-              moonset.shift();
-              moonset[0] = moonset[0].substring(0, moonset[0].length - 3);
-              let clouds = <div>&#9728;</div>;
-              if (day.clouds > 32) {
-                clouds = <div>&#127780;</div>;
-              }
-              if (day.clouds > 66) {
-                clouds = <div>&#9729;</div>;
-              }
-              return (
-                <tr style={{ color: 'white' }}>
-                  <td>{theDay}</td>
-                  <td>{(day.temp.max - 273.15).toFixed(1)}&#176;</td>
-                  <td>{(day.temp.min - 273.15).toFixed(1)}&#176;</td>
-                  <td>{day.pressure}</td>
-                  <td>{day.humidity}%</td>
-                  <td>{day.wind_speed}</td>
-                  <td>{day.weather[0].main}</td>
-                  <td>{clouds}</td>
-                  <td>{day.rain}</td>
-                  <td>{Math.round(day.pop * 100)}%</td>
-                  <td>{sunrise}</td>
-                  <td>{sunset}</td>
-                  <td>{moonrise}</td>
-                  <td>{moonset}</td>
-                  <td>{Math.round(day.moon_phase * 100)}%</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
       </Fragment>
     );
   } else return null;
