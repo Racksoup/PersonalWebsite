@@ -2,7 +2,7 @@
 
 .MainViewFrame {
   display: grid;
-  min-height: 84%;
+  min-height: 73vh;
   width: 100%;
   grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
   grid-template-rows: minmax(0, 1fr);
@@ -25,29 +25,57 @@
 
 .MainEntryFrame {
   display: grid;
-  min-height: 84%;
+  min-height: 96%;
   width: 100%;
   grid-template-columns: minmax(0, 1fr) minmax(0, 5fr);
-  grid-template-rows: 5vh 5vh auto;
+  grid-template-rows: 10vh 5vh auto;
+  justify-items: center;
 }
 
 .EditTitle {
   grid-area: 1 / 1 / 2 / 3;
-  border: solid white;
 }
 
 .JournalEntryButtonsFrame {
   grid-area: 2 / 1 / 3 / 3;
-  border: solid white;
 }
 
 .EditPictures {
   grid-area: 3 / 1 / 4 / 2;
   border: solid white;
   margin-right: 20px;
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px 100px;
 }
 
 .EditText {
   grid-area: 3 / 2 / 4 / 3;
   border: solid white;
+  width: 100%;
+}
+
+.TitleInput {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  max-width: 30rem;
+  height: 9vh;
+  font-size: 3rem;
+}
+
+.ImageEntryFrame {
+  display: flex;
+}
+
+.ImageEntryTitle {
+  margin-right: 1.5rem;
+}
+
+.EditPictureFrame {
+  border: solid white;
+  width: 100%;
+  min-height: 100%;
 }

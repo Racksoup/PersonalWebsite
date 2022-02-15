@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/utils.css';
 import '../css/journal.css';
 
-import Button from 'react-bootstrap/Button';
+
 import { Link } from 'react-router-dom';
 
 const SingleJournalView = () => {
