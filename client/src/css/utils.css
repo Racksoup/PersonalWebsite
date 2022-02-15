@@ -1,3 +1,4 @@
+/* Base Frames */
 .MainWin {
   margin-top: 6vh;
   margin-bottom: 10vh;
@@ -8,7 +9,56 @@
   padding-right: 1vw;
   padding-left: 1vw;
   min-height: 84vh;
+  height: 84vh; /* need to set height even if min-height for child object sizing issues */
   border-color: aquamarine;
   border-style: solid;
   border-radius: 20px;
+}
+
+/* Custom Widgets */
+/* Calendar */
+.Calendar {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 0.05rem;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+    minmax(0, 1fr);
+  grid-template-rows:
+    minmax(0, 1fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr)
+    minmax(0, 4fr);
+}
+.CalendarDayTitleFrame {
+  border-radius: 0.1rem;
+  border: solid white;
+}
+.CalendarDayTitle {
+  text-align: center;
+  font-size: 0.8rem;
+}
+.CalendarItem {
+  border-radius: 0.1rem;
+}
+.CalendarItem:hover {
+  border: solid white;
+}
+
+/* Journal  */
+
+/* Titles */
+.BigTitle {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.XSmallTitle {
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Link Format */
+.FormatLink {
+  color: 'white';
+  display: inline-block;
 }
