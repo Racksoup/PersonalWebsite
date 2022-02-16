@@ -1,16 +1,19 @@
 import React from 'react';
 import '../css/utils.css';
 import '../css/journal.css';
-import Example from './Modal';
+import PictureModal from './Modal';
+import { toggleModal } from '../actions/journal';
 
-import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-const SingleJournalEntry = () => {
+const SingleJournalEntry = ({ modal, toggleModal }) => {
   return (
     <div className='MainWin'>
-      <Example />
-      <Button style={{ position: 'fixed' }}>
+      <PictureModal />
+      <Button style={{ position: 'absolute' }}>
         <Link to='calendar' style={{ color: 'white' }}>
           Back
         </Link>
@@ -26,16 +29,16 @@ const SingleJournalEntry = () => {
           </div>
         </div>
         <div className='EditPictures'>
-          <div className='EditPictureFrame' onClick={(e) => pictureClicked(e)}></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
-          <div className='EditPictureFrame'></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
         </div>
         <div className='EditText'>hehe</div>
       </div>
@@ -43,6 +46,13 @@ const SingleJournalEntry = () => {
   );
 };
 
-const pictureClicked = (e) => {};
+SingleJournalEntry.propTypes = {
+  modal: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
 
-export default SingleJournalEntry;
+const mapStateToProps = (state) => ({
+  modal: state.journal.modal,
+});
+
+export default connect(mapStateToProps, { toggleModal })(SingleJournalEntry);
