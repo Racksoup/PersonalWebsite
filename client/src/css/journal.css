@@ -76,3 +76,13 @@
   border: solid white;
   height: 10vh;
 }
+
+.EditTextInput {
+  display: flex;
+  margin: auto;
+  margin-top: 20px;
+  min-height: 90%;
+  width: 90%;
+  overflow: hidden;
+  box-sizing: border-box;
+}

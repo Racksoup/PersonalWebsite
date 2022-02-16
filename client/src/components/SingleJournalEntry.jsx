@@ -4,6 +4,7 @@ import '../css/journal.css';
 import PictureModal from './Modal';
 import { toggleModal } from '../actions/journal';
 
+import Textarea from 'react-textarea-autosize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -40,7 +41,9 @@ const SingleJournalEntry = ({ modal, toggleModal }) => {
           <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
           <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
         </div>
-        <div className='EditText'>hehe</div>
+        <div className='EditText'>
+          <Textarea className='EditTextInput'></Textarea>
+        </div>
       </div>
     </div>
   );
