@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
+import { getOneJournal } from '../actions/journal';
 
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import '../css/utils.css';
 
-const Calendar = () => {
+const Calendar = ({ getOneJournal }) => {
   const monthsOfYear = [
     'January',
     'February',
@@ -81,6 +84,11 @@ const Calendar = () => {
     return daysOfMonth;
   };
 
+  const todayClicked = () => {
+    console.log('hit');
+    getOneJournal(ObjectId('620d8fe26288ce140867ffd2'));
+  };
+
   let daysOfMonth = buildMonthArr(firstDay);
 
   return (
@@ -126,50 +134,16 @@ const Calendar = () => {
               <p className='CalendarDayTitle'>Saturday</p>
             </div>
             {daysOfMonth.map((day) => {
-              return <div className='CalendarItem'>{day}</div>;
+              if (day === 'TODAY')
+                return (
+                  <div className='CalendarItem'>
+                    <button className='CalendarDayButton' onClick={() => todayClicked()}>
+                      {day}
+                    </button>
+                  </div>
+                );
+              else return <div className='CalendarItem'>{day}</div>;
             })}
-            {/* <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div>
-            <div className='CalendarItem'></div> */}
           </div>
         </div>
       </div>
@@ -177,4 +151,8 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+Calendar.propTypes = {
+  getOneJournal: PropTypes.func.isRequired,
+};
+
+export default connect(null, { getOneJournal })(Calendar);

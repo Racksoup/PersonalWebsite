@@ -1,4 +1,4 @@
-import { TOGGLE_MODAL, CREATE_JOURNAL } from './types';
+import { TOGGLE_MODAL, CREATE_JOURNAL, GOT_ONE_JOURNAL } from './types';
 
 import axios from 'axios';
 
@@ -27,6 +27,18 @@ export const createJournalPost = (item, file) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: CREATE_JOURNAL,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getOneJournal = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/journal/${id}`);
+    dispatch({
+      type: GOT_ONE_JOURNAL,
       payload: res.data,
     });
   } catch (err) {

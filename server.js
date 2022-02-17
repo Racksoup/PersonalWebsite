@@ -31,5 +31,9 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-// make journal backend
+// make calendar bring us to journal entry page
+// - make button that brings us to todays journal entry
+
 // add to-do's lists (multiple)
+// mutilple lists
+// track completed list items on both journal pages

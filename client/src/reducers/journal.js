@@ -1,4 +1,4 @@
-import { TOGGLE_MODAL, CREATE_JOURNAL } from '../actions/types';
+import { TOGGLE_MODAL, CREATE_JOURNAL, GOT_ONE_JOURNAL } from '../actions/types';
 
 const initialState = {
   modal: false,
@@ -10,6 +10,11 @@ export default function journal(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case GOT_ONE_JOURNAL:
+      return {
+        ...state,
+        journal: payload.item,
+      };
     case CREATE_JOURNAL:
       return {
         ...state,

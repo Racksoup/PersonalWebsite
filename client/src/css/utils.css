@@ -43,6 +43,15 @@
 .CalendarItem:hover {
   border: solid white;
 }
+.CalendarDayButton {
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: flex-start;
+  color: white;
+}
 
 /* Journal  */
 
