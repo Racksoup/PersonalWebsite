@@ -56,6 +56,8 @@ const Calendar = () => {
     return firstDay;
   };
 
+  const currentMonth = monthsOfYear[new Date().getMonth()];
+
   let firstDay = findFirstDayOfWeek(new Date());
   console.log(firstDay[0], firstDay[1], firstDay[2], firstDay[3], firstDay[4]);
 
@@ -84,7 +86,7 @@ const Calendar = () => {
   return (
     <Fragment>
       <div className='MainWin'>
-        <p className='BigTitle'>Calendar</p>
+        <p className='BigTitle'>{currentMonth}</p>
         <Button>
           <Link style={{ color: 'white', display: 'inline-block' }} to='/weather'>
             Weather
