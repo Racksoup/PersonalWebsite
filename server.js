@@ -18,6 +18,7 @@ app.use(express.json({ extend: false }));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/weather', require('./routes/api/weather'));
+app.use('/api/journal', require('./routes/api/journal'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -30,6 +31,5 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-// add journal entry page
-// add journal view page
+// make journal backend
 // add to-do's lists (multiple)
