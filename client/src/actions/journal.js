@@ -13,14 +13,16 @@ export const toggleModal = () => (dispatch) => {
   dispatch({
     type: TOGGLE_MODAL,
   });
-  console.log('hit');
 };
 
 export const createJournalPost = (item, file) => async (dispatch) => {
   let data = new FormData();
-  data.append('file', file);
+  if (file) {
+    data.append('file', file);
+  }
   data.append('title', item.title);
   data.append('text', item.text);
+  data.append('date', item.date);
 
   try {
     const config = {
@@ -31,7 +33,6 @@ export const createJournalPost = (item, file) => async (dispatch) => {
       },
     };
     const res = await axios.post('api/journal', data, config);
-    console.log(res);
     dispatch({
       type: CREATE_JOURNAL,
       payload: res.data,
@@ -56,10 +57,15 @@ export const getOneJournal = (id) => async (dispatch) => {
 export const getOneJournalByDate = (date) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/journal/date/${date}`);
-    dispatch({
-      type: GOT_ONE_JOURNAL,
-      payload: res.data,
-    });
+    if (res.data) {
+      dispatch({
+        type: GOT_ONE_JOURNAL,
+        payload: res.data,
+      });
+    } else {
+      let item = { title: '', text: '', date: date };
+      dispatch(createJournalPost(item));
+    }
   } catch (err) {
     console.log(err);
   }
@@ -70,7 +76,6 @@ export const getMonthsJournals = (date) => async (dispatch) => {
     let year = date.getFullYear();
     let month = date.getMonth();
     const res = await axios.get(`/api/journal/month/${year}/${month}`);
-    console.log(res.data);
     dispatch({
       type: GOT_MONTHS_JOURNALS,
       payload: res.data,

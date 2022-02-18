@@ -31,10 +31,10 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-// make calendar bring us to journal entry page
-// - give monthsArr objects more data and call getOneJournalByDay for their day
-// - make getOneJournalByDay
-// - make button that brings us to todays journal entry
+// show posts on calendar
+// multiple images on one journal
+// remove edit and view journal buttons. add edit journal button to view journal page. link to view journal page from calendar click
+// make calendar scroll all days
 
 // add to-do's lists (multiple)
 // mutilple lists

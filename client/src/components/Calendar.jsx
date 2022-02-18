@@ -138,7 +138,6 @@ const Calendar = ({
   };
 
   const todayClicked = (today) => {
-    console.log(today);
     getOneJournalByDate(today);
   };
 

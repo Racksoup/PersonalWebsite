@@ -83,7 +83,6 @@ export const postSavedWeather = () => async (dispatch, getState) => {
       newHistorical = newHistorical.filter((day) => day.dt !== savedWeather[i].dt);
     }
     try {
-      console.log(newHistorical);
       newHistorical.map(async (day) => {
         await axios.post('/api/weather/saved-weather', day);
       });

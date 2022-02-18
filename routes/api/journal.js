@@ -65,7 +65,9 @@ router.post('/', [Auth, upload.single('file')], async (req, res) => {
   if (title) postItem.title = title;
   if (text) postItem.text = text;
   if (date) postItem.date = date;
-  postItem.image_filename = req.file.filename;
+  if (req.file) {
+    postItem.image_filename = req.file.filename;
+  }
 
   try {
     const item = new JournalPost(postItem);

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const JournalPostSchema = new mongoose.Schema({
-  date: { type: Date, default: Date.now },
-  title: { type: String, required: true },
-  text: { type: String, required: true },
+  date: { type: Date },
+  title: { type: String, default: '' },
+  text: { type: String, default: '' },
   image_filename: { type: String },
 });
 
