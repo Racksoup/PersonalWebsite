@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const SingleJournalEntry = ({ createJournalPost, toggleModal }) => {
+const SingleJournalEntry = ({ createJournalPost, toggleModal, journal }) => {
   const [newJournal, setNewJournal] = useState({
     title: '',
     text: '',
@@ -41,63 +41,71 @@ const SingleJournalEntry = ({ createJournalPost, toggleModal }) => {
     return <Redirect to='/calendar' />;
   }
 
-  return (
-    <div className='MainWin'>
-      <PictureModal />
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button>
-          <Link to='calendar' style={{ color: 'white' }}>
-            Back
-          </Link>
-        </Button>
-        <Button onClick={(e) => onSubmit(e)}>Submit</Button>
-      </div>
-      <div className='MainEntryFrame'>
-        <div className='EditTitle'>
-          <input
-            className='TitleInput'
-            type='text'
-            name='title'
-            onChange={(e) => onChange(e)}
-          ></input>
+  if (journal) {
+    return (
+      <div className='MainWin'>
+        <PictureModal />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button>
+            <Link to='calendar' style={{ color: 'white' }}>
+              Back
+            </Link>
+          </Button>
+          <Button onClick={(e) => onSubmit(e)}>Submit</Button>
         </div>
-        <div className='JournalEntryButtonsFrame'>
-          <div className='ImageEntryFrame'>
-            <p className='ImageEntryTitle'>Upload Image:</p>
-            <input type='file' name='file' onChange={(e) => onFileChange(e)}></input>
+        <div className='MainEntryFrame'>
+          <div className='EditTitle'>
+            <input
+              className='TitleInput'
+              type='text'
+              name='title'
+              value={journal.title}
+              onChange={(e) => onChange(e)}
+            ></input>
+          </div>
+          <div className='JournalEntryButtonsFrame'>
+            <div className='ImageEntryFrame'>
+              <p className='ImageEntryTitle'>Upload Image:</p>
+              <input type='file' name='file' onChange={(e) => onFileChange(e)}></input>
+            </div>
+          </div>
+          <div className='EditPictures'>
+            <div
+              className='EditPictureFrame'
+              src={`api/journal/image/${journal.image_filename}`}
+              onClick={(e) => toggleModal(e)}
+            ></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+          </div>
+          <div className='EditText'>
+            <Textarea
+              className='EditTextInput'
+              type='text'
+              name='text'
+              value={journal.text}
+              onChange={(e) => onChange(e)}
+            ></Textarea>
           </div>
         </div>
-        <div className='EditPictures'>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-          <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
-        </div>
-        <div className='EditText'>
-          <Textarea
-            className='EditTextInput'
-            type='text'
-            name='text'
-            onChange={(e) => onChange(e)}
-          ></Textarea>
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 SingleJournalEntry.propTypes = {
@@ -105,4 +113,8 @@ SingleJournalEntry.propTypes = {
   createJournalPost: PropTypes.func.isRequired,
 };
 
-export default connect(null, { createJournalPost, toggleModal })(SingleJournalEntry);
+const mapStateToProps = (state) => ({
+  journal: state.journal.journal,
+});
+
+export default connect(mapStateToProps, { createJournalPost, toggleModal })(SingleJournalEntry);

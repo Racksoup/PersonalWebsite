@@ -6,7 +6,7 @@ import {
   getMonthsJournals,
 } from '../actions/journal';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -191,9 +191,11 @@ const Calendar = ({
               daysOfMonth.map((day) => {
                 return (
                   <div className='CalendarItem'>
-                    <button className='CalendarDayButton' onClick={() => todayClicked(day[1])}>
-                      {day[0]}
-                    </button>
+                    <Link to='/journal-entry' style={{ color: 'white', textDecoration: 'none' }}>
+                      <button className='CalendarDayButton' onClick={() => todayClicked(day[1])}>
+                        {day[0]}
+                      </button>
+                    </Link>
                   </div>
                 );
               })}
