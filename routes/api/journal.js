@@ -144,6 +144,19 @@ router.get('/:_id', Auth, async (req, res) => {
   }
 });
 
+// @route   GET api/journal/date/:_date
+// @desc    Get One Journal Entry By Date
+// @access  Private
+router.get('/date/:date', Auth, async (req, res) => {
+  try {
+    const item = await JournalPost.findOne({ date: req.params.date });
+    res.json(item);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // ===========================
 // IMAGE ROUTES
 // ===========================
