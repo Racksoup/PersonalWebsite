@@ -1,4 +1,10 @@
-import { TOGGLE_MODAL, CREATE_JOURNAL, GOT_ONE_JOURNAL, CLEAR_JOURNALS } from './types';
+import {
+  TOGGLE_MODAL,
+  CREATE_JOURNAL,
+  GOT_ONE_JOURNAL,
+  CLEAR_JOURNALS,
+  GOT_MONTHS_JOURNALS,
+} from './types';
 
 import axios from 'axios';
 
@@ -47,11 +53,25 @@ export const getOneJournal = (id) => async (dispatch) => {
 };
 
 export const getOneJournalByDate = (date) => async (dispatch) => {
-  console.log('hit');
   try {
     const res = await axios.get(`/api/journal/date/${date}`);
     dispatch({
       type: GOT_ONE_JOURNAL,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMonthsJournals = (date) => async (dispatch) => {
+  try {
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    const res = await axios.get(`/api/journal/month/${year}/${month}`);
+    console.log(res.data);
+    dispatch({
+      type: GOT_MONTHS_JOURNALS,
       payload: res.data,
     });
   } catch (err) {

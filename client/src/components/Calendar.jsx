@@ -1,5 +1,10 @@
-import React, { Fragment } from 'react';
-import { getOneJournal, getOneJournalByDate, clearJournals } from '../actions/journal';
+import React, { Fragment, useEffect } from 'react';
+import {
+  getOneJournal,
+  getOneJournalByDate,
+  clearJournals,
+  getMonthsJournals,
+} from '../actions/journal';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,14 +12,17 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import '../css/utils.css';
 import axios from 'axios';
-import { useEffect } from 'react';
 
-const Calendar = ({ getOneJournal, getOneJournalByDate, clearJournals }) => {
-  let daysOfMonth;
+const Calendar = ({
+  getOneJournal,
+  getOneJournalByDate,
+  clearJournals,
+  getMonthsJournals,
+  journals,
+}) => {
   useEffect(() => {
-    daysOfMonth = buildMonthArr(firstDay);
+    getMonthsJournals(new Date());
   }, []);
-  //clearJournals();
   const monthsOfYear = [
     'January',
     'February',
@@ -70,7 +78,6 @@ const Calendar = ({ getOneJournal, getOneJournalByDate, clearJournals }) => {
   const currentMonth = monthsOfYear[new Date().getMonth()];
 
   let firstDay = findFirstDayOfWeek(new Date());
-  console.log(firstDay[0], firstDay[1], firstDay[2], firstDay[3], firstDay[4], firstDay[5]);
 
   const buildMonthArr = (firstDay) => {
     const daysOfMonth = [];
@@ -92,7 +99,7 @@ const Calendar = ({ getOneJournal, getOneJournalByDate, clearJournals }) => {
       } else {
         thisDaysDate = new Date(`${firstDay[5]}-0${firstDay[2]}-${i}T05:00:00`);
       }
-      daysOfMonth.push(i);
+      daysOfMonth.push([i]);
     }
 
     // add curr month
@@ -114,28 +121,28 @@ const Calendar = ({ getOneJournal, getOneJournalByDate, clearJournals }) => {
         thisDaysDate = new Date(`${firstDay[5]}-0${firstDay[2] + 1}-${x}T05:00:00`);
       }
 
-      getOneJournalByDate(thisDaysDate);
-
       // push
       if (new Date().getDate() === i + 1) {
-        daysOfMonth.push('TODAY');
+        daysOfMonth.push(['TODAY', thisDaysDate]);
       } else {
-        daysOfMonth.push((i + 1).toString());
+        daysOfMonth.push([(i + 1).toString(), thisDaysDate]);
       }
     }
 
     // add next month
     const startValDaysOfMonth = daysOfMonth.length;
     for (let i = daysOfMonth.length; i < 6 * 7; i++) {
-      daysOfMonth.push((i + 1 - startValDaysOfMonth).toString());
+      daysOfMonth.push([(i + 1 - startValDaysOfMonth).toString()]);
     }
     return daysOfMonth;
   };
 
-  const todayClicked = () => {
-    console.log('hit');
-    getOneJournalByDate(new Date('2022-02-12T05:00:00'));
+  const todayClicked = (today) => {
+    console.log(today);
+    getOneJournalByDate(today);
   };
+
+  let daysOfMonth = buildMonthArr(firstDay);
 
   return (
     <Fragment>
@@ -180,16 +187,15 @@ const Calendar = ({ getOneJournal, getOneJournalByDate, clearJournals }) => {
               <p className='CalendarDayTitle'>Saturday</p>
             </div>
             {daysOfMonth &&
+              journals &&
               daysOfMonth.map((day) => {
-                if (day === 'TODAY')
-                  return (
-                    <div className='CalendarItem'>
-                      <button className='CalendarDayButton' onClick={() => todayClicked()}>
-                        {day}
-                      </button>
-                    </div>
-                  );
-                else return <div className='CalendarItem'>{day}</div>;
+                return (
+                  <div className='CalendarItem'>
+                    <button className='CalendarDayButton' onClick={() => todayClicked(day[1])}>
+                      {day[0]}
+                    </button>
+                  </div>
+                );
               })}
           </div>
         </div>
@@ -202,6 +208,7 @@ Calendar.propTypes = {
   getOneJournal: PropTypes.func.isRequired,
   getOneJournalByDate: PropTypes.func.isRequired,
   clearJournals: PropTypes.func.isRequired,
+  getMonthsJournals: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -209,6 +216,9 @@ const mapStateToProps = (state) => ({
   journals: state.journal.journals,
 });
 
-export default connect(mapStateToProps, { getOneJournal, getOneJournalByDate, clearJournals })(
-  Calendar
-);
+export default connect(mapStateToProps, {
+  getOneJournal,
+  getOneJournalByDate,
+  clearJournals,
+  getMonthsJournals,
+})(Calendar);

@@ -1,4 +1,10 @@
-import { TOGGLE_MODAL, CREATE_JOURNAL, GOT_ONE_JOURNAL, CLEAR_JOURNALS } from '../actions/types';
+import {
+  TOGGLE_MODAL,
+  CREATE_JOURNAL,
+  GOT_ONE_JOURNAL,
+  CLEAR_JOURNALS,
+  GOT_MONTHS_JOURNALS,
+} from '../actions/types';
 
 const initialState = {
   modal: false,
@@ -10,6 +16,11 @@ export default function journal(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case GOT_MONTHS_JOURNALS:
+      return {
+        ...state,
+        journals: payload,
+      };
     case CLEAR_JOURNALS:
       return {
         ...state,
@@ -18,7 +29,7 @@ export default function journal(state = initialState, action) {
     case GOT_ONE_JOURNAL:
       return {
         ...state,
-        journals: [...state.journals, payload],
+        journal: payload,
       };
     case CREATE_JOURNAL:
       return {

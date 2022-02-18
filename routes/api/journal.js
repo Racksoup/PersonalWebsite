@@ -157,6 +157,34 @@ router.get('/date/:date', Auth, async (req, res) => {
   }
 });
 
+// @route   GET api/journal/month/:year/:month
+// @desc    Get Journal Entries By Month, 3 months of data (prevMonth, currMonth, nextMonth)
+// @access  Private
+router.get('/month/:year/:month', Auth, async (req, res) => {
+  try {
+    let nextMonth = parseInt(req.params.month) + 1;
+    if (nextMonth < 10) {
+      nextMonth = `0${nextMonth}`;
+    }
+    let prevMonth = parseInt(req.params.month) - 1;
+    if (prevMonth === -1) {
+      prevMonth = 11;
+    } else if (prevMonth < 10) {
+      prevMonth = `0${prevMonth}`;
+    }
+    const items = await JournalPost.find({
+      date: {
+        $gte: new Date(req.params.year, prevMonth),
+        $lt: new Date(req.params.year, nextMonth),
+      },
+    });
+    res.json(items);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error x');
+  }
+});
+
 // ===========================
 // IMAGE ROUTES
 // ===========================
