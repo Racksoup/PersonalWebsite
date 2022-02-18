@@ -192,7 +192,7 @@ router.get('/month/:year/:month', Auth, async (req, res) => {
 // @route   GET api/journal/image/:filename
 // @desc    Get Journal Image
 // @access  Private
-router.get('/image/:filename', Auth, async (req, res) => {
+router.get('/image/:filename', async (req, res) => {
   await gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     // Check if files
     if (!file || file.length === 0) {

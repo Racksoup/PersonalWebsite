@@ -4,6 +4,7 @@ import {
   GOT_ONE_JOURNAL,
   CLEAR_JOURNALS,
   GOT_MONTHS_JOURNALS,
+  UPDATE_JOURNAL,
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,11 @@ export default function journal(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case UPDATE_JOURNAL:
+      return {
+        ...state,
+        journal: payload,
+      };
     case GOT_MONTHS_JOURNALS:
       return {
         ...state,

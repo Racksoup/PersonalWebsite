@@ -4,6 +4,7 @@ import {
   GOT_ONE_JOURNAL,
   CLEAR_JOURNALS,
   GOT_MONTHS_JOURNALS,
+  UPDATE_JOURNAL,
 } from './types';
 
 import axios from 'axios';
@@ -83,4 +84,38 @@ export const clearJournals = () => (dispatch) => {
   dispatch({
     type: CLEAR_JOURNALS,
   });
+};
+
+export const updateJournalPost = (item, file) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const oldItem = await axios.get(`/api/journal/${item._id}`);
+    if (file !== '' && file !== null && file !== undefined) {
+      let data = new FormData();
+      data.append('file', file);
+      const fileConfig = {
+        headers: {
+          accept: 'application/json',
+          'Accept-Language': 'en-US,en;q=0.8',
+          'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        },
+      };
+      await axios.delete(`/api/journal/deleteimage/${oldItem.data.image_filename}`);
+      const newImage = await axios.post('/api/journal/uploadimage', data, fileConfig);
+      item.image_filename = newImage.data.file.filename;
+    }
+    if (item) {
+      const res = await axios.put(`/api/journal/${item._id}`, item, config);
+      dispatch({
+        type: UPDATE_JOURNAL,
+        payload: res.data,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };
