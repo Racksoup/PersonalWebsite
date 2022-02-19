@@ -166,7 +166,7 @@ router.get('/month/:year/:month', Auth, async (req, res) => {
   try {
     let nextMonth = parseInt(req.params.month) + 1;
     if (nextMonth < 10) {
-      nextMonth = `0${nextMonth}`;
+      nextMonth = `0${nextMonth + 1}`;
     }
     let prevMonth = parseInt(req.params.month) - 1;
     if (prevMonth === -1) {

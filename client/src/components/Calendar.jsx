@@ -59,7 +59,7 @@ const Calendar = ({
   // if wednesday -4 from day total. 17. 17 / 7 = 2.4, round down 2.
   // (2 * 7) -17 = 3 . 3 days back from saturday = thursday. 8 - 3 = 5(thursday)
 
-  const findFirstDayOfWeek = (day) => {
+  const findFirstDayOfMonth = (day) => {
     const weekDay = day.getDay() + 1;
     const DayNum = day.getDate();
     const Month = day.getMonth();
@@ -77,7 +77,7 @@ const Calendar = ({
 
   const currentMonth = monthsOfYear[new Date().getMonth()];
 
-  let firstDay = findFirstDayOfWeek(new Date());
+  let firstDay = findFirstDayOfMonth(new Date());
 
   const buildMonthArr = (firstDay) => {
     const daysOfMonth = [];
@@ -91,17 +91,32 @@ const Calendar = ({
     }
 
     // add prev month
+    // add prev month
+    // add prev month
     for (let i = prevMonthNumDays; i > prevMonthNumDays - firstDay[1]; i--) {
       // format thisDaysDate (month issue)
       let thisDaysDate;
-      if (firstDay[2] === 9 || firstDay[2] === 10 || firstDay[2] === 11) {
+      if (firstDay[2] === 10 || firstDay[2] === 11) {
         thisDaysDate = new Date(`${firstDay[5]}-${firstDay[2]}-${i}T05:00:00`);
       } else {
         thisDaysDate = new Date(`${firstDay[5]}-0${firstDay[2]}-${i}T05:00:00`);
       }
-      daysOfMonth.push([i]);
+
+      let journalIndex = null;
+      journals.map((journal, k) => {
+        let journalDay = new Date(journal.date);
+        if (
+          journalDay.getDate() === thisDaysDate.getDate() &&
+          journalDay.getMonth() === thisDaysDate.getMonth() &&
+          journalDay.getFullYear() === thisDaysDate.getFullYear()
+        )
+          journalIndex = k;
+      });
+      daysOfMonth.push({ dayOfMonth: i, thisDaysDate, journalIndex });
     }
 
+    // add curr month
+    // add curr month
     // add curr month
     for (let i = 0; i < firstDay[4]; i++) {
       let x;
@@ -115,24 +130,67 @@ const Calendar = ({
 
       // format thisDaysDate (month issue)
       let thisDaysDate;
-      if (firstDay[2] === 9 || firstDay[2] === 10 || firstDay[2] === 11) {
+      if (firstDay[2] === 9 || firstDay[2] === 10) {
         thisDaysDate = new Date(`${firstDay[5]}-${firstDay[2] + 1}-${x}T05:00:00`);
+      } else if (firstDay[2] === 11) {
+        thisDaysDate = new Date(`${firstDay[5]}-${firstDay[2] - 10}-${x}T05:00:00`);
       } else {
         thisDaysDate = new Date(`${firstDay[5]}-0${firstDay[2] + 1}-${x}T05:00:00`);
       }
 
+      let journalIndex = null;
+      journals.map((journal, k) => {
+        let journalDay = new Date(journal.date);
+        if (
+          journalDay.getDate() === thisDaysDate.getDate() &&
+          journalDay.getMonth() === thisDaysDate.getMonth() &&
+          journalDay.getFullYear() === thisDaysDate.getFullYear()
+        )
+          journalIndex = k;
+      });
+
       // push
-      if (new Date().getDate() === i + 1) {
-        daysOfMonth.push(['TODAY', thisDaysDate]);
-      } else {
-        daysOfMonth.push([(i + 1).toString(), thisDaysDate]);
-      }
+      daysOfMonth.push({ dayOfMonth: (i + 1).toString(), thisDaysDate, journalIndex });
     }
 
     // add next month
+    // add next month
+    // add next month
     const startValDaysOfMonth = daysOfMonth.length;
     for (let i = daysOfMonth.length; i < 6 * 7; i++) {
-      daysOfMonth.push([(i + 1 - startValDaysOfMonth).toString()]);
+      let x;
+      if (i < 9 + startValDaysOfMonth) {
+        x = `0${i - startValDaysOfMonth + 1}`;
+      } else if (i === 9 + startValDaysOfMonth) {
+        x = 10;
+      } else {
+        x = i - startValDaysOfMonth + 1;
+      }
+
+      let thisDaysDate;
+      if (firstDay[2] === 8 || firstDay[2] === 9) {
+        thisDaysDate = new Date(`${firstDay[5]}-${firstDay[2] + 2}-${x}T05:00:00`);
+      } else if (firstDay[2] === 10 || firstDay[2] === 11) {
+        thisDaysDate = new Date(`${firstDay[5]}-${firstDay[2] - 10}-${x}T05:00:00`);
+      } else {
+        thisDaysDate = new Date(`${firstDay[5]}-0${firstDay[2] + 2}-${x}T05:00:00`);
+      }
+
+      let journalIndex = null;
+      journals.map((journal, k) => {
+        let journalDay = new Date(journal.date);
+        if (
+          journalDay.getDate() === thisDaysDate.getDate() &&
+          journalDay.getMonth() === thisDaysDate.getMonth() &&
+          journalDay.getFullYear() === thisDaysDate.getFullYear()
+        )
+          journalIndex = k;
+      });
+      daysOfMonth.push({
+        dayOfMonth: (i + 1 - startValDaysOfMonth).toString(),
+        thisDaysDate,
+        journalIndex,
+      });
     }
     return daysOfMonth;
   };
@@ -142,67 +200,82 @@ const Calendar = ({
   };
 
   let daysOfMonth = buildMonthArr(firstDay);
+  console.log(daysOfMonth);
 
-  return (
-    <Fragment>
-      <div className='MainWin'>
-        <p className='BigTitle'>{currentMonth}</p>
-        <Button>
-          <Link style={{ color: 'white', display: 'inline-block' }} to='/weather'>
-            Weather
-          </Link>
-        </Button>
-        <Button>
-          <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-view'>
-            Journal View
-          </Link>
-        </Button>
-        <Button>
-          <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-entry'>
-            Journal Entry
-          </Link>
-        </Button>
-        <div style={{ height: '84%', paddingTop: '1vh' }}>
-          <div className='Calendar'>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Sunday</p>
+  if (journals) {
+    return (
+      <Fragment>
+        <div className='MainWin'>
+          <p className='BigTitle'>{currentMonth}</p>
+          <Button>
+            <Link style={{ color: 'white', display: 'inline-block' }} to='/weather'>
+              Weather
+            </Link>
+          </Button>
+          <Button>
+            <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-view'>
+              Journal View
+            </Link>
+          </Button>
+          <Button>
+            <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-entry'>
+              Journal Entry
+            </Link>
+          </Button>
+          <div style={{ height: '84%', paddingTop: '1vh' }}>
+            <div className='Calendar'>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Sunday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Monday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Tuesday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Wednesday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Thursday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Friday</p>
+              </div>
+              <div className='CalendarDayTitleFrame'>
+                <p className='CalendarDayTitle'>Saturday</p>
+              </div>
+              {daysOfMonth &&
+                journals &&
+                daysOfMonth.map((day) => {
+                  return (
+                    <div className='CalendarItem'>
+                      <Link to='/journal-entry' style={{ color: 'white', textDecoration: 'none' }}>
+                        <button
+                          className='CalendarDayButton'
+                          onClick={() => todayClicked(day.thisDaysDate)}
+                        >
+                          {journals[day.journalIndex] && (
+                            <img
+                              src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
+                              style={{ height: '100%', width: '100%' }}
+                            />
+                          )}
+                          <div style={{ position: 'absolute' }}>
+                            <p>{day.dayOfMonth}</p>
+                            {journals[day.journalIndex] && <p>{journals[day.journalIndex].text}</p>}
+                          </div>
+                        </button>
+                      </Link>
+                    </div>
+                  );
+                })}
             </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Monday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Tuesday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Wednesday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Thursday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Friday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Saturday</p>
-            </div>
-            {daysOfMonth &&
-              journals &&
-              daysOfMonth.map((day) => {
-                return (
-                  <div className='CalendarItem'>
-                    <Link to='/journal-entry' style={{ color: 'white', textDecoration: 'none' }}>
-                      <button className='CalendarDayButton' onClick={() => todayClicked(day[1])}>
-                        {day[0]}
-                      </button>
-                    </Link>
-                  </div>
-                );
-              })}
           </div>
         </div>
-      </div>
-    </Fragment>
-  );
+      </Fragment>
+    );
+  }
 };
 
 Calendar.propTypes = {

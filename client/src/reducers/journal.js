@@ -40,7 +40,7 @@ export default function journal(state = initialState, action) {
     case CREATE_JOURNAL:
       return {
         ...state,
-        journals: [...state.journals, payload.item],
+        journal: payload.item,
       };
     case TOGGLE_MODAL:
       return {
