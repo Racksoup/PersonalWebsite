@@ -5,6 +5,7 @@ import {
   CLEAR_JOURNALS,
   GOT_MONTHS_JOURNALS,
   UPDATE_JOURNAL,
+  CLEAR_JOURNAL,
 } from './types';
 
 import axios from 'axios';
@@ -54,13 +55,12 @@ export const getOneJournal = (id) => async (dispatch) => {
   }
 };
 
-export const getOneJournalByDate = (date) => async (dispatch) => {
+export const getOneJournalByDate = (journal, date) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/journal/date/${date}`);
-    if (res.data) {
+    if (journal) {
       dispatch({
         type: GOT_ONE_JOURNAL,
-        payload: res.data,
+        payload: journal,
       });
     } else {
       let item = { title: '', text: '', date: date };
@@ -88,6 +88,12 @@ export const getMonthsJournals = (date) => async (dispatch) => {
 export const clearJournals = () => (dispatch) => {
   dispatch({
     type: CLEAR_JOURNALS,
+  });
+};
+
+export const clearJournal = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_JOURNAL,
   });
 };
 

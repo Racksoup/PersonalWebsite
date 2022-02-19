@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import '../css/utils.css';
 import '../css/journal.css';
 import PictureModal from './Modal';
-import { createJournalPost, toggleModal, updateJournalPost } from '../actions/journal';
+import {
+  createJournalPost,
+  toggleModal,
+  updateJournalPost,
+  clearJournal,
+} from '../actions/journal';
 
 import Textarea from 'react-textarea-autosize';
 import PropTypes from 'prop-types';
@@ -10,7 +15,13 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const SingleJournalEntry = ({ createJournalPost, updateJournalPost, toggleModal, journal }) => {
+const SingleJournalEntry = ({
+  createJournalPost,
+  updateJournalPost,
+  toggleModal,
+  clearJournal,
+  journal,
+}) => {
   const [newJournal, setNewJournal] = useState({
     title: journal.title,
     text: journal.text,
@@ -53,7 +64,7 @@ const SingleJournalEntry = ({ createJournalPost, updateJournalPost, toggleModal,
       <div className='MainWin'>
         <PictureModal />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button>
+          <Button onClick={() => clearJournal()}>
             <Link to='calendar' style={{ color: 'white' }}>
               Back
             </Link>
@@ -118,7 +129,7 @@ const SingleJournalEntry = ({ createJournalPost, updateJournalPost, toggleModal,
       <div className='MainWin'>
         <PictureModal />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button>
+          <Button onClick={() => clearJournal()}>
             <Link to='calendar' style={{ color: 'white' }}>
               Back
             </Link>
@@ -179,12 +190,16 @@ SingleJournalEntry.propTypes = {
   createJournalPost: PropTypes.func.isRequired,
   updateJournalPost: PropTypes.func.isRequired,
   journal: PropTypes.object.isRequired,
+  clearJournal: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   journal: state.journal.journal,
 });
 
-export default connect(mapStateToProps, { createJournalPost, updateJournalPost, toggleModal })(
-  SingleJournalEntry
-);
+export default connect(mapStateToProps, {
+  createJournalPost,
+  updateJournalPost,
+  toggleModal,
+  clearJournal,
+})(SingleJournalEntry);

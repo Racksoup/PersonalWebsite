@@ -195,8 +195,8 @@ const Calendar = ({
     return daysOfMonth;
   };
 
-  const todayClicked = (today) => {
-    getOneJournalByDate(today);
+  const todayClicked = (journal, date) => {
+    getOneJournalByDate(journal, date);
   };
 
   let daysOfMonth = buildMonthArr(firstDay);
@@ -253,7 +253,7 @@ const Calendar = ({
                       <Link to='/journal-entry' style={{ color: 'white', textDecoration: 'none' }}>
                         <button
                           className='CalendarDayButton'
-                          onClick={() => todayClicked(day.thisDaysDate)}
+                          onClick={() => todayClicked(journals[day.journalIndex], day.thisDaysDate)}
                         >
                           {journals[day.journalIndex] && (
                             <img
@@ -263,7 +263,9 @@ const Calendar = ({
                           )}
                           <div style={{ position: 'absolute' }}>
                             <p>{day.dayOfMonth}</p>
-                            {journals[day.journalIndex] && <p>{journals[day.journalIndex].text}</p>}
+                            {journals[day.journalIndex] && (
+                              <p>{journals[day.journalIndex].title}</p>
+                            )}
                           </div>
                         </button>
                       </Link>

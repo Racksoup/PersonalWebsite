@@ -215,10 +215,10 @@ router.get('/image/:filename', async (req, res) => {
   });
 });
 
-// @route   DELETE api/journal/delete-image/:filename
+// @route   DELETE api/journal/deleteimage/:filename
 // @desc    Delete Image By Name
 // @access  private
-router.delete('/delete-image/:filename', Auth, async (req, res) => {
+router.delete('/deleteimage/:filename', Auth, async (req, res) => {
   const delImage = await gfs.remove(
     { filename: req.params.filename, root: 'journalImages' },
     (err, GridFSBucket) => {
@@ -230,10 +230,10 @@ router.delete('/delete-image/:filename', Auth, async (req, res) => {
   res.json(delImage);
 });
 
-// @route   DELETE api/journal/delete-image/id/:files_id
+// @route   DELETE api/journal/deleteimage/id/:files_id
 // @desc    Delete Image By id
 // @access  Private
-router.delete('/delete-image/id/:files_id', Auth, async (req, res) => {
+router.delete('/deleteimage/id/:files_id', Auth, async (req, res) => {
   const delImage = await gfs.remove(
     { files_id: req.params.files_id, root: 'journalImages' },
     (err, GridFSBucket) => {
