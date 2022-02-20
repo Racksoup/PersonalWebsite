@@ -215,16 +215,7 @@ const MyCalendar = ({
               Weather
             </Link>
           </Button>
-          <Button>
-            <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-view'>
-              Journal View
-            </Link>
-          </Button>
-          <Button>
-            <Link style={{ color: 'white', display: 'inline-block' }} to='/journal-entry'>
-              Journal Entry
-            </Link>
-          </Button>
+
           <DatePicker onChange={setDateValue} value={dateValue} />
           <div style={{ height: '84%', paddingTop: '1vh' }}>
             <div className='MyCalendar'>
@@ -254,17 +245,25 @@ const MyCalendar = ({
                 daysOfMonth.map((day) => {
                   return (
                     <div className='CalendarItem'>
-                      <Link to='/journal-entry' style={{ color: 'white', textDecoration: 'none' }}>
+                      <Link to='/journal-view' style={{ color: 'white', textDecoration: 'none' }}>
                         <button
                           className='CalendarDayButton'
                           onClick={() => todayClicked(journals[day.journalIndex], day.thisDaysDate)}
                         >
-                          {journals[day.journalIndex] && (
-                            <img
-                              src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
-                              style={{ height: '100%', width: '100%', position: 'relative' }}
-                            />
-                          )}
+                          {journals[day.journalIndex] &&
+                            journals[day.journalIndex].image_filename !== undefined && (
+                              <img
+                                src={`api/journal/image/${
+                                  journals[day.journalIndex].image_filename
+                                }`}
+                                style={{
+                                  height: '100%',
+                                  width: '100%',
+                                  position: 'relative',
+                                  border: '0',
+                                }}
+                              />
+                            )}
                           <div style={{ position: 'absolute' }}>
                             <p>{day.dayOfMonth}</p>
                             {journals[day.journalIndex] && (

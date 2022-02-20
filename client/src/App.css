@@ -24,3 +24,9 @@ body {
   color: white;
   overflow: auto;
 }
+
+img,
+a {
+  border: none;
+  outline: none;
+}

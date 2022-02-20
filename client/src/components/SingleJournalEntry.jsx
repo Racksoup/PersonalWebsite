@@ -190,7 +190,7 @@ SingleJournalEntry.propTypes = {
   createJournalPost: PropTypes.func.isRequired,
   updateJournalPost: PropTypes.func.isRequired,
   journal: PropTypes.object.isRequired,
-  clearJournal: PropTypes.object.isRequired,
+  clearJournal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
