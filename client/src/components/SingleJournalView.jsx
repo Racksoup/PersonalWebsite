@@ -6,10 +6,14 @@ import { clearJournal } from '../actions/journal';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const SingleJournalView = ({ clearJournal, journal }) => {
+  if (journal.title === '') {
+    return <Redirect to='/journal-entry' />;
+  }
+  console.log(journal.title);
   return (
     <div className='MainWin'>
       <Button onClick={() => clearJournal()}>
