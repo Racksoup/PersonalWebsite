@@ -78,7 +78,7 @@ const MyCalendar = ({
     return firstDay;
   };
 
-  const currentMonth = monthsOfYear[new Date().getMonth()];
+  const currentMonth = monthsOfYear[dateValue.getMonth()];
 
   let firstDay = findFirstDayOfMonth(dateValue);
 
@@ -96,7 +96,7 @@ const MyCalendar = ({
     // add prev month
     // add prev month
     // add prev month
-    for (let i = prevMonthNumDays; i > prevMonthNumDays - firstDay[1]; i--) {
+    for (let i = prevMonthNumDays - firstDay[1] + 1; i < prevMonthNumDays + 1; i++) {
       // format thisDaysDate (month issue)
       let thisDaysDate;
       if (firstDay[2] === 10 || firstDay[2] === 11) {
