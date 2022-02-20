@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   getOneJournal,
   getOneJournalByDate,
@@ -6,6 +6,7 @@ import {
   getMonthsJournals,
 } from '../actions/journal';
 
+import DatePicker from 'react-date-picker';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,7 +14,7 @@ import Button from 'react-bootstrap/Button';
 import '../css/utils.css';
 import axios from 'axios';
 
-const Calendar = ({
+const MyCalendar = ({
   getOneJournal,
   getOneJournalByDate,
   clearJournals,
@@ -23,6 +24,8 @@ const Calendar = ({
   useEffect(() => {
     getMonthsJournals(new Date());
   }, []);
+
+  const [dateValue, setDateValue] = useState(new Date());
   const monthsOfYear = [
     'January',
     'February',
@@ -77,7 +80,7 @@ const Calendar = ({
 
   const currentMonth = monthsOfYear[new Date().getMonth()];
 
-  let firstDay = findFirstDayOfMonth(new Date());
+  let firstDay = findFirstDayOfMonth(dateValue);
 
   const buildMonthArr = (firstDay) => {
     const daysOfMonth = [];
@@ -200,7 +203,7 @@ const Calendar = ({
   };
 
   let daysOfMonth = buildMonthArr(firstDay);
-  console.log(daysOfMonth);
+  console.log(dateValue);
 
   if (journals) {
     return (
@@ -222,8 +225,9 @@ const Calendar = ({
               Journal Entry
             </Link>
           </Button>
+          <DatePicker onChange={setDateValue} value={dateValue} />
           <div style={{ height: '84%', paddingTop: '1vh' }}>
-            <div className='Calendar'>
+            <div className='MyCalendar'>
               <div className='CalendarDayTitleFrame'>
                 <p className='CalendarDayTitle'>Sunday</p>
               </div>
@@ -258,7 +262,7 @@ const Calendar = ({
                           {journals[day.journalIndex] && (
                             <img
                               src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
-                              style={{ height: '100%', width: '100%' }}
+                              style={{ height: '100%', width: '100%', position: 'relative' }}
                             />
                           )}
                           <div style={{ position: 'absolute' }}>
@@ -280,7 +284,7 @@ const Calendar = ({
   }
 };
 
-Calendar.propTypes = {
+MyCalendar.propTypes = {
   getOneJournal: PropTypes.func.isRequired,
   getOneJournalByDate: PropTypes.func.isRequired,
   clearJournals: PropTypes.func.isRequired,
@@ -297,4 +301,4 @@ export default connect(mapStateToProps, {
   getOneJournalByDate,
   clearJournals,
   getMonthsJournals,
-})(Calendar);
+})(MyCalendar);

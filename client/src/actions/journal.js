@@ -115,7 +115,7 @@ export const updateJournalPost = (item, file) => async (dispatch) => {
           'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
         },
       };
-      await axios.delete(`/api/journal/deleteimage/${oldItem.data.image_filename}`);
+      await axios.delete(`/api/journal/deleteImage/${oldItem.data.image_filename}`);
       const newImage = await axios.post('/api/journal/uploadimage', data, fileConfig);
       item.image_filename = newImage.data.file.filename;
     }

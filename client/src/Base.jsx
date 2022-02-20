@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import './App.css';
-import Calendar from './components/Calendar.jsx';
+import MyCalendar from './components/MyCalendar.jsx';
 import Login from './components/Login';
 import Forecast from './components/Weather/Forecast';
 import Weather from './components/Weather/Weather';
@@ -51,7 +51,7 @@ const Base = ({
       <section className='App'>
         <Switch>
           <Route exact path='/' component={Login} />
-          <Route exact path='/calendar' component={Calendar} />
+          <Route exact path='/calendar' component={MyCalendar} />
           <Route exact path='/forecast' component={Forecast} />
           <Route exact path='/weather' component={Weather} />
           <Route exact path='/minutely' component={Minutely} />
