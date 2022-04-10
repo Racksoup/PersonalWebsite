@@ -1,0 +1,100 @@
+.datePicker {
+  color: white;
+  margin: 0px 0px 0px 15px;
+  display: inline-block;
+
+  .react-date-picker__button:enabled .react-date-picker__button__icon {
+    stroke: white;
+  }
+
+  .react-date-picker__button:enabled:hover .react-date-picker__button__icon,
+  .react-date-picker__button:enabled:focus .react-date-picker__button__icon {
+    stroke: #00ff62;
+  }
+
+  .react-date-picker__inputGroup__input {
+    color: white;
+  }
+
+  .react-calendar {
+    background-color: rgb(19, 19, 19);
+  }
+
+  .react-calendar__month-view__days__day {
+    color: rgb(212, 212, 212);
+  }
+
+  .react-calendar__month-view__days__day--weekend {
+    color: #d10000;
+  }
+
+  .react-calendar__month-view__days__day--neighboringMonth {
+    color: #363636;
+  }
+
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    color: rgb(0, 0, 0);
+  }
+
+  .react-calendar__tile--now {
+    background: #8f8f2f;
+  }
+
+  .react-calendar__tile--active {
+    background: #2d4a68;
+  }
+
+  .react-calendar__navigation button {
+    color: white;
+  }
+  .react-calendar__navigation button:focus,
+  .react-calendar__navigation button:hover {
+    color: rgb(0, 0, 0);
+  }
+}
+
+/* Custom Widgets */
+/* Calendar */
+.MyCalendar {
+  width: 100%;
+  height: 65vh;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)
+    minmax(0, 1fr);
+  grid-template-rows:
+    minmax(0, 1fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr)
+    minmax(0, 4fr);
+}
+.CalendarDayTitleFrame {
+  border-radius: 0.1rem;
+  border: solid white;
+}
+.CalendarDayTitle {
+  text-align: center;
+  font-size: 0.8rem;
+}
+.CalendarItem {
+  border-radius: 0.1rem;
+  border: solid rgba(255, 255, 255, 0.116) 0.01rem;
+  padding: 0px;
+  margin: 0px;
+}
+.CalendarItem:hover {
+  border: solid rgba(255, 255, 255, 0.637) 0.2rem;
+}
+.CalendarDayButton {
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: flex-start;
+  color: white;
+}
+
+.Calendar_Button_MonthNav {
+  display: inline-block;
+  margin: 0rem 2rem 0rem 2rem;
+}

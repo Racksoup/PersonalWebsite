@@ -13,7 +13,6 @@ const SingleJournalView = ({ clearJournal, journal }) => {
   if (journal.title === '') {
     return <Redirect to='/journal-entry' />;
   }
-  console.log(journal.title);
   return (
     <div className='MainWin'>
       <Button onClick={() => clearJournal()}>

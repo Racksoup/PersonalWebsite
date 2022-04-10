@@ -12,7 +12,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import '../css/utils.css';
-import axios from 'axios';
+import '../css/calendar.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const MyCalendar = ({
   getOneJournal,
@@ -202,21 +204,42 @@ const MyCalendar = ({
     getOneJournalByDate(journal, date);
   };
 
+  const leftMonthButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setMonth(currDate.getMonth() - 1);
+    setDateValue(currDate);
+  };
+
+  const rightMonthButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setMonth(currDate.getMonth() + 1);
+    setDateValue(currDate);
+  };
+
   let daysOfMonth = buildMonthArr(firstDay);
-  console.log(dateValue);
+
+  useEffect(() => {}, [dateValue]);
 
   if (journals) {
     return (
       <Fragment>
         <div className='MainWin'>
           <p className='BigTitle'>{currentMonth}</p>
-          <Button>
-            <Link style={{ color: 'white', display: 'inline-block' }} to='/weather'>
-              Weather
-            </Link>
-          </Button>
+          <div style={{ display: 'inline' }}>
+            <Button>
+              <Link style={{ color: 'white' }} to='/weather'>
+                Weather
+              </Link>
+            </Button>
 
-          <DatePicker onChange={setDateValue} value={dateValue} />
+            <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
+            <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+            <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          </div>
           <div style={{ height: '84%', paddingTop: '1vh' }}>
             <div className='MyCalendar'>
               <div className='CalendarDayTitleFrame'>

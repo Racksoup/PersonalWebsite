@@ -32,8 +32,10 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 // multiple images on one journal
-// remove edit and view journal buttons. add edit journal button to view journal page. link to view journal page from calendar click
+// style view journal
 
 // add to-do's lists (multiple)
 // mutilple lists
-// track completed list items on both journal pages
+// track completed list items on journal pages
+
+// timeline of big events
