@@ -59,12 +59,31 @@
   border-color: aquamarine;
   border-style: solid;
   border-radius: 20px;
-  width: 60rem;
-  height: 48rem;
 }
 
-.MyCalendar {
-  width: 100%;
+.Calendar-Title {
+  display: inline;
+  text-align: center;
+  font-size: 2.5rem;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.Calendar-TitleGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.Calendar-Title-MonthFlex {
+  display: flex;
+  align-items: center;
+}
+
+.Calendar-Grid {
+  width: 60rem;
   padding: 0.5rem;
   height: 40rem;
   display: grid;
@@ -101,10 +120,4 @@
 .Calendar_Button_MonthNav {
   display: inline-block;
   margin: 0rem 2rem 0rem 2rem;
-}
-
-.Calendar-Title {
-  display: inline;
-  text-align: center;
-  font-size: 2.5rem;
 }
