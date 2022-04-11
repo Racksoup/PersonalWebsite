@@ -7,14 +7,13 @@ import {
 } from '../actions/journal';
 
 import DatePicker from 'react-date-picker';
-import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import '../css/utils.css';
 import '../css/calendar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const MyCalendar = ({
   getOneJournal,
@@ -207,31 +206,25 @@ const MyCalendar = ({
   const leftMonthButtonClicked = () => {
     let currDate = new Date(dateValue);
     currDate.setMonth(currDate.getMonth() - 1);
+    currDate.setDate(1);
     setDateValue(currDate);
   };
 
   const rightMonthButtonClicked = () => {
     let currDate = new Date(dateValue);
     currDate.setMonth(currDate.getMonth() + 1);
+    currDate.setDate(1);
     setDateValue(currDate);
   };
 
   let daysOfMonth = buildMonthArr(firstDay);
 
-  useEffect(() => {}, [dateValue]);
-
   if (journals) {
     return (
       <Fragment>
-        <div className='MainWin'>
-          <p className='BigTitle'>{currentMonth}</p>
+        <div className='Calendar-MainWin'>
           <div style={{ display: 'inline' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Weather
-              </Link>
-            </Button>
-
+            <p className='Calendar-Title'>{currentMonth}</p>
             <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
             <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
               <FontAwesomeIcon icon={faChevronLeft} />

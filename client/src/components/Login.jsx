@@ -25,7 +25,7 @@ const Login = ({ login, user }) => {
   };
 
   if (user) {
-    return <Redirect to='/calendar' />;
+    return <Redirect to='/home' />;
   }
 
   return (
