@@ -1,7 +1,3 @@
-/* Base Frames */
-
-/* Journal  */
-
 /* Titles */
 .BigTitle {
   text-align: center;
@@ -11,10 +7,4 @@
 .XSmallTitle {
   text-align: center;
   font-size: 0.8rem;
-}
-
-/* Link Format */
-.FormatLink {
-  color: 'white';
-  display: inline-block;
 }

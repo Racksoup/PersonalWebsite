@@ -23,4 +23,8 @@
 .Link-WeatherNav {
   text-decoration: none;
   color: black;
+
+  &:hover {
+    color: rgb(255, 123, 0);
+  }
 }

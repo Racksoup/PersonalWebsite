@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/utils.css';
-import '../css/journal.css';
+import '../css/journal.scss';
 import PictureModal from './Modal';
 import {
   createJournalPost,
@@ -56,16 +56,16 @@ const SingleJournalEntry = ({
   };
 
   if (redirect) {
-    return <Redirect to='/calendar' />;
+    return <Redirect to='/home' />;
   }
 
   if (journal) {
     return (
-      <div className='MainWin'>
+      <div className='JournalPage'>
         <PictureModal />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Button onClick={() => clearJournal()}>
-            <Link to='calendar' style={{ color: 'white' }}>
+            <Link to='/home' style={{ color: 'white' }}>
               Back
             </Link>
           </Button>
@@ -130,7 +130,7 @@ const SingleJournalEntry = ({
         <PictureModal />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Button onClick={() => clearJournal()}>
-            <Link to='calendar' style={{ color: 'white' }}>
+            <Link to='/home' style={{ color: 'white' }}>
               Back
             </Link>
           </Button>

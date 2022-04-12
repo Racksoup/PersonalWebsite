@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import './weather.css';
+import '../../css/weather.scss';
 import '../../css/utils.css';
 import { getFourDay } from '../../actions/weather';
 
@@ -87,118 +87,116 @@ const Forecast = ({ getFourDay, forecast }) => {
   };
 
   return (
-    <Fragment>
-      <div className='MainWin'>
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '0px' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Back
-              </Link>
-            </Button>
-          </div>
-          <h1 style={{ textAlign: 'center', margin: 'auto' }}>5 Day Forecast</h1>
+    <div className='WeatherPage'>
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '0px' }}>
+          <Button>
+            <Link style={{ color: 'white' }} to='/weather'>
+              Back
+            </Link>
+          </Button>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-          <div className='DayBox'>
-            <h4>{dayForecast.day1 && dayForecast.day1[0].day}</h4>
-            {dayForecast.day1 &&
-              dayForecast.day1.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+        <h1 style={{ textAlign: 'center', margin: 'auto' }}>5 Day Forecast</h1>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+        <div className='DayBox'>
+          <h4>{dayForecast.day1 && dayForecast.day1[0].day}</h4>
+          {dayForecast.day1 &&
+            dayForecast.day1.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
-          <div className='DayBox'>
-            <h4>{dayForecast.day2 && dayForecast.day2[0].day}</h4>
-            {dayForecast.day2 &&
-              dayForecast.day2.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
+        </div>
+        <div className='DayBox'>
+          <h4>{dayForecast.day2 && dayForecast.day2[0].day}</h4>
+          {dayForecast.day2 &&
+            dayForecast.day2.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
-          <div className='DayBox'>
-            <h4>{dayForecast.day3 && dayForecast.day3[0].day}</h4>
-            {dayForecast.day3 &&
-              dayForecast.day3.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
+        </div>
+        <div className='DayBox'>
+          <h4>{dayForecast.day3 && dayForecast.day3[0].day}</h4>
+          {dayForecast.day3 &&
+            dayForecast.day3.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
-          <div className='DayBox'>
-            <h4>{dayForecast.day4 && dayForecast.day4[0].day}</h4>
-            {dayForecast.day4 &&
-              dayForecast.day4.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
+        </div>
+        <div className='DayBox'>
+          <h4>{dayForecast.day4 && dayForecast.day4[0].day}</h4>
+          {dayForecast.day4 &&
+            dayForecast.day4.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
-          <div className='DayBox'>
-            <h4>{dayForecast.day5 && dayForecast.day5[0].day}</h4>
-            {dayForecast.day5 &&
-              dayForecast.day5.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
+        </div>
+        <div className='DayBox'>
+          <h4>{dayForecast.day5 && dayForecast.day5[0].day}</h4>
+          {dayForecast.day5 &&
+            dayForecast.day5.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
-          <div className='DayBox'>
-            <h4>{dayForecast.day6 && dayForecast.day6[0].day}</h4>
-            {dayForecast.day6 &&
-              dayForecast.day6.map((hour) => {
-                return (
-                  <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
-                    <div style={{ display: 'flex' }}>
-                      <div>{hour.time}</div>
-                      <div>{hour.tag}</div>
-                    </div>
-                    <div>{(hour.temp - 273.15).toFixed(2)}</div>
-                    <div>{hour.weather}</div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
+        </div>
+        <div className='DayBox'>
+          <h4>{dayForecast.day6 && dayForecast.day6[0].day}</h4>
+          {dayForecast.day6 &&
+            dayForecast.day6.map((hour) => {
+              return (
+                <div style={{ display: 'flex', justifyContent: 'space-around', width: '180px' }}>
+                  <div style={{ display: 'flex' }}>
+                    <div>{hour.time}</div>
+                    <div>{hour.tag}</div>
                   </div>
-                );
-              })}
-          </div>
+                  <div>{(hour.temp - 273.15).toFixed(2)}</div>
+                  <div>{hour.weather}</div>
+                </div>
+              );
+            })}
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

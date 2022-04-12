@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/utils.css';
-import '../css/journal.css';
+import '../css/journal.scss';
 import PictureModal from './Modal';
 import { clearJournal } from '../actions/journal';
 
@@ -14,17 +14,15 @@ const SingleJournalView = ({ clearJournal, journal }) => {
     return <Redirect to='/journal-entry' />;
   }
   return (
-    <div className='MainWin'>
-      <Button onClick={() => clearJournal()}>
-        <Link to='calendar' style={{ color: 'white' }}>
+    <div className='JournalPage'>
+      <Link to='home' className='Journal-Link'>
+        <div className='Journal-Btn' onClick={() => clearJournal()}>
           Back
-        </Link>
-      </Button>
-      <Button>
-        <Link to='journal-entry' style={{ color: 'white' }}>
-          Edit
-        </Link>
-      </Button>
+        </div>
+      </Link>
+      <Link to='journal-entry' className='Journal-Link'>
+        <div className='Journal-Btn'>Edit</div>
+      </Link>
 
       <p className='BigTitle'>{journal.title}</p>
       <div className='MainViewFrame'>

@@ -9,7 +9,7 @@
 
   .react-date-picker__button:enabled:hover .react-date-picker__button__icon,
   .react-date-picker__button:enabled:focus .react-date-picker__button__icon {
-    stroke: #00ff62;
+    stroke: cyan;
   }
 
   .react-date-picker__inputGroup__input {
@@ -56,7 +56,7 @@
 
 /* Calendar */
 .Calendar-MainWin {
-  border-color: aquamarine;
+  border-color: cyan;
   border-style: solid;
   border-radius: 20px;
 }
@@ -67,11 +67,16 @@
   font-size: 2.5rem;
   padding: 0rem;
   margin: 0rem;
+  width: 12rem;
+
+  &:hover {
+    color: rgb(255, 123, 0);
+  }
 }
 
 .Calendar-TitleGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 12rem 1fr;
   grid-template-rows: 1fr;
   align-items: center;
   justify-items: center;
@@ -103,9 +108,10 @@
   border: solid rgba(255, 255, 255, 0.116) 0.01rem;
   padding: 0px;
   margin: 0px;
-}
-.CalendarItem:hover {
-  border: solid rgba(255, 255, 255, 0.637) 0.2rem;
+
+  &:hover {
+    border: solid rgba(255, 115, 0, 0.637) 0.2rem;
+  }
 }
 .CalendarDayButton {
   background-color: rgba(0, 0, 0, 0);
