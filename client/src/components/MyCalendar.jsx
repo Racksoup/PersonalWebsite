@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   getOneJournal,
   getOneJournalByDate,
@@ -26,6 +26,7 @@ const MyCalendar = ({
     getMonthsJournals(new Date());
   }, []);
 
+  const [calendarLayout, toggleCalendarLayout] = useState(0);
   const [dateValue, setDateValue] = useState(new Date());
   const monthsOfYear = [
     'January',
@@ -80,6 +81,7 @@ const MyCalendar = ({
   };
 
   const currentMonth = monthsOfYear[dateValue.getMonth()];
+  const currentYear = dateValue.getFullYear();
 
   let firstDay = findFirstDayOfMonth(dateValue);
 
@@ -219,78 +221,106 @@ const MyCalendar = ({
 
   let daysOfMonth = buildMonthArr(firstDay);
 
-  if (journals) {
+  // Calendar Layout Main
+  if (calendarLayout == 0) {
     return (
-      <Fragment>
-        <div className='Calendar-MainWin'>
-          <div className='Calendar-TitleGrid'>
-            <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
-            <div className='Calendar-Title-MonthFlex'>
-              <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </div>
-              <p className='Calendar-Title'>{currentMonth}</p>
-              <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </div>
+      <div className='Calendar-MainWin'>
+        <div className='Calendar-TitleGrid'>
+          <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
+          <div className='Calendar-Title-MonthFlex'>
+            <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronLeft} />
             </div>
-          </div>
-          <div className='Calendar-Grid'>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Sunday</p>
+            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(1)}>
+              {currentMonth}
+            </p>
+            <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronRight} />
             </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Monday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Tuesday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Wednesday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Thursday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Friday</p>
-            </div>
-            <div className='CalendarDayTitleFrame'>
-              <p className='CalendarDayTitle'>Saturday</p>
-            </div>
-            {daysOfMonth &&
-              journals &&
-              daysOfMonth.map((day) => {
-                return (
-                  <div className='CalendarItem'>
-                    <Link to='/journal-view' style={{ color: 'white', textDecoration: 'none' }}>
-                      <button
-                        className='CalendarDayButton'
-                        onClick={() => todayClicked(journals[day.journalIndex], day.thisDaysDate)}
-                      >
-                        {journals[day.journalIndex] &&
-                          journals[day.journalIndex].image_filename !== undefined && (
-                            <img
-                              src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
-                              style={{
-                                height: '100%',
-                                width: '100%',
-                                position: 'relative',
-                                border: '0',
-                              }}
-                            />
-                          )}
-                        <div style={{ position: 'absolute' }}>
-                          <p>{day.dayOfMonth}</p>
-                          {journals[day.journalIndex] && <p>{journals[day.journalIndex].title}</p>}
-                        </div>
-                      </button>
-                    </Link>
-                  </div>
-                );
-              })}
           </div>
         </div>
-      </Fragment>
+        <div className='Calendar-Grid'>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Sunday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Monday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Tuesday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Wednesday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Thursday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Friday</p>
+          </div>
+          <div className='CalendarDayTitleFrame'>
+            <p className='CalendarDayTitle'>Saturday</p>
+          </div>
+          {daysOfMonth &&
+            journals &&
+            daysOfMonth.map((day) => {
+              return (
+                <div className='CalendarItem'>
+                  <Link to='/journal-view' style={{ color: 'white', textDecoration: 'none' }}>
+                    <button
+                      className='CalendarDayButton'
+                      onClick={() => todayClicked(journals[day.journalIndex], day.thisDaysDate)}
+                    >
+                      {journals[day.journalIndex] &&
+                        journals[day.journalIndex].image_filename !== undefined && (
+                          <img
+                            src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
+                            style={{
+                              height: '100%',
+                              width: '100%',
+                              position: 'relative',
+                              border: '0',
+                            }}
+                          />
+                        )}
+                      <div style={{ position: 'absolute' }}>
+                        <p>{day.dayOfMonth}</p>
+                        {journals[day.journalIndex] && <p>{journals[day.journalIndex].title}</p>}
+                      </div>
+                    </button>
+                  </Link>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    );
+  }
+
+  // Calendar Layout Month Selector
+  if (calendarLayout == 1) {
+    return (
+      <div className='Calendar-MainWin'>
+        <div className='Calendar-TitleGrid'>
+          <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
+          <div className='Calendar-Title-MonthFlex'>
+            <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(0)}>
+              {currentYear}
+            </p>
+            <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          </div>
+        </div>
+        <div className='Calendar-MonthGrid'>
+          {monthsOfYear.map((month) => {
+            return <div className='Calendar-MonthItem'>{month}</div>;
+          })}
+        </div>
+      </div>
     );
   }
 };
