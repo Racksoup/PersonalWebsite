@@ -7,15 +7,6 @@
   align-items: center;
 }
 
-.DayBox {
-  border-style: solid;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .Weather-Btn {
   width: 10rem;
   height: 3rem;
@@ -80,4 +71,36 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+
+.Forecast {
+  width: 40rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.Forecast-DayFlex {
+  width: 12rem;
+  padding: 0.6rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Forecast-HourFlex {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: start;
+}
+
+.Forecast-HourItem {
+  width: 100%;
+  display: flex;
 }

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 
 const Hourly = ({ hourly, getOneCallWeather }) => {
   useEffect(() => {
@@ -27,7 +26,7 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
     return (
       <div className='WeatherPage-Main'>
         <div className='Weather-TitleBox'>
-          <Link className='Weather-Link' to='/home'>
+          <Link className='Weather-Link' to='/weather'>
             <div className='Weather-Btn Weather-BackBtn'>Back</div>
           </Link>
           <h1 className='Weather-Title'>Hourly</h1>
