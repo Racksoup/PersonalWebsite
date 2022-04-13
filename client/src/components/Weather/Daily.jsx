@@ -15,16 +15,14 @@ const Daily = ({ daily, getOneCallWeather }) => {
 
   if (daily) {
     return (
-      <div className='WeatherPage'>
-        <div style={{ display: 'flex', overflow: 'hidden' }}>
-          <div style={{ width: '0px' }}>
-            <Link className='Weather-Link' to='/weather'>
-              <div className='Weather-Btn Weather-BackBtn'>Back</div>
-            </Link>
-          </div>
-          <h1 style={{ margin: 'auto' }}>Daily</h1>
+      <div className='WeatherPage-Main'>
+        <div className='Weather-TitleBox'>
+          <Link className='Weather-Link' to='/home'>
+            <div className='Weather-Btn Weather-BackBtn'>Back</div>
+          </Link>
+          <h1 className='Weather-Title'>Daily</h1>
         </div>
-        <Table striped bordered hover style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
+        <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>
             <tr style={{ color: 'white' }}>
               <th>Day</th>
