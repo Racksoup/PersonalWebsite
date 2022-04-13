@@ -3,6 +3,11 @@
   width: 80rem;
 }
 
+.WeatherPage-Main {
+  margin: auto;
+  width: 20rem;
+}
+
 .DayBox {
   border-style: solid;
   border-radius: 10px;
@@ -10,4 +15,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.Btn-Weather {
+  width: 10rem;
+  height: 3rem;
+  background-color: cyan;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: rgb(255, 115, 0);
+  }
+}
+
+.Link-Weather {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.Weather-NavBox {
+  height: 7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Weather-NavBox-Row {
+  width: 21rem;
+  display: flex;
+  justify-content: space-between;
 }
