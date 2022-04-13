@@ -28,11 +28,9 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
       <div className='WeatherPage'>
         <div style={{ display: 'flex', overflow: 'hidden' }}>
           <div style={{ width: '0px' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Back
-              </Link>
-            </Button>
+            <Link className='Weather-Link' to='/weather'>
+              <div className='Weather-Btn Weather-BackBtn'>Back</div>
+            </Link>
           </div>
           <h1 style={{ margin: 'auto' }}>Hourly</h1>
         </div>

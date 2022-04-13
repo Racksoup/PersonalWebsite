@@ -72,3 +72,12 @@
   grid-template-rows: 1fr;
   align-items: end;
 }
+
+.Minute-Flex {
+  margin: 30px 0px 0px 0px;
+  height: 23rem;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

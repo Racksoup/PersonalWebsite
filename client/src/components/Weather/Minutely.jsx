@@ -5,7 +5,6 @@ import { getOneCallWeather } from '../../actions/weather';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 
 const Minutely = ({ minutely, getOneCallWeather }) => {
   useEffect(() => {
@@ -24,27 +23,14 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
 
   if (minutely) {
     return (
-      <div className='WeatherPage'>
-        <div style={{ display: 'flex', overflow: 'hidden' }}>
-          <div style={{ width: '0px' }}>
-            <Button>
-              <Link style={{ color: 'white' }} to='/weather'>
-                Back
-              </Link>
-            </Button>
-          </div>
-          <h1 style={{ margin: 'auto' }}>Minutely Precipitation</h1>
+      <div className='WeatherPage-Main'>
+        <div className='Weather-TitleBox'>
+          <Link className='Weather-Link' to='/weather'>
+            <div className='Weather-Btn Weather-BackBtn'>Back</div>
+          </Link>
+          <h1 className='Weather-Title'>Minutely Precipitation</h1>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '245px',
-            flexWrap: 'wrap',
-            marginTop: '30px',
-          }}
-        >
+        <div className='Minute-Flex'>
           {minutely.map((minute, i) => {
             if (tagMin > 59) {
               tagMin = 0;
