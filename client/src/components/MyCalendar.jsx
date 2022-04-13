@@ -219,6 +219,74 @@ const MyCalendar = ({
     setDateValue(currDate);
   };
 
+  const leftYearButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setFullYear(currDate.getFullYear() - 1);
+    currDate.setMonth(0);
+    currDate.setDate(1);
+    setDateValue(currDate);
+  };
+
+  const rightYearButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setFullYear(currDate.getFullYear() + 1);
+    currDate.setMonth(0);
+    currDate.setDate(1);
+    setDateValue(currDate);
+  };
+
+  const leftCenturyButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setFullYear(currDate.getFullYear() - 100);
+    currDate.setMonth(0);
+    currDate.setDate(1);
+    setDateValue(currDate);
+  };
+
+  const rightCenturyButtonClicked = () => {
+    let currDate = new Date(dateValue);
+    currDate.setFullYear(Math.floor(currDate.getFullYear() / 100) * 100 + 100);
+    currDate.setMonth(0);
+    currDate.setDate(1);
+    setDateValue(currDate);
+  };
+
+  const monthItemClicked = (month) => {
+    let newDate = new Date(dateValue);
+    newDate.setMonth(month);
+    newDate.setDate(1);
+    setDateValue(newDate);
+    toggleCalendarLayout(0);
+  };
+
+  const yearClicked = (year) => {
+    let newDate = new Date(dateValue);
+    newDate.setFullYear(parseInt(year));
+    newDate.setMonth(0);
+    newDate.setDate(1);
+    setDateValue(newDate);
+    toggleCalendarLayout(1);
+  };
+
+  const printYears = () => {
+    let preYear = Math.floor(currentYear / 100);
+    let arr = [];
+    for (let i = 0; i < 100; i++) {
+      let postYear = i.toString();
+      if (i < 10) {
+        postYear = `0${i}`;
+      }
+      let fullYear = preYear + postYear;
+      console.log(fullYear);
+      arr.push(
+        <div className='Calendar-YearItem' onClick={() => yearClicked(fullYear)}>
+          {fullYear}
+        </div>
+      );
+    }
+    return arr;
+  };
+
   let daysOfMonth = buildMonthArr(firstDay);
 
   // Calendar Layout Main
@@ -284,7 +352,7 @@ const MyCalendar = ({
                           />
                         )}
                       <div style={{ position: 'absolute' }}>
-                        <p>{day.dayOfMonth}</p>
+                        <p style={{ width: '2rem' }}>{day.dayOfMonth}</p>
                         {journals[day.journalIndex] && <p>{journals[day.journalIndex].title}</p>}
                       </div>
                     </button>
@@ -304,22 +372,49 @@ const MyCalendar = ({
         <div className='Calendar-TitleGrid'>
           <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
           <div className='Calendar-Title-MonthFlex'>
-            <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
+            <div className='Calendar_Button_MonthNav' onClick={() => leftYearButtonClicked()}>
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
-            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(0)}>
+            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(2)}>
               {currentYear}
             </p>
-            <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
+            <div className='Calendar_Button_MonthNav' onClick={() => rightYearButtonClicked()}>
               <FontAwesomeIcon icon={faChevronRight} />
             </div>
           </div>
         </div>
         <div className='Calendar-MonthGrid'>
-          {monthsOfYear.map((month) => {
-            return <div className='Calendar-MonthItem'>{month}</div>;
+          {monthsOfYear.map((month, i) => {
+            return (
+              <div className='Calendar-MonthItem' onClick={() => monthItemClicked(i)}>
+                {month}
+              </div>
+            );
           })}
         </div>
+      </div>
+    );
+  }
+
+  // Calendar Layout Year Selector
+  if (calendarLayout == 2) {
+    return (
+      <div className='Calendar-MainWin'>
+        <div className='Calendar-TitleGrid'>
+          <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
+          <div className='Calendar-Title-MonthFlex'>
+            <div className='Calendar_Button_MonthNav' onClick={() => leftCenturyButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </div>
+            <p className='Calendar-Title-YearLayout'>
+              {`${Math.floor(currentYear / 100)}00 - ${Math.floor(currentYear / 100) + 1}00`}
+            </p>
+            <div className='Calendar_Button_MonthNav' onClick={() => rightCenturyButtonClicked()}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </div>
+          </div>
+        </div>
+        <div className='Calendar-YearGrid'>{printYears()}</div>
       </div>
     );
   }
