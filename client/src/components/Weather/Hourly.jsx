@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { getOneCallWeather } from '../../actions/weather';
-import '../../css/utils.css';
 import '../../css/weather.scss';
 
 import { connect } from 'react-redux';

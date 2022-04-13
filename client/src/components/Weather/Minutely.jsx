@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import '../../css/weather.scss';
-import '../../css/utils.css';
 import { getOneCallWeather } from '../../actions/weather';
 
 import PropTypes from 'prop-types';

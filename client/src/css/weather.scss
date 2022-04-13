@@ -1,11 +1,10 @@
-.WeatherPage {
-  margin: auto;
-  width: 80rem;
-}
-
 .WeatherPage-Main {
-  margin: auto;
-  width: 20rem;
+  margin: 3rem auto 0rem auto;
+  width: 60rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .DayBox {
@@ -17,7 +16,7 @@
   align-items: center;
 }
 
-.Btn-Weather {
+.Weather-Btn {
   width: 10rem;
   height: 3rem;
   background-color: cyan;
@@ -31,7 +30,14 @@
   }
 }
 
-.Link-Weather {
+.Weather-BackBtn {
+  width: 5rem;
+  height: 2rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+}
+
+.Weather-Link {
   text-decoration: none;
   color: black;
   font-size: 1.2rem;
@@ -39,6 +45,7 @@
 }
 
 .Weather-NavBox {
+  margin: 1rem 0;
   height: 7rem;
   display: flex;
   flex-direction: column;
@@ -49,4 +56,19 @@
   width: 21rem;
   display: flex;
   justify-content: space-between;
+}
+
+.Weather-Title {
+  text-align: center;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.Weather-TitleBox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: end;
 }

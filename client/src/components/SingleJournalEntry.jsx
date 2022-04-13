@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../css/utils.css';
 import '../css/journal.scss';
 import PictureModal from './Modal';
 import {

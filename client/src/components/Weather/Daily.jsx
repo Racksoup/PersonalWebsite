@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import '../../css/utils.css';
 import '../../css/weather.scss';
 import { getOneCallWeather } from '../../actions/weather';
 
