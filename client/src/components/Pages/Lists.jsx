@@ -48,7 +48,7 @@ const Lists = () => {
       </div>
       <div className='Lists-List'>
         <div className='Lists-List-Nav'>
-          <div />
+          <div className='Lists-Btn Lists-List-AddItem'>Delete List</div>
           <h3 className='Lists-List-Title'>Title</h3>
           <div className='Lists-Btn Lists-List-AddItem'>Add Item</div>
         </div>
