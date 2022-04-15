@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import '../../css/Lists.scss';
+import { getLists, createList, deleteList } from '../../actions/lists';
 
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const NewListModal = (props) => {
+const NewListModal = ({ toggleModal, createList }) => {
+  const [list, setList] = useState({ title: '' });
+
   const submitClicked = (e) => {
     e.stopPropagation();
+    createList(list);
+    toggleModal(false);
+  };
 
-    props.toggleModal(false);
+  const inputChanged = (e) => {
+    setList({ ...list, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className='Modal-Background' onClick={() => props.toggleModal(false)}>
+    <div className='Modal-Background' onClick={() => toggleModal(false)}>
       <div className='Modal' onClick={(e) => e.stopPropagation()}>
         <h2 className='Modal-Title'>Create New List</h2>
-        <input className='Modal-Input' />
+        <input
+          className='Modal-Input'
+          value={list.title}
+          onChange={(e) => inputChanged(e)}
+          name='title'
+        />
         <div className='Lists-Btn Modal-Submit' onClick={(e) => submitClicked(e)}>
           Submit
         </div>
@@ -25,12 +38,12 @@ const NewListModal = (props) => {
   );
 };
 
-const Lists = () => {
+const Lists = ({ getLists, createList, deleteList, lists }) => {
   const [modal, toggleModal] = useState(false);
 
   return (
     <div className='Lists'>
-      {modal == true && <NewListModal toggleModal={toggleModal} />}
+      {modal == true && <NewListModal toggleModal={toggleModal} createList={createList} />}
       <div className='Lists-TitleBox'>
         <Link className='Lists-Link' to='/home'>
           <div className='Lists-Btn Lists-BackBtn'>Back</div>
@@ -64,4 +77,8 @@ const Lists = () => {
   );
 };
 
-export default Lists;
+const mapStateToProps = (state) => ({
+  lists: state.lists.lists,
+});
+
+export default connect(mapStateToProps, { getLists, createList, deleteList })(Lists);
