@@ -5,11 +5,11 @@ import {
   clearJournals,
   getMonthsJournals,
 } from '../actions/journal';
+import '../css/calendar.scss';
 
 import DatePicker from 'react-date-picker';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import '../css/calendar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';

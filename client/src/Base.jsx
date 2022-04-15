@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import './App.css';
 import LandingPage from './components/Pages/LandingPage.jsx';
-import Login from './components/Login';
+import Login from './components/Pages/Login';
 import Forecast from './components/Weather/Forecast';
 import Weather from './components/Weather/Weather';
 import Minutely from './components/Weather/Minutely';
@@ -10,11 +10,6 @@ import Hourly from './components/Weather/Hourly';
 import Daily from './components/Weather/Daily';
 import SingleJournalEntry from './components/SingleJournalEntry';
 import SingleJournalView from './components/SingleJournalView';
-
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PropTypes from 'prop-types';
 import {
   getFourDay,
   getOneCallWeather,
@@ -22,6 +17,11 @@ import {
   getSavedWeather,
   postSavedWeather,
 } from './actions/weather';
+
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PropTypes from 'prop-types';
 
 const Base = ({
   gotHistorical,
