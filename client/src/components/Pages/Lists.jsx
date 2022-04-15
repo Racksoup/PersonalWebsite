@@ -6,12 +6,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const NewListModal = (props) => {
+  const submitClicked = (e) => {
+    e.stopPropagation();
+
+    props.toggleModal(false);
+  };
+
   return (
     <div className='Modal-Background' onClick={() => props.toggleModal(false)}>
       <div className='Modal' onClick={(e) => e.stopPropagation()}>
         <h2 className='Modal-Title'>Create New List</h2>
         <input className='Modal-Input' />
-        <div className='Lists-Btn Modal-Submit'>Submit</div>
+        <div className='Lists-Btn Modal-Submit' onClick={(e) => submitClicked(e)}>
+          Submit
+        </div>
       </div>
     </div>
   );
@@ -22,7 +30,7 @@ const Lists = () => {
 
   return (
     <div className='Lists'>
-      {modal == true && <NewListModal modal={modal} toggleModal={toggleModal} />}
+      {modal == true && <NewListModal toggleModal={toggleModal} />}
       <div className='Lists-TitleBox'>
         <Link className='Lists-Link' to='/home'>
           <div className='Lists-Btn Lists-BackBtn'>Back</div>
