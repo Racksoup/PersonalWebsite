@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 const LandingPage = () => {
   return (
     <div className='Home'>
-      <Link className='Link-WeatherNav' to='/weather'>
-        <div className='Btn-WeatherNav'>Weather</div>
-      </Link>
+      <div className='Home-Nav'>
+        <Link className='Home-Link' to='/weather'>
+          <div className='Home-Btn'>Weather</div>
+        </Link>
+        <Link className='Home-Link' to='/lists'>
+          <div className='Home-Btn'>Lists</div>
+        </Link>
+      </div>
       <MyCalendar />
     </div>
   );

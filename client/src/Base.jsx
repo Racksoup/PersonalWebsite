@@ -10,6 +10,7 @@ import Hourly from './components/Weather/Hourly';
 import Daily from './components/Weather/Daily';
 import SingleJournalEntry from './components/SingleJournalEntry';
 import SingleJournalView from './components/SingleJournalView';
+import Lists from './components/Pages/Lists';
 import {
   getFourDay,
   getOneCallWeather,
@@ -59,6 +60,7 @@ const Base = ({
           <Route exact path='/daily' component={Daily} />
           <Route exact path='/journal-view' component={SingleJournalView} />
           <Route exact path='/journal-entry' component={SingleJournalEntry} />
+          <Route exact path='/lists' component={Lists} />
         </Switch>
       </section>
     </Fragment>

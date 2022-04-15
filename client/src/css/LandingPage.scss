@@ -6,7 +6,13 @@
   align-items: center;
 }
 
-.Btn-WeatherNav {
+.Home-Nav {
+  display: flex;
+  width: 25rem;
+  justify-content: space-between;
+}
+
+.Home-Btn {
   width: 10rem;
   height: 2.2rem;
   display: flex;
@@ -20,7 +26,7 @@
   margin: 0 0 1rem 0;
 }
 
-.Link-WeatherNav {
+.Home-Link {
   text-decoration: none;
   color: black;
 
