@@ -36,11 +36,14 @@
 
 .Lists-Nav {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin: 1.2rem 0 0 0;
 }
 
 .Lists-NavBtn {
-  margin: 0 0.3rem;
+  width: 9.1rem;
+  margin: 0.4rem 0;
 }
 
 .Lists-List {

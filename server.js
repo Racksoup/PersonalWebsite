@@ -20,6 +20,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/weather', require('./routes/api/weather'));
 app.use('/api/journal', require('./routes/api/journal'));
 app.use('/api/lists', require('./routes/api/lists'));
+app.use('/api/listItem', require('./routes/api/listItem'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

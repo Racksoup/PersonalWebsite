@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../css/Lists.scss';
 import { getLists, createList, deleteList } from '../../actions/lists';
 
@@ -39,6 +39,11 @@ const NewListModal = ({ toggleModal, createList }) => {
 };
 
 const Lists = ({ getLists, createList, deleteList, lists }) => {
+  useEffect(() => {
+    getLists();
+  }, []);
+
+  console.log(lists);
   const [modal, toggleModal] = useState(false);
 
   return (
@@ -55,9 +60,9 @@ const Lists = ({ getLists, createList, deleteList, lists }) => {
         New List
       </div>
       <div className='Lists-Nav'>
-        <div className='Lists-Btn Lists-NavBtn'>ff</div>
-        <div className='Lists-Btn Lists-NavBtn'>ff</div>
-        <div className='Lists-Btn Lists-NavBtn'>ff</div>
+        {lists.map((list) => (
+          <div className='Lists-Btn Lists-NavBtn'>{list.title}</div>
+        ))}
       </div>
       <div className='Lists-List'>
         <div className='Lists-List-Nav'>
