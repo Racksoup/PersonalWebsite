@@ -299,7 +299,7 @@ const MyCalendar = ({
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
             <p className='Calendar-Title' onClick={() => toggleCalendarLayout(1)}>
-              {currentMonth}
+              {currentMonth} - {currentYear}
             </p>
             <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
               <FontAwesomeIcon icon={faChevronRight} />
@@ -374,7 +374,7 @@ const MyCalendar = ({
             <div className='Calendar_Button_MonthNav' onClick={() => leftYearButtonClicked()}>
               <FontAwesomeIcon icon={faChevronLeft} />
             </div>
-            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(2)}>
+            <p className='Calendar-Title-MonthLayout' onClick={() => toggleCalendarLayout(2)}>
               {currentYear}
             </p>
             <div className='Calendar_Button_MonthNav' onClick={() => rightYearButtonClicked()}>
