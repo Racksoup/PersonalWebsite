@@ -11,7 +11,6 @@ const { route } = require('./lists');
 // @desc    return 1 list
 // @access  Private
 router.get('/:listTitle', Auth, async (req, res) => {
-  console.log(req.params.listTitle);
   try {
     const list = await ListItem.find({ listTitle: req.params.listTitle });
     res.json(list);
@@ -26,8 +25,8 @@ router.get('/:listTitle', Auth, async (req, res) => {
 // @access  Private
 router.delete('/:_id', Auth, async (req, res) => {
   try {
-    await ListItem.findOneAndRemove({ _id: req.params._id });
-    res.json({ msg: 'List Item Deleted' });
+    const item = await ListItem.findOneAndRemove({ _id: req.params._id });
+    res.json(item);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -47,9 +46,7 @@ router.post('/', Auth, async (req, res) => {
   try {
     const item = new ListItem(postItem);
     await item.save();
-    res.json({
-      item: item,
-    });
+    res.json(item);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -65,7 +62,6 @@ router.put('/:_id', Auth, async (req, res) => {
   postItem.listTitle = listTitle;
   postItem.title = title;
   postItem.checked = checked;
-  console.log(postItem.checked);
 
   try {
     const item = await ListItem.findOneAndUpdate({ _id: req.params._id }, postItem);

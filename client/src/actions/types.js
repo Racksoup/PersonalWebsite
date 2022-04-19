@@ -24,3 +24,7 @@ export const CLEAR_JOURNAL = 'CLEAR_JOURNAL';
 export const CREATED_LIST = 'CREATED_LIST';
 export const GOT_LISTS = 'GOT_LISTS';
 export const DELETED_LIST = 'DELETED_LIST';
+export const CREATED_LISTITEM = 'CREATED_LISTITEM';
+export const GOT_LIST = 'GOT_LIST';
+export const DELETED_LISTITEM = 'DELETED_LISTITEM';
+export const UPDATED_LISTITEM = 'UPDATED_LISTITEM';

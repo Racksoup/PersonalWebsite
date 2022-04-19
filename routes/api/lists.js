@@ -1,4 +1,5 @@
 const List = require('../../models/list');
+const ListItem = require('../../models/listItem');
 const Auth = require('../../middleware/auth');
 
 const express = require('express');
@@ -24,7 +25,8 @@ router.get('/', Auth, async (req, res) => {
 // @access  Private
 router.delete('/:_id', Auth, async (req, res) => {
   try {
-    await List.findOneAndRemove({ _id: req.params._id });
+    const list = await List.findOneAndRemove({ _id: req.params._id });
+    await ListItem.deleteMany({ listTitle: list.title });
     res.json({ msg: 'List Deleted' });
   } catch (err) {
     console.error(err.message);
