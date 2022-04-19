@@ -1,4 +1,10 @@
-import { CREATED_LISTITEM, GOT_LIST, DELETED_LISTITEM, UPDATED_LISTITEM } from '../actions/types';
+import {
+  CREATED_LISTITEM,
+  GOT_LIST,
+  DELETED_LISTITEM,
+  UPDATED_LISTITEM,
+  DELETED_LIST,
+} from '../actions/types';
 
 const initialState = {
   list: [],
@@ -24,12 +30,20 @@ export default function lists(state = initialState, action) {
         list: state.list.filter((item) => item.title !== payload.title),
       };
     case UPDATED_LISTITEM:
-      let newList = state.list;
-      newList.filter((item) => item.title !== payload.title);
-      newList.push(payload);
       return {
         ...state,
-        list: newList,
+        list: state.list.filter((item) => {
+          if (item.title !== payload.title) {
+            return item;
+          } else {
+            return payload;
+          }
+        }),
+      };
+    case DELETED_LIST:
+      return {
+        ...state,
+        list: [],
       };
     default:
       return state;

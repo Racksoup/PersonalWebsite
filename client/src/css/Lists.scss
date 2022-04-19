@@ -26,7 +26,10 @@
 }
 
 .Lists-NewList {
-  margin: 0.5rem 0 0 0;
+  width: 7rem;
+  height: 2rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
 }
 
 .Lists-NewList-Icon {
@@ -35,11 +38,11 @@
 }
 
 .Lists-Nav {
-  display: flex;
   width: 100%;
+  display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 1.2rem 0 0 0;
+  margin: 0.6rem 0 0 0;
 }
 
 .Lists-NavBtn {
@@ -49,7 +52,7 @@
 
 .Lists-List {
   width: 100%;
-  margin: 1.2rem 0 0 0;
+  margin: 2.5rem 0 0 0;
   border: solid 0.1rem cyan;
   border-radius: 1rem;
   display: flex;
@@ -70,6 +73,8 @@
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr;
   align-items: end;
+  padding-bottom: 0.4rem;
+  border-bottom: solid 0.1rem rgb(255, 255, 255);
 }
 
 .Lists-BackBtn {
@@ -180,4 +185,12 @@
 
 .Modal-Submit {
   margin: 1rem 0 1rem 0;
+}
+
+.Lists-List-Item-Checked {
+  margin: 0.3rem 0 0 0;
+  position: fixed;
+  width: 24rem;
+  background: rgba(75, 75, 75, 1);
+  height: 0.15rem;
 }

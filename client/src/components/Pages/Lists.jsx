@@ -91,7 +91,7 @@ const Lists = ({
 
   const [modal, toggleModal] = useState(false);
   const [newItemModal, toggleNewItemModal] = useState(false);
-  const [lastListClicked, setLastListClicked] = useState({});
+  const [lastListClicked, setLastListClicked] = useState('');
 
   const clickedList = (list) => {
     getList(list.title);
@@ -102,6 +102,11 @@ const Lists = ({
     const newItem = item;
     newItem.checked = !newItem.checked;
     updateListItem(newItem);
+  };
+
+  const deleteListClicked = () => {
+    deleteList(lastListClicked);
+    setLastListClicked('');
   };
 
   return (
@@ -119,10 +124,10 @@ const Lists = ({
           <div className='Lists-Btn Lists-BackBtn'>Back</div>
         </Link>
         <h1 className='Lists-Title'>Lists</h1>
-      </div>
-      <div className='Lists-Btn Lists-NewList' onClick={() => toggleModal(true)}>
-        <FontAwesomeIcon className='Lists-NewList-Icon' icon={faPlus} />
-        New List
+        <div className='Lists-Btn Lists-NewList' onClick={() => toggleModal(true)}>
+          <FontAwesomeIcon className='Lists-NewList-Icon' icon={faPlus} />
+          New List
+        </div>
       </div>
       <div className='Lists-Nav'>
         {lists.map((list) => (
@@ -131,33 +136,36 @@ const Lists = ({
           </div>
         ))}
       </div>
-      <div className='Lists-List'>
-        <div className='Lists-List-Nav'>
-          <div className='Lists-Btn Lists-List-AddItem' onClick={() => deleteList(lastListClicked)}>
-            Delete List
-          </div>
-          <h3 className='Lists-List-Title'>{lastListClicked.title}</h3>
-          <div className='Lists-Btn Lists-List-AddItem' onClick={() => toggleNewItemModal(true)}>
-            Add Item
-          </div>
-        </div>
-        <div className='Lists-List-Items'>
-          {list.map((item) => (
-            <div className='Lists-List-Item'>
-              <div className='Lists-List-Item-Label'>{item.title}</div>
-              <div className='Lists-Btn Lists-List-Item-Btn' onClick={() => updateClicked(item)}>
-                Check
-              </div>
-              <div
-                className='Lists-Btn Lists-List-Item-Btn'
-                onClick={() => deleteListItem(item._id)}
-              >
-                Delete
-              </div>
+      {lastListClicked && (
+        <div className='Lists-List'>
+          <div className='Lists-List-Nav'>
+            <div className='Lists-Btn Lists-List-AddItem' onClick={() => deleteListClicked()}>
+              Delete List
             </div>
-          ))}
+            <h3 className='Lists-List-Title'>{lastListClicked.title}</h3>
+            <div className='Lists-Btn Lists-List-AddItem' onClick={() => toggleNewItemModal(true)}>
+              Add Item
+            </div>
+          </div>
+          <div className='Lists-List-Items'>
+            {list.map((item) => (
+              <div className='Lists-List-Item'>
+                <div className='Lists-List-Item-Label'>{item.title}</div>
+                <div className='Lists-Btn Lists-List-Item-Btn' onClick={() => updateClicked(item)}>
+                  Check
+                </div>
+                <div
+                  className='Lists-Btn Lists-List-Item-Btn'
+                  onClick={() => deleteListItem(item._id)}
+                >
+                  Delete
+                </div>
+                {item.checked && <div className='Lists-List-Item-Checked' />}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

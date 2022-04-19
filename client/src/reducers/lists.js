@@ -11,7 +11,7 @@ export default function lists(state = initialState, action) {
     case CREATED_LIST:
       return {
         ...state,
-        lists: [...state.lists, payload],
+        lists: [...state.lists, payload.item],
       };
     case GOT_LISTS:
       return {
