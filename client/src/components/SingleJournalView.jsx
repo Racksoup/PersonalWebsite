@@ -11,21 +11,34 @@ const SingleJournalView = ({ clearJournal, journal }) => {
   if (journal.title === '') {
     return <Redirect to='/journal-entry' />;
   }
+
+  console.log(journal);
+  let textArr;
+  if (journal) {
+    textArr = journal.text.split('\n\n');
+  }
   return (
     <div className='JournalPage'>
-      <Link to='home' className='Journal-Link'>
-        <div className='Journal-Btn' onClick={() => clearJournal()}>
-          Back
+      <div className='Journal-View-TitleBox'>
+        <Link to='home' className='Journal-Link'>
+          <div className='Journal-Btn' onClick={() => clearJournal()}>
+            Back
+          </div>
+        </Link>
+        <p className='Journal-View-Title'>{journal.title}</p>
+        <Link to='journal-entry' className='Journal-Link'>
+          <div className='Journal-Btn'>Edit</div>
+        </Link>
+      </div>
+      <div className='Journal-View-Content'>
+        <div className='Journal-PicturesFrame'>
+          <img className='Journal-View-Img' src={`api/journal/image/${journal.image_filename}`} />
         </div>
-      </Link>
-      <Link to='journal-entry' className='Journal-Link'>
-        <div className='Journal-Btn'>Edit</div>
-      </Link>
-
-      <p className='BigTitle'>{journal.title}</p>
-      <div className='MainViewFrame'>
-        <div className='PicturesFrame'></div>
-        <div className='TextFrame'>{journal.text}</div>
+        <div className='TextFrame'>
+          {textArr.map((text) => (
+            <p>{text}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
