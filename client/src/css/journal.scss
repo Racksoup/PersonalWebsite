@@ -23,10 +23,17 @@
   font-size: 2rem;
   font-weight: 500;
   background-color: cyan;
+  color: black;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(255, 123, 0);
+    border: solid 0.1rem rgb(255, 123, 0);
+  }
 }
 
 .Journal-View-Content {
@@ -54,17 +61,13 @@
 
 /* Single Journal Entry */
 
-.MainEntryFrame {
+.Journal-Entry-Content {
   display: grid;
   min-height: 75vh;
   width: 100%;
   grid-template-columns: minmax(0, 1fr) minmax(0, 5fr);
   grid-template-rows: 10vh 5vh auto;
   justify-items: center;
-}
-
-.EditTitle {
-  grid-area: 1 / 1 / 2 / 3;
 }
 
 .JournalEntryButtonsFrame {
@@ -133,4 +136,14 @@
   width: 100%;
   height: 15rem;
   border-radius: 1rem;
+}
+
+.Journal-Entry-ImgInput {
+  display: none;
+}
+
+.Journal-Entry-ImgInput-Btn {
+  width: 3rem;
+  height: 2rem;
+  background-color: orange;
 }

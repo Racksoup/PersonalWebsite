@@ -13,8 +13,8 @@ const SingleJournalView = ({ clearJournal, journal }) => {
   }
 
   console.log(journal);
-  let textArr;
-  if (journal) {
+  let textArr = [];
+  if (journal && journal.text) {
     textArr = journal.text.split('\n\n');
   }
   return (
