@@ -1,12 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../css/journal.scss';
-import PictureModal from './Modal';
-import {
-  createJournalPost,
-  toggleModal,
-  updateJournalPost,
-  clearJournal,
-} from '../actions/journal';
+import { createJournalPost, updateJournalPost, clearJournal } from '../actions/journal';
 
 import Textarea from 'react-textarea-autosize';
 import PropTypes from 'prop-types';
@@ -14,13 +8,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const SingleJournalEntry = ({
-  createJournalPost,
-  updateJournalPost,
-  toggleModal,
-  clearJournal,
-  journal,
-}) => {
+const SingleJournalEntry = ({ createJournalPost, updateJournalPost, clearJournal, journal }) => {
   const [newJournal, setNewJournal] = useState({
     title: journal.title,
     text: journal.text,
@@ -39,7 +27,6 @@ const SingleJournalEntry = ({
   const onFileChange = (e) => {
     setNewFile(e.target.files[0]);
   };
-  console.log(newFile);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +54,6 @@ const SingleJournalEntry = ({
   if (journal) {
     return (
       <div className='JournalPage'>
-        <PictureModal />
         <div className='Journal-View-TitleBox'>
           <div className='Journal-Btn' onClick={() => clearJournal()}>
             <Link className='Journal-Link' to='/home'>
@@ -104,7 +90,7 @@ const SingleJournalEntry = ({
             </div>
           </div>
           <div className='EditPictures'>
-            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}>
+            <div className='EditPictureFrame'>
               <img
                 style={{ height: '100%', width: '100%' }}
                 src={`api/journal/image/${journal.image_filename}`}
@@ -126,7 +112,6 @@ const SingleJournalEntry = ({
   } else {
     return (
       <div className='MainWin'>
-        <PictureModal />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Button onClick={() => clearJournal()}>
             <Link to='/home' style={{ color: 'white' }}>
@@ -162,7 +147,7 @@ const SingleJournalEntry = ({
             </div>
           </div>
           <div className='EditPictures'>
-            <div className='EditPictureFrame' onClick={(e) => toggleModal(e)}></div>
+            <div className='EditPictureFrame'></div>
           </div>
           <div className='EditText'>
             <Textarea
@@ -179,7 +164,6 @@ const SingleJournalEntry = ({
 };
 
 SingleJournalEntry.propTypes = {
-  toggleModal: PropTypes.func.isRequired,
   createJournalPost: PropTypes.func.isRequired,
   updateJournalPost: PropTypes.func.isRequired,
   journal: PropTypes.object.isRequired,
@@ -193,6 +177,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   createJournalPost,
   updateJournalPost,
-  toggleModal,
   clearJournal,
 })(SingleJournalEntry);

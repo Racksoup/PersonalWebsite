@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../css/journal.scss';
-import PictureModal from './Modal';
 import { clearJournal } from '../actions/journal';
 
 import PropTypes from 'prop-types';

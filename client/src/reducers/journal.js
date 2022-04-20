@@ -1,5 +1,4 @@
 import {
-  TOGGLE_MODAL,
   CREATE_JOURNAL,
   GOT_ONE_JOURNAL,
   CLEAR_JOURNALS,
@@ -9,7 +8,6 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  modal: false,
   journal: {},
   journals: [],
 };
@@ -48,11 +46,7 @@ export default function journal(state = initialState, action) {
         ...state,
         journal: payload.item,
       };
-    case TOGGLE_MODAL:
-      return {
-        ...state,
-        modal: !state.modal,
-      };
+
     default:
       return state;
   }
