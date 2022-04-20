@@ -88,7 +88,12 @@ const SingleJournalEntry = ({ createJournalPost, updateJournalPost, clearJournal
             </div>
           </div>
           <div className='EditPictures'>
-            <img className='EditPictureFrame' src={`api/journal/image/${journal.image_filename}`} />
+            {journal.image_filename && (
+              <img
+                className='EditPictureFrame'
+                src={`api/journal/image/${journal.image_filename}`}
+              />
+            )}
           </div>
           <Textarea
             className='Journal-Entry-Input'

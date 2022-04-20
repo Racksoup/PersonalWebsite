@@ -342,17 +342,14 @@ const MyCalendar = ({
                         journals[day.journalIndex].image_filename !== undefined && (
                           <img
                             src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
-                            style={{
-                              height: '100%',
-                              width: '100%',
-                              position: 'relative',
-                              border: '0',
-                            }}
+                            className='Calendar-Item-Img'
                           />
                         )}
-                      <div style={{ position: 'absolute' }}>
-                        <p style={{ width: '2rem' }}>{day.dayOfMonth}</p>
-                        {journals[day.journalIndex] && <p>{journals[day.journalIndex].title}</p>}
+                      <div className='Calendar-Item-Contents'>
+                        <p className='Calendar-Item-Num'>{day.dayOfMonth}</p>
+                        {journals[day.journalIndex] && (
+                          <p className='Calendar-Item-Title'>{journals[day.journalIndex].title}</p>
+                        )}
                       </div>
                     </button>
                   </Link>
