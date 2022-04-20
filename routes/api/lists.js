@@ -1,11 +1,9 @@
-const List = require('../../models/list');
-const ListItem = require('../../models/listItem');
+const List = require('../../models/List');
+const ListItem = require('../../models/ListItem');
 const Auth = require('../../middleware/auth');
 
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const mongoose = require('mongoose');
 
 // @route   GET api/lists
 // @desc    Get all lists
