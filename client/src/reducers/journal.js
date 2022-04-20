@@ -46,7 +46,6 @@ export default function journal(state = initialState, action) {
         ...state,
         journal: payload.item,
       };
-
     default:
       return state;
   }

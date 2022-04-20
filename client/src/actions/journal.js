@@ -1,5 +1,4 @@
 import {
-  TOGGLE_MODAL,
   CREATE_JOURNAL,
   GOT_ONE_JOURNAL,
   CLEAR_JOURNALS,
@@ -9,12 +8,6 @@ import {
 } from './types';
 
 import axios from 'axios';
-
-export const toggleModal = () => (dispatch) => {
-  dispatch({
-    type: TOGGLE_MODAL,
-  });
-};
 
 export const createJournalPost = (item, file) => async (dispatch) => {
   let data = new FormData();
