@@ -1,15 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
-const cors = require('cors');
-const corsOptions = {
-  origin: 'http://localhost:5000',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
 
 const app = express();
-app.use(cors(corsOptions));
 
 connectDB();
 
