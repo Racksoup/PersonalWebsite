@@ -1,94 +1,28 @@
-.Lists {
-  margin: 1rem auto 0 auto;
-  max-width: 40rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.Lists-Btn {
-  width: 10rem;
-  height: 3rem;
-  background-color: cyan;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: black;
-  font-size: 1.7rem;
-  font-weight: 600;
-
-  &:hover {
-    color: rgb(255, 115, 0);
-    border: solid 0.1rem rgb(255, 115, 0);
-  }
-}
-
-.Lists-NewList {
-  width: 7rem;
-  height: 2rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-}
-
-.Lists-NewList-Icon {
+.Lists-NewListBtn-Icon {
   margin: 0 0.3rem 0 0;
   font-size: 1.4rem;
 }
 
 .Lists-Nav {
-  width: 100%;
+  width: 40rem;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 0.6rem 0 0 0;
 }
 
 .Lists-NavBtn {
   width: 9.1rem;
-  margin: 0.4rem 0;
+  margin: 0.4rem;
 }
 
 .Lists-List {
-  width: 100%;
+  max-width: 40rem;
   margin: 2.5rem 0 0 0;
   border: solid 0.1rem cyan;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.Lists-Link {
-  text-decoration: none;
-  color: black;
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.Lists-TitleBox {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 1fr;
-  align-items: end;
-  padding-bottom: 0.4rem;
-  border-bottom: solid 0.1rem rgb(255, 255, 255);
-}
-
-.Lists-BackBtn {
-  width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-}
-
-.Lists-Title {
-  text-align: center;
-  font-size: 2rem;
-  padding: 0;
-  margin: 0;
 }
 
 .Lists-List-Title {
@@ -134,9 +68,6 @@
 
 .Lists-List-Item-Btn {
   width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
   margin: 0 0.3rem;
 }
 
@@ -196,15 +127,11 @@
 }
 
 @media screen and (max-width: 650px) {
-  .Lists-TitleBox {
+  .Lists-Nav {
     width: 320px;
   }
 
-  .Lists-NavBtn {
-    width: 8rem;
-  }
-
-  .Lists-Nav {
+  .Lists-List {
     width: 320px;
   }
 
@@ -219,5 +146,10 @@
   .Modal-Input {
     width: 280px;
     font-size: 0.8rem;
+  }
+
+  .Lists-List-Item-Btn {
+    width: 4rem;
+    margin: 0 0.2rem;
   }
 }

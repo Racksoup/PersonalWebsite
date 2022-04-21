@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { loadUser } from './actions/auth';
 import './App.css';
+import './css/Utils.scss';
 import LandingPage from './components/Pages/LandingPage.jsx';
 import Login from './components/Pages/Login';
 import Forecast from './components/Weather/Forecast';

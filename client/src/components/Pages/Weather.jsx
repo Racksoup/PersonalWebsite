@@ -10,28 +10,29 @@ const Weather = ({ isAuthenticated, loading }) => {
   }
 
   return (
-    <div className='WeatherPage-Main'>
-      <div className='Weather-TitleBox'>
-        <Link className='Weather-Link' to='/home'>
-          <div className='Weather-Btn Weather-BackBtn'>Back</div>
+    <div className='Section'>
+      <div className='TitleBox'>
+        <Link className='Link' to='/home'>
+          <div className='Btn'>Back</div>
         </Link>
         <h1 className='Weather-Title'>Weather</h1>
+        <div style={{ width: '7rem' }} />
       </div>
       <div className='Weather-NavBox'>
         <div className='Weather-NavBox-Row'>
-          <Link className='Weather-Link' to='/daily'>
-            <div className='Weather-Btn'>Daily</div>
+          <Link className='Link' to='/daily'>
+            <div className='Btn'>Daily</div>
           </Link>
-          <Link className='Weather-Link' to='/forecast'>
-            <div className='Weather-Btn'>5 Day Forecast</div>
+          <Link className='Link' to='/forecast'>
+            <div className='Btn'>5 Day Forecast</div>
           </Link>
         </div>
         <div className='Weather-NavBox-Row'>
-          <Link className='Weather-Link' to='/hourly'>
-            <div className='Weather-Btn'>Hourly</div>
+          <Link className='Link' to='/hourly'>
+            <div className='Btn'>Hourly</div>
           </Link>
-          <Link className='Weather-Link' to='/minutely'>
-            <div className='Weather-Btn'>Minutely</div>
+          <Link className='Link' to='/minutely'>
+            <div className='Btn'>Minutely</div>
           </Link>
         </div>
       </div>

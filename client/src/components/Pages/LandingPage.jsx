@@ -11,13 +11,14 @@ const LandingPage = ({ isAuthenticated, loading }) => {
   }
 
   return (
-    <div className='Home'>
-      <div className='Home-Nav'>
-        <Link className='Home-Link' to='/weather'>
-          <div className='Home-Btn'>Weather</div>
+    <div className='Section'>
+      <div className='TitleBox'>
+        <Link className='Link' to='/weather'>
+          <div className='Btn'>Weather</div>
         </Link>
-        <Link className='Home-Link' to='/lists'>
-          <div className='Home-Btn'>Lists</div>
+        <div className='TitleBox-Title'>Home</div>
+        <Link className='Link' to='/lists'>
+          <div className='Btn'>Lists</div>
         </Link>
       </div>
       <MyCalendar />

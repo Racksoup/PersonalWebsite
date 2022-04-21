@@ -116,7 +116,7 @@ const Lists = ({
   }
 
   return (
-    <div className='Lists'>
+    <div className='Section'>
       {modal == true && <NewListModal toggleModal={toggleModal} createList={createList} />}
       {newItemModal == true && (
         <NewItemModal
@@ -125,19 +125,19 @@ const Lists = ({
           lastListClicked={lastListClicked}
         />
       )}
-      <div className='Lists-TitleBox'>
-        <Link className='Lists-Link' to='/home'>
-          <div className='Lists-Btn Lists-BackBtn'>Back</div>
+      <div className='TitleBox'>
+        <Link className='Link' to='/home'>
+          <div className='Btn'>Back</div>
         </Link>
-        <h1 className='Lists-Title'>Lists</h1>
-        <div className='Lists-Btn Lists-NewList' onClick={() => toggleModal(true)}>
+        <h1 className='TitleBox-Title'>Lists</h1>
+        <div className='Btn' onClick={() => toggleModal(true)}>
           <FontAwesomeIcon className='Lists-NewList-Icon' icon={faPlus} />
           New List
         </div>
       </div>
       <div className='Lists-Nav'>
         {lists.map((list) => (
-          <div className='Lists-Btn Lists-NavBtn' onClick={() => clickedList(list)}>
+          <div className='Btn Lists-NavBtn' onClick={() => clickedList(list)}>
             {list.title}
           </div>
         ))}
@@ -145,11 +145,11 @@ const Lists = ({
       {lastListClicked && (
         <div className='Lists-List'>
           <div className='Lists-List-Nav'>
-            <div className='Lists-Btn Lists-List-AddItem' onClick={() => deleteListClicked()}>
+            <div className='Btn Lists-List-AddItem' onClick={() => deleteListClicked()}>
               Delete List
             </div>
             <h3 className='Lists-List-Title'>{lastListClicked.title}</h3>
-            <div className='Lists-Btn Lists-List-AddItem' onClick={() => toggleNewItemModal(true)}>
+            <div className='Btn Lists-List-AddItem' onClick={() => toggleNewItemModal(true)}>
               Add Item
             </div>
           </div>
@@ -157,13 +157,10 @@ const Lists = ({
             {list.map((item) => (
               <div className='Lists-List-Item'>
                 <div className='Lists-List-Item-Label'>{item.title}</div>
-                <div className='Lists-Btn Lists-List-Item-Btn' onClick={() => updateClicked(item)}>
+                <div className='Btn Lists-List-Item-Btn' onClick={() => updateClicked(item)}>
                   Check
                 </div>
-                <div
-                  className='Lists-Btn Lists-List-Item-Btn'
-                  onClick={() => deleteListItem(item._id)}
-                >
+                <div className='Btn Lists-List-Item-Btn' onClick={() => deleteListItem(item._id)}>
                   Delete
                 </div>
                 {item.checked && <div className='Lists-List-Item-Checked' />}
