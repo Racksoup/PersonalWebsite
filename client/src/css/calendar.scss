@@ -284,3 +284,23 @@
     font-size: 1rem;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .Calendar-MainWin {
+    width: 650px;
+    height: 750px;
+  }
+
+  .Calendar-Grid {
+    width: 650px;
+    height: 750px;
+  }
+
+  .Calendar-TitleGrid {
+    width: 650px;
+  }
+
+  .Calendar-Title-MonthFlex {
+    width: 650px;
+  }
+}
