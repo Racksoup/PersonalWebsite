@@ -3,10 +3,8 @@ import '../../css/weather.scss';
 import { getOneCallWeather } from '../../actions/weather';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 
 const Daily = ({ daily, getOneCallWeather }) => {
   useEffect(() => {
@@ -15,13 +13,8 @@ const Daily = ({ daily, getOneCallWeather }) => {
 
   if (daily) {
     return (
-      <div className='WeatherPage-Main'>
-        <div className='Weather-TitleBox'>
-          <Link className='Weather-Link' to='/weather'>
-            <div className='Weather-Btn Weather-BackBtn'>Back</div>
-          </Link>
-          <h1 className='Weather-Title'>Daily</h1>
-        </div>
+      <div className='Section'>
+        <h1 className='Weather-Title'>Daily</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>
             <tr style={{ color: 'white' }}>

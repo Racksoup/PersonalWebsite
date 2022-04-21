@@ -4,11 +4,7 @@ import './App.css';
 import './css/Utils.scss';
 import LandingPage from './components/Pages/LandingPage.jsx';
 import Login from './components/Pages/Login';
-import Forecast from './components/Weather/Forecast';
 import Weather from './components/Pages/Weather';
-import Minutely from './components/Weather/Minutely';
-import Hourly from './components/Weather/Hourly';
-import Daily from './components/Weather/Daily';
 import SingleJournalEntry from './components/Pages/SingleJournalEntry';
 import SingleJournalView from './components/Pages/SingleJournalView';
 import Lists from './components/Pages/Lists';
@@ -54,11 +50,7 @@ const Base = ({
         <Switch>
           <Route exact path='/' component={Login} />
           <Route exact path='/home' component={LandingPage} />
-          <Route exact path='/forecast' component={Forecast} />
           <Route exact path='/weather' component={Weather} />
-          <Route exact path='/minutely' component={Minutely} />
-          <Route exact path='/hourly' component={Hourly} />
-          <Route exact path='/daily' component={Daily} />
           <Route exact path='/journal-view' component={SingleJournalView} />
           <Route exact path='/journal-entry' component={SingleJournalEntry} />
           <Route exact path='/lists' component={Lists} />

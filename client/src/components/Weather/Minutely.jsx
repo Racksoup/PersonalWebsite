@@ -23,13 +23,8 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
 
   if (minutely) {
     return (
-      <div className='WeatherPage-Main'>
-        <div className='Weather-TitleBox'>
-          <Link className='Weather-Link' to='/weather'>
-            <div className='Weather-Btn Weather-BackBtn'>Back</div>
-          </Link>
-          <h1 className='Weather-Title'>Minutely Precipitation</h1>
-        </div>
+      <div className='Section'>
+        <h1 className='Weather-Title'>Minutely Precipitation</h1>
         <div className='Minute-Flex'>
           {minutely.map((minute, i) => {
             if (tagMin > 59) {

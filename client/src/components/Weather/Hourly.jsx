@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getOneCallWeather } from '../../actions/weather';
 import '../../css/weather.scss';
 
@@ -24,13 +24,8 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
 
   if (hourly) {
     return (
-      <div className='WeatherPage-Main'>
-        <div className='Weather-TitleBox'>
-          <Link className='Weather-Link' to='/weather'>
-            <div className='Weather-Btn Weather-BackBtn'>Back</div>
-          </Link>
-          <h1 className='Weather-Title'>Hourly</h1>
-        </div>
+      <div className='Section'>
+        <h1 className='Weather-Title'>Hourly</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>
             <tr style={{ color: 'white' }}>

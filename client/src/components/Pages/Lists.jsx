@@ -135,9 +135,9 @@ const Lists = ({
           New List
         </div>
       </div>
-      <div className='Lists-Nav'>
+      <div className='Nav'>
         {lists.map((list) => (
-          <div className='Btn Lists-NavBtn' onClick={() => clickedList(list)}>
+          <div className='Btn' onClick={() => clickedList(list)}>
             {list.title}
           </div>
         ))}

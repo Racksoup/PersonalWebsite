@@ -1,11 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../css/weather.scss';
 import { getFourDay } from '../../actions/weather';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 
 const Forecast = ({ getFourDay, forecast }) => {
   useEffect(() => {
@@ -97,13 +96,9 @@ const Forecast = ({ getFourDay, forecast }) => {
   };
 
   return (
-    <div className='WeatherPage-Main'>
-      <div className='Weather-TitleBox'>
-        <Link className='Weather-Link' to='/weather'>
-          <div className='Weather-Btn Weather-BackBtn'>Back</div>
-        </Link>
-        <h1 className='Weather-Title'>Forecast</h1>
-      </div>
+    <div className='Section'>
+      <h1 className='Weather-Title'>Forecast</h1>
+
       <div className='Forecast'>
         <div className='Forecast-DayFlex'>
           <h4>{dayForecast.day1 && dayForecast.day1[0].day}</h4>
