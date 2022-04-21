@@ -3,7 +3,6 @@ import { getOneCallWeather } from '../../actions/weather';
 import '../../css/weather.scss';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 
@@ -24,7 +23,7 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
 
   if (hourly) {
     return (
-      <div className='Section'>
+      <div className='Weather-Section'>
         <h1 className='Weather-Title'>Hourly</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>

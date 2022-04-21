@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../css/weather.scss';
 import { getOneCallWeather } from '../../actions/weather';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const Minutely = ({ minutely, getOneCallWeather }) => {
   useEffect(() => {
@@ -23,9 +22,9 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
 
   if (minutely) {
     return (
-      <div className='Section'>
+      <div className='Weather-Section'>
         <h1 className='Weather-Title'>Minutely Precipitation</h1>
-        <div className='Minute-Flex'>
+        <div className='Minutely'>
           {minutely.map((minute, i) => {
             if (tagMin > 59) {
               tagMin = 0;

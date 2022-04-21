@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../../css/weather.scss';
 import { getOneCallWeather } from '../../actions/weather';
 
@@ -13,7 +13,7 @@ const Daily = ({ daily, getOneCallWeather }) => {
 
   if (daily) {
     return (
-      <div className='Section'>
+      <div className='Weather-Section'>
         <h1 className='Weather-Title'>Daily</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>

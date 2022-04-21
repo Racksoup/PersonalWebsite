@@ -4,7 +4,6 @@ import { getFourDay } from '../../actions/weather';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const Forecast = ({ getFourDay, forecast }) => {
   useEffect(() => {
@@ -96,7 +95,7 @@ const Forecast = ({ getFourDay, forecast }) => {
   };
 
   return (
-    <div className='Section'>
+    <div className='Weather-Section'>
       <h1 className='Weather-Title'>Forecast</h1>
 
       <div className='Forecast'>
