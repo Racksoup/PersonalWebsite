@@ -1,9 +1,14 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../../css/weather.scss';
 
-const Weather = () => {
+const Weather = ({ isAuthenticated, loading }) => {
+  if (!isAuthenticated && !loading) {
+    return <Redirect to='/' />;
+  }
+
   return (
     <div className='WeatherPage-Main'>
       <div className='Weather-TitleBox'>
@@ -34,4 +39,9 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
+});
+
+export default connect(mapStateToProps, {})(Weather);

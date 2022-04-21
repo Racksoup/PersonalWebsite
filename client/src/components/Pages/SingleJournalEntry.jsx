@@ -1,12 +1,19 @@
 import React, { useState, useRef } from 'react';
-import '../css/journal.scss';
-import { createJournalPost, updateJournalPost, clearJournal } from '../actions/journal';
+import '../../css/journal.scss';
+import { createJournalPost, updateJournalPost, clearJournal } from '../../actions/journal';
 
 import Textarea from 'react-textarea-autosize';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-const SingleJournalEntry = ({ createJournalPost, updateJournalPost, clearJournal, journal }) => {
+const SingleJournalEntry = ({
+  createJournalPost,
+  updateJournalPost,
+  clearJournal,
+  journal,
+  isAuthenticated,
+  loading,
+}) => {
   const [newJournal, setNewJournal] = useState({
     title: journal.title,
     text: journal.text,
@@ -47,6 +54,10 @@ const SingleJournalEntry = ({ createJournalPost, updateJournalPost, clearJournal
 
   if (redirect) {
     return <Redirect to='/home' />;
+  }
+
+  if (!isAuthenticated && !loading) {
+    return <Redirect to='/' />;
   }
 
   if (journal) {
@@ -112,6 +123,8 @@ const SingleJournalEntry = ({ createJournalPost, updateJournalPost, clearJournal
 
 const mapStateToProps = (state) => ({
   journal: state.journal.journal,
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, {

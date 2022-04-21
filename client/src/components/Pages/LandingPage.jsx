@@ -2,11 +2,17 @@ import React from 'react';
 import MyCalendar from '../MyCalendar.jsx';
 import '../../css/LandingPage.scss';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const LandingPage = () => {
+const LandingPage = ({ isAuthenticated, loading }) => {
+  if (!isAuthenticated && !loading) {
+    return <Redirect to='/' />;
+  }
+
   return (
     <div className='Home'>
+      <authComp />
       <div className='Home-Nav'>
         <Link className='Home-Link' to='/weather'>
           <div className='Home-Btn'>Weather</div>
@@ -20,4 +26,9 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
+});
+
+export default connect(mapStateToProps, {})(LandingPage);

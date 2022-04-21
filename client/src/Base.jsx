@@ -4,12 +4,12 @@ import './App.css';
 import LandingPage from './components/Pages/LandingPage.jsx';
 import Login from './components/Pages/Login';
 import Forecast from './components/Weather/Forecast';
-import Weather from './components/Weather/Weather';
+import Weather from './components/Pages/Weather';
 import Minutely from './components/Weather/Minutely';
 import Hourly from './components/Weather/Hourly';
 import Daily from './components/Weather/Daily';
-import SingleJournalEntry from './components/SingleJournalEntry';
-import SingleJournalView from './components/SingleJournalView';
+import SingleJournalEntry from './components/Pages/SingleJournalEntry';
+import SingleJournalView from './components/Pages/SingleJournalView';
 import Lists from './components/Pages/Lists';
 import {
   getFourDay,

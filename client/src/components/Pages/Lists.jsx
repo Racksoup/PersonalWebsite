@@ -4,7 +4,7 @@ import { getLists, createList, deleteList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -84,6 +84,8 @@ const Lists = ({
   updateListItem,
   list,
   lists,
+  isAuthenticated,
+  loading,
 }) => {
   useEffect(() => {
     getLists();
@@ -108,6 +110,10 @@ const Lists = ({
     deleteList(lastListClicked);
     setLastListClicked('');
   };
+
+  if (!isAuthenticated && !loading) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <div className='Lists'>
@@ -173,6 +179,8 @@ const Lists = ({
 const mapStateToProps = (state) => ({
   lists: state.lists.lists,
   list: state.listItem.list,
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, {

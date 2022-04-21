@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/journal.scss';
-import { clearJournal } from '../actions/journal';
+import '../../css/journal.scss';
+import { clearJournal } from '../../actions/journal';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
