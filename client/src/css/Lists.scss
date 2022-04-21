@@ -1,6 +1,6 @@
 .Lists {
   margin: 1rem auto 0 auto;
-  width: 40rem;
+  max-width: 40rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -193,4 +193,31 @@
   width: 24rem;
   background: rgba(75, 75, 75, 1);
   height: 0.15rem;
+}
+
+@media screen and (max-width: 650px) {
+  .Lists-TitleBox {
+    width: 320px;
+  }
+
+  .Lists-NavBtn {
+    width: 8rem;
+  }
+
+  .Lists-Nav {
+    width: 320px;
+  }
+
+  .Lists-List-Item-Label {
+    font-size: 0.8rem;
+  }
+
+  .Modal {
+    width: 320px;
+  }
+
+  .Modal-Input {
+    width: 280px;
+    font-size: 0.8rem;
+  }
 }
