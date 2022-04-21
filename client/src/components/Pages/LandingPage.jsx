@@ -12,7 +12,6 @@ const LandingPage = ({ isAuthenticated, loading }) => {
 
   return (
     <div className='Home'>
-      <authComp />
       <div className='Home-Nav'>
         <Link className='Home-Link' to='/weather'>
           <div className='Home-Btn'>Weather</div>

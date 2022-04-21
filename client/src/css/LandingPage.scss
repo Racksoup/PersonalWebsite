@@ -34,3 +34,17 @@
     color: rgb(255, 123, 0);
   }
 }
+
+@media screen and (max-width: 650px) {
+  .Home {
+    width: 320px;
+  }
+
+  .Home-Nav {
+    width: 320px;
+  }
+
+  .Home-Btn {
+    width: 9rem;
+  }
+}

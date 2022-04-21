@@ -292,18 +292,15 @@ const MyCalendar = ({
   if (calendarLayout == 0) {
     return (
       <div className='Calendar-MainWin'>
-        <div className='Calendar-TitleGrid'>
-          <DatePicker className='datePicker' onChange={setDateValue} value={dateValue} />
-          <div className='Calendar-Title-MonthFlex'>
-            <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
-              <FontAwesomeIcon icon={faChevronLeft} />
-            </div>
-            <p className='Calendar-Title' onClick={() => toggleCalendarLayout(1)}>
-              {currentMonth} - {currentYear}
-            </p>
-            <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
-              <FontAwesomeIcon icon={faChevronRight} />
-            </div>
+        <div className='Calendar-Title-MonthFlex'>
+          <div className='Calendar_Button_MonthNav' onClick={() => leftMonthButtonClicked()}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </div>
+          <p className='Calendar-Title' onClick={() => toggleCalendarLayout(1)}>
+            {currentMonth} - {currentYear}
+          </p>
+          <div className='Calendar_Button_MonthNav' onClick={() => rightMonthButtonClicked()}>
+            <FontAwesomeIcon icon={faChevronRight} />
           </div>
         </div>
         <div className='Calendar-Grid'>
