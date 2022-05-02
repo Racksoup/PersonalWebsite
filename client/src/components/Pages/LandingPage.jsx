@@ -1,8 +1,9 @@
 import React from 'react';
 import MyCalendar from '../MyCalendar.jsx';
+import TitleBox from '../TitleBox.jsx';
 import '../../css/LandingPage.scss';
 
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const LandingPage = ({ isAuthenticated, loading }) => {
@@ -12,15 +13,7 @@ const LandingPage = ({ isAuthenticated, loading }) => {
 
   return (
     <div className='Section'>
-      <div className='TitleBox'>
-        <Link className='Link' to='/weather'>
-          <div className='Btn'>Weather</div>
-        </Link>
-        <div className='TitleBox-Title'>Home</div>
-        <Link className='Link' to='/lists'>
-          <div className='Btn'>Lists</div>
-        </Link>
-      </div>
+      <TitleBox name='Home' />
       <MyCalendar />
     </div>
   );

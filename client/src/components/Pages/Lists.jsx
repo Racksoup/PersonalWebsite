@@ -4,9 +4,8 @@ import { getLists, createList, deleteList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
 
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Redirect } from 'react-router-dom';
+import TitleBox from '../TitleBox';
 
 const NewListModal = ({ toggleModal, createList }) => {
   const [list, setList] = useState({ title: '' });
@@ -125,16 +124,7 @@ const Lists = ({
           lastListClicked={lastListClicked}
         />
       )}
-      <div className='TitleBox'>
-        <Link className='Link' to='/home'>
-          <div className='Btn'>Back</div>
-        </Link>
-        <h1 className='TitleBox-Title'>Lists</h1>
-        <div className='Btn' onClick={() => toggleModal(true)}>
-          <FontAwesomeIcon className='Lists-NewList-Icon' icon={faPlus} />
-          New List
-        </div>
-      </div>
+      <TitleBox name='Lists' />
       <div className='Nav'>
         {lists.map((list) => (
           <div className='Btn' onClick={() => clickedList(list)}>

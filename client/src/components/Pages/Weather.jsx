@@ -4,6 +4,7 @@ import Daily from '../Weather/Daily';
 import Forecast from '../Weather/Forecast';
 import Hourly from '../Weather/Hourly';
 import Minutely from '../Weather/Minutely';
+import TitleBox from '../TitleBox';
 
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -17,13 +18,7 @@ const Weather = ({ isAuthenticated, loading }) => {
 
   return (
     <div className='Section'>
-      <div className='TitleBox'>
-        <Link className='Link' to='/home'>
-          <div className='Btn'>Back</div>
-        </Link>
-        <h1 className='TitleBox-Title'>Weather</h1>
-        <div style={{ width: '7rem' }} />
-      </div>
+      <TitleBox name='Weather' />
       <div className='Nav'>
         <div className='Btn' onClick={() => toggleLayout(0)}>
           Daily
