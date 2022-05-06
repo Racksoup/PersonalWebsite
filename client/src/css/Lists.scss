@@ -1,129 +1,80 @@
-.Lists-NewListBtn-Icon {
-  margin: 0 0.3rem 0 0;
-  font-size: 1.4rem;
-}
-
-.Lists-Nav {
-  width: 40rem;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.Lists-NavBtn {
-  width: 9.1rem;
-  margin: 0.4rem;
-}
-
-.Lists-List {
-  max-width: 40rem;
-  margin: 2.5rem 0 0 0;
-  border: solid 0.1rem cyan;
-  border-radius: 1rem;
+.Lists {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.Lists-List-Title {
-  margin: 0.5rem 0 0 0;
-}
-
-.Lists-List-Nav {
-  margin: 0 0 0.6rem 0;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-  align-items: end;
-}
-
-.Lists-List-AddItem {
-  width: 5rem;
-  height: 2rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-}
-
-.Lists-List-Items {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.Lists-List-Item {
-  width: 100%;
-  height: 3rem;
-  border-top: solid 0.1rem rgba(255, 255, 255, 0.2);
-  display: flex;
-  padding: 0 2rem;
-  align-items: center;
-}
-
-.Lists-List-Item-Label {
-  width: 25rem;
-  font-size: 1.6rem;
-  overflow: hidden;
-}
-
-.Lists-List-Item-Btn {
-  width: 5rem;
-  margin: 0 0.3rem;
-}
-
-.Modal-Background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-}
-
-.Modal {
-  width: 25rem;
-  position: absolute;
-  margin: 10rem auto 0 auto;
-  border: solid 0.3rem cyan;
-  border-radius: 1rem;
-  background-color: white;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.Modal-Title {
-  padding: 0;
-  margin: 1rem 0 0 0;
-}
-
-.Modal-Input {
-  margin: 1rem 0 0 0;
-  width: 20rem;
-  height: 3rem;
-  font-size: 1.4rem;
-  border-radius: 0.5rem;
-  border: solid 0.1rem rgba(0, 0, 0, 0.4);
-  padding: 0 0 0 1rem;
-
-  &:focus {
-    border: solid 0.2rem rgb(255, 115, 0);
-    outline: none;
+  .NewListBtn {
+    margin: 0.3rem 0 0 0;
   }
-}
 
-.Modal-Submit {
-  margin: 1rem 0 1rem 0;
-}
+  .NewListIcon {
+    margin: 0 0.3rem 0 0;
+    font-size: 1rem;
+  }
 
-.Lists-List-Item-Checked {
-  margin: 0.3rem 0 0 0;
-  position: fixed;
-  width: 24rem;
-  background: rgba(75, 75, 75, 1);
-  height: 0.15rem;
+  .List {
+    max-width: 40rem;
+    margin: 2.5rem 0 0 0;
+    border: solid 0.1rem cyan;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .Title {
+      margin: 0.5rem 0 0 0;
+    }
+
+    .ListNav {
+      margin: 0 0 0.6rem 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+      align-items: end;
+    }
+
+    .Btn {
+      width: 5rem;
+      height: 2rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .Items {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .Item {
+        width: 100%;
+        height: 3rem;
+        border-top: solid 0.1rem rgba(255, 255, 255, 0.2);
+        display: flex;
+        padding: 0 2rem;
+        align-items: center;
+
+        .Label {
+          width: 25rem;
+          font-size: 1.6rem;
+          overflow: hidden;
+        }
+
+        .Checked {
+          margin: 0.3rem 0 0 0;
+          position: fixed;
+          width: 24rem;
+          background: rgba(75, 75, 75, 1);
+          height: 0.15rem;
+        }
+
+        .Btn {
+          width: 5rem;
+          margin: 0 0.3rem;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 650px) {

@@ -13,7 +13,7 @@
   height: 3rem;
   margin: 0.8rem 0 1.2rem 0;
   padding-bottom: 0.1rem;
-  border-bottom: solid 0.1rem rgb(255, 255, 255);
+  border-bottom: solid 0.1rem rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   &:hover {
     color: rgb(255, 115, 0);
@@ -63,12 +64,14 @@
 .Nav {
   width: 40rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 
   .Btn {
     margin: 0.3rem;
-    width: 9.1rem;
+    width: 4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 }
 

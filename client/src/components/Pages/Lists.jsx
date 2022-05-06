@@ -2,76 +2,13 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Lists.scss';
 import { getLists, createList, deleteList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
+import NewListModal from '../NewListModal';
 
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import TitleBox from '../TitleBox';
-
-const NewListModal = ({ toggleModal, createList }) => {
-  const [list, setList] = useState({ title: '' });
-
-  const submitClicked = (e) => {
-    e.stopPropagation();
-    createList(list);
-    toggleModal(false);
-  };
-
-  const inputChanged = (e) => {
-    setList({ ...list, [e.target.name]: e.target.value });
-  };
-
-  return (
-    <div className='Modal-Background' onClick={() => toggleModal(false)}>
-      <div className='Modal' onClick={(e) => e.stopPropagation()}>
-        <h2 className='Modal-Title'>Create New List</h2>
-        <input
-          className='Modal-Input'
-          value={list.title}
-          onChange={(e) => inputChanged(e)}
-          name='title'
-        />
-        <div className='Lists-Btn Modal-Submit' onClick={(e) => submitClicked(e)}>
-          Submit
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const NewItemModal = ({ toggleNewItemModal, createListItem, lastListClicked }) => {
-  const [newListItem, setNewListItem] = useState({
-    listTitle: lastListClicked.title,
-    title: '',
-    checked: false,
-  });
-
-  const submitClicked = (e) => {
-    e.stopPropagation();
-    createListItem(newListItem);
-    toggleNewItemModal(false);
-  };
-
-  const inputChanged = (e) => {
-    setNewListItem({ ...newListItem, [e.target.name]: e.target.value });
-  };
-
-  return (
-    <div className='Modal-Background' onClick={() => toggleNewItemModal(false)}>
-      <div className='Modal' onClick={(e) => e.stopPropagation()}>
-        <h2 className='Modal-Title'>Add Item</h2>
-        <input
-          className='Modal-Input'
-          value={newListItem.title}
-          onChange={(e) => inputChanged(e)}
-          name='title'
-        />
-        <div className='Lists-Btn Modal-Submit' onClick={(e) => submitClicked(e)}>
-          Submit
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Lists = ({
   getLists,
@@ -93,6 +30,12 @@ const Lists = ({
   const [modal, toggleModal] = useState(false);
   const [newItemModal, toggleNewItemModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
+  const newListInitState = { title: '' };
+  const newItemInitState = {
+    listTitle: lastListClicked.title,
+    title: '',
+    checked: false,
+  };
 
   const clickedList = (list) => {
     getList(list.title);
@@ -116,49 +59,61 @@ const Lists = ({
 
   return (
     <div className='Section'>
-      {modal == true && <NewListModal toggleModal={toggleModal} createList={createList} />}
-      {newItemModal == true && (
-        <NewItemModal
-          toggleNewItemModal={toggleNewItemModal}
-          createListItem={createListItem}
-          lastListClicked={lastListClicked}
-        />
-      )}
-      <TitleBox name='Lists' />
-      <div className='Nav'>
-        {lists.map((list) => (
-          <div className='Btn' onClick={() => clickedList(list)}>
-            {list.title}
-          </div>
-        ))}
-      </div>
-      {lastListClicked && (
-        <div className='Lists-List'>
-          <div className='Lists-List-Nav'>
-            <div className='Btn Lists-List-AddItem' onClick={() => deleteListClicked()}>
-              Delete List
+      <div className='Lists'>
+        {modal == true && (
+          <NewListModal
+            toggleModal={toggleModal}
+            createListFunc={createList}
+            initState={newListInitState}
+          />
+        )}
+        {newItemModal == true && (
+          <NewListModal
+            toggleModal={toggleNewItemModal}
+            createListFunc={createListItem}
+            initState={newItemInitState}
+          />
+        )}
+        <TitleBox name='Lists' />
+        <div className='Nav'>
+          {lists.map((list) => (
+            <div className='Btn' onClick={() => clickedList(list)}>
+              {list.title}
             </div>
-            <h3 className='Lists-List-Title'>{lastListClicked.title}</h3>
-            <div className='Btn Lists-List-AddItem' onClick={() => toggleNewItemModal(true)}>
-              Add Item
-            </div>
-          </div>
-          <div className='Lists-List-Items'>
-            {list.map((item) => (
-              <div className='Lists-List-Item'>
-                <div className='Lists-List-Item-Label'>{item.title}</div>
-                <div className='Btn Lists-List-Item-Btn' onClick={() => updateClicked(item)}>
-                  Check
-                </div>
-                <div className='Btn Lists-List-Item-Btn' onClick={() => deleteListItem(item._id)}>
-                  Delete
-                </div>
-                {item.checked && <div className='Lists-List-Item-Checked' />}
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
-      )}
+        <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
+          <FontAwesomeIcon className='NewListIcon' icon={faPlus} />
+          New List
+        </div>
+        {lastListClicked && (
+          <div className='List'>
+            <div className='ListNav'>
+              <div className='Btn' onClick={() => deleteListClicked()}>
+                Delete List
+              </div>
+              <h3 className='Title'>{lastListClicked.title}</h3>
+              <div className='Btn' onClick={() => toggleNewItemModal(true)}>
+                Add Item
+              </div>
+            </div>
+            <div className='Items'>
+              {list.map((item) => (
+                <div className='Item'>
+                  <div className='Label'>{item.title}</div>
+                  <div className='Btn' onClick={() => updateClicked(item)}>
+                    Check
+                  </div>
+                  <div className='Btn' onClick={() => deleteListItem(item._id)}>
+                    Delete
+                  </div>
+                  {item.checked && <div className='Checked' />}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
