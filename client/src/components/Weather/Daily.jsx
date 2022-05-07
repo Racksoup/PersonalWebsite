@@ -11,6 +11,24 @@ const Daily = ({ daily, getOneCallWeather }) => {
     getOneCallWeather();
   }, []);
 
+  daily.map((day) => {
+    day.theDay = new Date(day.dt * 1000).toLocaleString().split(' ').shift().replace(/,/g, '');
+    day.theDay = day.theDay.substring(day.theDay.length - 7, day.theDay.length - 5);
+    day.theSunrise = new Date(day.sunrise * 1000).toLocaleString().split(' ');
+    day.theSunrise.shift();
+    day.theSunrise[0] = day.theSunrise[0].substring(0, day.theSunrise[0].length - 3);
+    day.theSunset = new Date(day.sunset * 1000).toLocaleString().split(' ');
+    day.theSunset.shift();
+    day.theSunset[0] = day.theSunset[0].substring(0, day.theSunset[0].length - 3);
+    day.theMoonrise = new Date(day.moonrise * 1000).toLocaleString().split(' ');
+    day.theMoonrise.shift();
+    day.theMoonrise[0] = day.theMoonrise[0].substring(0, day.theMoonrise[0].length - 3);
+    day.theMoonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
+    day.theMoonset.shift();
+    day.theMoonset[0] = day.theMoonset[0].substring(0, day.theMoonset[0].length - 3);
+    day.theClouds = <div>&#9728;</div>;
+  });
+
   if (daily) {
     return (
       <div className='Weather-Section'>
@@ -36,48 +54,29 @@ const Daily = ({ daily, getOneCallWeather }) => {
             </tr>
           </thead>
           <tbody>
-            {daily.map((day) => {
-              let theDay = new Date(day.dt * 1000)
-                .toLocaleString()
-                .split(' ')
-                .shift()
-                .replace(/,/g, '');
-              theDay = theDay.substring(theDay.length - 7, theDay.length - 5);
-              let sunrise = new Date(day.sunrise * 1000).toLocaleString().split(' ');
-              sunrise.shift();
-              sunrise[0] = sunrise[0].substring(0, sunrise[0].length - 3);
-              let sunset = new Date(day.sunset * 1000).toLocaleString().split(' ');
-              sunset.shift();
-              sunset[0] = sunset[0].substring(0, sunset[0].length - 3);
-              let moonrise = new Date(day.moonrise * 1000).toLocaleString().split(' ');
-              moonrise.shift();
-              moonrise[0] = moonrise[0].substring(0, moonrise[0].length - 3);
-              let moonset = new Date(day.moonset * 1000).toLocaleString().split(' ');
-              moonset.shift();
-              moonset[0] = moonset[0].substring(0, moonset[0].length - 3);
-              let clouds = <div>&#9728;</div>;
-              if (day.clouds > 32) {
-                clouds = <div>&#127780;</div>;
+            {daily.map((day, i) => {
+              if (daily[i].clouds > 32) {
+                day.theClouds = <div>&#127780;</div>;
               }
-              if (day.clouds > 66) {
-                clouds = <div>&#9729;</div>;
+              if (daily[i].clouds > 66) {
+                day.theClouds = <div>&#9729;</div>;
               }
               return (
                 <tr style={{ color: 'white' }}>
-                  <td>{theDay}</td>
+                  <td>{day.theDay}</td>
                   <td>{(day.temp.max - 273.15).toFixed(1)}&#176;</td>
                   <td>{(day.temp.min - 273.15).toFixed(1)}&#176;</td>
                   <td>{day.pressure}</td>
                   <td>{day.humidity}%</td>
                   <td>{day.wind_speed}</td>
                   <td>{day.weather[0].main}</td>
-                  <td>{clouds}</td>
+                  <td>{day.theClouds}</td>
                   <td>{day.rain}</td>
                   <td>{Math.round(day.pop * 100)}%</td>
-                  <td>{sunrise}</td>
-                  <td>{sunset}</td>
-                  <td>{moonrise}</td>
-                  <td>{moonset}</td>
+                  <td>{day.theSunrise[0]}</td>
+                  <td>{day.theSunset}</td>
+                  <td>{day.theMoonrise}</td>
+                  <td>{day.theMoonset}</td>
                   <td>{Math.round(day.moon_phase * 100)}%</td>
                 </tr>
               );
