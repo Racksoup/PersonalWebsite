@@ -83,7 +83,7 @@ const Lists = ({
           ))}
         </div>
         <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
-          <FontAwesomeIcon className='NewListIcon' icon={faPlus} />
+          <FontAwesomeIcon className='Icon' icon={faPlus} />
           New List
         </div>
         {lastListClicked && (

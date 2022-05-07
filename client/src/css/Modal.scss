@@ -44,3 +44,14 @@
     margin: 1rem 0 1rem 0;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .Modal {
+    width: 320px;
+
+    .Input {
+      width: 280px;
+      font-size: 0.8rem;
+    }
+  }
+}

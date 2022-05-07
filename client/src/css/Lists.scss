@@ -5,11 +5,11 @@
 
   .NewListBtn {
     margin: 0.3rem 0 0 0;
-  }
 
-  .NewListIcon {
-    margin: 0 0.3rem 0 0;
-    font-size: 1rem;
+    .Icon {
+      margin: 0 0.3rem 0 0;
+      font-size: 1rem;
+    }
   }
 
   .List {
@@ -35,10 +35,11 @@
     }
 
     .Btn {
-      width: 5rem;
+      min-width: 5rem;
       height: 2rem;
       font-size: 1rem;
       border-radius: 0.5rem;
+      flex-basis: 1;
     }
 
     .Items {
@@ -78,16 +79,24 @@
 }
 
 @media screen and (max-width: 650px) {
-  .Lists-Nav {
-    width: 320px;
-  }
+  .Lists {
+    .Nav {
+      width: 320px;
+    }
+    .List {
+      width: 320px;
 
-  .Lists-List {
-    width: 320px;
-  }
+      .Item {
+        .Label {
+          font-size: 0.8rem;
+        }
 
-  .Lists-List-Item-Label {
-    font-size: 0.8rem;
+        .Btn {
+          width: 4rem;
+          margin: 0 0.2rem;
+        }
+      }
+    }
   }
 
   .Modal {
@@ -97,10 +106,5 @@
   .Modal-Input {
     width: 280px;
     font-size: 0.8rem;
-  }
-
-  .Lists-List-Item-Btn {
-    width: 4rem;
-    margin: 0 0.2rem;
   }
 }

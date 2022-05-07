@@ -5,8 +5,8 @@ import './css/Utils.scss';
 import LandingPage from './components/Pages/LandingPage.jsx';
 import Login from './components/Pages/Login';
 import Weather from './components/Pages/Weather';
-import SingleJournalEntry from './components/Pages/SingleJournalEntry';
-import SingleJournalView from './components/Pages/SingleJournalView';
+import JournalEntry from './components/Pages/JournalEntry';
+import JournalView from './components/Pages/JournalView';
 import Lists from './components/Pages/Lists';
 import {
   getFourDay,
@@ -51,8 +51,8 @@ const Base = ({
           <Route exact path='/' component={Login} />
           <Route exact path='/home' component={LandingPage} />
           <Route exact path='/weather' component={Weather} />
-          <Route exact path='/journal-view' component={SingleJournalView} />
-          <Route exact path='/journal-entry' component={SingleJournalEntry} />
+          <Route exact path='/journal-view' component={JournalView} />
+          <Route exact path='/journal-entry' component={JournalEntry} />
           <Route exact path='/lists' component={Lists} />
         </Switch>
       </section>
