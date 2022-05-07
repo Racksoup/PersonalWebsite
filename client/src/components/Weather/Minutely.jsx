@@ -22,8 +22,8 @@ const Minutely = ({ minutely, getOneCallWeather }) => {
 
   if (minutely) {
     return (
-      <div className='Weather-Section'>
-        <h1 className='Weather-Title'>Minutely Precipitation</h1>
+      <div className='Weather'>
+        <h1 className='Title'>Minutely Precipitation</h1>
         <div className='Minutely'>
           {minutely.map((minute, i) => {
             if (tagMin > 59) {

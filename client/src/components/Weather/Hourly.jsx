@@ -23,8 +23,8 @@ const Hourly = ({ hourly, getOneCallWeather }) => {
 
   if (hourly) {
     return (
-      <div className='Weather-Section'>
-        <h1 className='Weather-Title'>Hourly</h1>
+      <div className='Weather'>
+        <h1 className='Title'>Hourly</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>
             <tr style={{ color: 'white' }}>

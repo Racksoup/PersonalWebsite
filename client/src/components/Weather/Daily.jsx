@@ -31,8 +31,8 @@ const Daily = ({ daily, getOneCallWeather }) => {
 
   if (daily) {
     return (
-      <div className='Weather-Section'>
-        <h1 className='Weather-Title'>Daily</h1>
+      <div className='Weather'>
+        <h1 className='Title'>Daily</h1>
         <Table bordered variant='dark' style={{ width: '80%', margin: 'auto', marginTop: '20px' }}>
           <thead>
             <tr style={{ color: 'white' }}>

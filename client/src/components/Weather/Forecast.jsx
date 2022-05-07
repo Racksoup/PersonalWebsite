@@ -95,8 +95,8 @@ const Forecast = ({ getFourDay, forecast }) => {
   };
 
   return (
-    <div className='Weather-Section'>
-      <h1 className='Weather-Title'>Forecast</h1>
+    <div className='Weather'>
+      <h1 className='Title'>Forecast</h1>
 
       <div className='Forecast'>
         <div className='Forecast-DayFlex'>
