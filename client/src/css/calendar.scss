@@ -21,23 +21,34 @@
       margin: 0rem;
       width: 20rem;
       cursor: pointer;
-
       &:hover {
         color: rgb(255, 123, 0);
       }
 
       &-Month {
+        cursor: pointer;
+        display: inline;
+        text-align: center;
+        padding: 0rem;
+        margin: 0rem;
         font-size: 2rem;
         width: 11rem;
+        &:hover {
+          color: rgb(255, 123, 0);
+        }
       }
 
       &-Year {
+        cursor: pointer;
         display: inline;
         text-align: center;
         font-size: 2rem;
         padding: 0rem;
         margin: 0rem;
         width: 11rem;
+        &:hover {
+          color: rgb(255, 123, 0);
+        }
       }
     }
 
@@ -135,8 +146,10 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        cursor: pointer;
 
         &:hover {
+          color: rgb(255, 115, 0);
           border: solid rgba(255, 115, 0, 0.637) 0.2rem;
           border-radius: 0.7rem;
         }
@@ -152,6 +165,25 @@
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       justify-items: stretch;
       align-items: stretch;
+
+      .Item {
+        border-radius: 0.1rem;
+        border: solid rgba(255, 255, 255, 0.116) 0.01rem;
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: 400;
+        cursor: pointer;
+
+        &:hover {
+          border: solid rgba(255, 115, 0, 0.637) 0.2rem;
+          color: rgba(255, 115, 0);
+          border-radius: 0.6rem;
+        }
+      }
     }
   }
 }
@@ -162,25 +194,6 @@
   grid-template-rows: 1fr;
   align-items: center;
   justify-items: center;
-}
-
-.Calendar-YearItem {
-  border-radius: 0.1rem;
-  border: solid rgba(255, 255, 255, 0.116) 0.01rem;
-  padding: 0px;
-  margin: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-weight: 400;
-  cursor: pointer;
-
-  &:hover {
-    border: solid rgba(255, 115, 0, 0.637) 0.2rem;
-    color: rgba(255, 115, 0);
-    border-radius: 0.6rem;
-  }
 }
 
 .Calendar-Title-YearLayout {

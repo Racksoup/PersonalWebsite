@@ -1,5 +1,5 @@
 import React from 'react';
-import MyCalendar from '../MyCalendar.jsx';
+import MyCalendar from '../Calendar/MyCalendar.jsx';
 import TitleBox from '../TitleBox.jsx';
 import '../../css/LandingPage.scss';
 

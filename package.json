@@ -1,5 +1,5 @@
 {
-  "name": "connors-calendar",
+  "name": "PersonalWebsite",
   "version": "1.0.0",
   "description": "Calendar, Journal, To-Do list, Spending Tracker",
   "main": "server.js",

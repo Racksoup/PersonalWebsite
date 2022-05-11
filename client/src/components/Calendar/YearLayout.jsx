@@ -7,9 +7,27 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 const YearLayout = ({
   rightCenturyButtonClicked,
   leftCenturyButtonClicked,
-  printYears,
   currentYear,
+  yearClicked,
 }) => {
+  const printYears = () => {
+    let preYear = Math.floor(currentYear / 100);
+    let arr = [];
+    for (let i = 0; i < 100; i++) {
+      let postYear = i.toString();
+      if (i < 10) {
+        postYear = `0${i}`;
+      }
+      let fullYear = preYear + postYear;
+      console.log(fullYear);
+      arr.push(
+        <div className='Item' onClick={() => yearClicked(fullYear)}>
+          {fullYear}
+        </div>
+      );
+    }
+    return arr;
+  };
   return (
     <div className='Calendar'>
       <div className='TitleBox'>

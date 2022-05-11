@@ -9,6 +9,8 @@ const MonthLayout = ({
   rightYearButtonClicked,
   toggleCalendarLayout,
   monthItemClicked,
+  currentYear,
+  monthsOfYear,
 }) => {
   return (
     <div className='Calendar'>

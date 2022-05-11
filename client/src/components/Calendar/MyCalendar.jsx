@@ -4,10 +4,11 @@ import {
   getOneJournalByDate,
   clearJournals,
   getMonthsJournals,
-} from '../actions/journal';
-import '../css/calendar.scss';
-import YearLayout from './Calendar/YearLayout';
-import MonthLayout from './Calendar/MonthLayout';
+} from '../../actions/journal';
+import '../../css/calendar.scss';
+import YearLayout from './YearLayout';
+import MonthLayout from './MonthLayout';
+import DayLayout from './DayLayout';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -262,80 +263,21 @@ const MyCalendar = ({ getOneJournalByDate, getMonthsJournals, journals }) => {
     toggleCalendarLayout(1);
   };
 
-  const printYears = () => {
-    let preYear = Math.floor(currentYear / 100);
-    let arr = [];
-    for (let i = 0; i < 100; i++) {
-      let postYear = i.toString();
-      if (i < 10) {
-        postYear = `0${i}`;
-      }
-      let fullYear = preYear + postYear;
-      console.log(fullYear);
-      arr.push(
-        <div className='Calendar-YearItem' onClick={() => yearClicked(fullYear)}>
-          {fullYear}
-        </div>
-      );
-    }
-    return arr;
-  };
-
   let daysOfMonth = buildMonthArr(firstDay);
 
   // Calendar Layout Main
   if (calendarLayout == 0) {
     return (
-      <div className='Calendar'>
-        <div className='TitleBox'>
-          <div className='MonthNavBtn' onClick={() => leftMonthButtonClicked()}>
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </div>
-          <p className='Title' onClick={() => toggleCalendarLayout(1)}>
-            {currentMonth} - {currentYear}
-          </p>
-          <div className='MonthNavBtn' onClick={() => rightMonthButtonClicked()}>
-            <FontAwesomeIcon icon={faChevronRight} />
-          </div>
-        </div>
-        <div className='Grid'>
-          <p className='DayOfWeek'>Sunday</p>
-          <p className='DayOfWeek'>Monday</p>
-          <p className='DayOfWeek'>Tuesday</p>
-          <p className='DayOfWeek'>Wednesday</p>
-          <p className='DayOfWeek'>Thursday</p>
-          <p className='DayOfWeek'>Friday</p>
-          <p className='DayOfWeek'>Saturday</p>
-          {daysOfMonth &&
-            journals &&
-            daysOfMonth.map((day) => {
-              return (
-                <div
-                  className='Day'
-                  onClick={() => todayClicked(journals[day.journalIndex], day.thisDaysDate)}
-                >
-                  <Link to='/journal-view' className='Link'>
-                    <div className='Content'>
-                      {journals[day.journalIndex] &&
-                        journals[day.journalIndex].image_filename !== undefined && (
-                          <img
-                            src={`api/journal/image/${journals[day.journalIndex].image_filename}`}
-                            className='Img'
-                          />
-                        )}
-                      <div className='Overlay'>
-                        <p className='Num'>{day.dayOfMonth}</p>
-                        {journals[day.journalIndex] && (
-                          <p className='Title'>{journals[day.journalIndex].title}</p>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-        </div>
-      </div>
+      <DayLayout
+        leftMonthButtonClicked={leftMonthButtonClicked}
+        rightMonthButtonClicked={rightMonthButtonClicked}
+        toggleCalendarLayout={toggleCalendarLayout}
+        currentYear={currentYear}
+        daysOfMonth={daysOfMonth}
+        journals={journals}
+        todayClicked={todayClicked}
+        currentMonth={currentMonth}
+      />
     );
   }
 
@@ -347,6 +289,8 @@ const MyCalendar = ({ getOneJournalByDate, getMonthsJournals, journals }) => {
         rightYearButtonClicked={rightYearButtonClicked}
         toggleCalendarLayout={toggleCalendarLayout}
         monthItemClicked={monthItemClicked}
+        currentYear={currentYear}
+        monthsOfYear={monthsOfYear}
       />
     );
   }
@@ -357,8 +301,8 @@ const MyCalendar = ({ getOneJournalByDate, getMonthsJournals, journals }) => {
       <YearLayout
         rightCenturyButtonClicked={rightCenturyButtonClicked}
         leftCenturyButtonClicked={leftCenturyButtonClicked}
-        printYears={printYears}
         currentYear={currentYear}
+        yearClicked={yearClicked}
       />
     );
   }
