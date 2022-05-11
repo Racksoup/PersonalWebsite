@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://rax:Celeste@cluster0.r7hlc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "Demo"
+}

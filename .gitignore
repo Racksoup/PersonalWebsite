@@ -1,3 +1,4 @@
 node_modules/
-config
+config/default.json
+routes/api/users.js
 client/package-lock.json

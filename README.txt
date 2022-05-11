@@ -1,3 +1,2 @@
 Personal Website
-Connor Rack
-r
+Connor Racks

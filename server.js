@@ -9,7 +9,7 @@ connectDB();
 app.use(express.json({ extend: false }));
 
 app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/users', require('./routes/api/users'));
+//app.use('/api/users', require('./routes/api/users'));
 app.use('/api/weather', require('./routes/api/weather'));
 app.use('/api/journal', require('./routes/api/journal'));
 app.use('/api/lists', require('./routes/api/lists'));
