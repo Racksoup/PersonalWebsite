@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://rax:Pony46Tah@cluster0.tkb8d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "jwtSecret": "John324242TheSnowBRAIN"
-}
