@@ -23,6 +23,19 @@ router.get('/:listId', Auth, async (req, res) => {
 router.delete('/:_id', Auth, async (req, res) => {
   try {
     const item = await ListItem.findOneAndRemove({ _id: req.params._id });
+    const items = await ListItem.find({ parentId: item._id });
+    await ListItem.deleteMany({ parentId: item._id });
+
+    function x(items) {
+      if (items.length > 0) {
+        items.map(async (item1) => {
+          const itemsx = await ListItem.find({ parentId: item1._id });
+          await ListItem.deleteMany({ parentId: item1._id });
+          x(itemsx);
+        });
+      }
+    }
+    x(items);
     res.json(item);
   } catch (err) {
     console.error(err.message);

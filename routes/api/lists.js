@@ -24,7 +24,7 @@ router.get('/', Auth, async (req, res) => {
 router.delete('/:_id', Auth, async (req, res) => {
   try {
     const list = await List.findOneAndRemove({ _id: req.params._id });
-    await ListItem.deleteMany({ listTitle: list.title });
+    await ListItem.deleteMany({ listId: list._id });
     res.json({ msg: 'List Deleted' });
   } catch (err) {
     console.error(err.message);

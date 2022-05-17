@@ -95,16 +95,16 @@ const Lists = ({
           />
         )}
         <TitleBox name='Lists' />
+        <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
+          <FontAwesomeIcon className='Icon' icon={faPlus} />
+          New List
+        </div>
         <div className='Nav'>
           {lists.map((list) => (
             <div className='Btn' onClick={() => clickedList(list)}>
               {list.title}
             </div>
           ))}
-        </div>
-        <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
-          <FontAwesomeIcon className='Icon' icon={faPlus} />
-          New List
         </div>
         {lastListClicked && (
           <div className='List'>
@@ -144,6 +144,7 @@ const Lists = ({
                               clickedItem={clickedItem}
                               toggleNewNestedItemModal={toggleNewNestedItemModal}
                               updateClicked={updateClicked}
+                              deleteListItem={deleteListItem}
                               depth={1}
                             />
                           );
@@ -165,6 +166,7 @@ const NestedLists = ({
   clickedItem,
   toggleNewNestedItemModal,
   updateClicked,
+  deleteListItem,
   depth,
 }) => {
   const nextDepth = depth + 1;
@@ -199,6 +201,7 @@ const NestedLists = ({
               clickedItem={clickedItem}
               toggleNewNestedItemModal={toggleNewNestedItemModal}
               updateClicked={updateClicked}
+              deleteListItem={deleteListItem}
               depth={nextDepth}
             />
           );
