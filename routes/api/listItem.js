@@ -7,9 +7,9 @@ const router = express.Router();
 // @route   GET api/listItem/:listTitle
 // @desc    return 1 list
 // @access  Private
-router.get('/:listTitle', Auth, async (req, res) => {
+router.get('/:listId', Auth, async (req, res) => {
   try {
-    const list = await ListItem.find({ listTitle: req.params.listTitle });
+    const list = await ListItem.find({ listId: req.params.listId });
     res.json(list);
   } catch (err) {
     console.error(err.message);
@@ -34,9 +34,10 @@ router.delete('/:_id', Auth, async (req, res) => {
 // @desc    Create one list item
 // @access  Private
 router.post('/', Auth, async (req, res) => {
-  const { listTitle, title, checked } = req.body;
+  const { listId, parentId, title, checked } = req.body;
   const postItem = {};
-  postItem.listTitle = listTitle;
+  postItem.listId = listId;
+  postItem.parentId = parentId;
   postItem.title = title;
   postItem.checked = checked;
 
@@ -54,9 +55,10 @@ router.post('/', Auth, async (req, res) => {
 // @desc    Change one list item
 // @access  Private
 router.put('/:_id', Auth, async (req, res) => {
-  const { listTitle, title, checked } = req.body;
+  const { listId, parentId, title, checked } = req.body;
   const postItem = {};
-  postItem.listTitle = listTitle;
+  postItem.listId = listId;
+  postItem.parentId = parentId;
   postItem.title = title;
   postItem.checked = checked;
 

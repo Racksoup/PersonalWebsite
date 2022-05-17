@@ -29,17 +29,30 @@ const Lists = ({
 
   const [modal, toggleModal] = useState(false);
   const [newItemModal, toggleNewItemModal] = useState(false);
+  const [newNestedItemModal, toggleNewNestedItemModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
+  const [lastItemClicked, setLastItemClicked] = useState('');
   const newListInitState = { title: '' };
   const newItemInitState = {
-    listTitle: lastListClicked.title,
+    listId: lastListClicked._id,
+    parentId: lastListClicked._id,
+    title: '',
+    checked: false,
+  };
+  const newNestedItemInitState = {
+    listId: lastItemClicked.listId,
+    parentId: lastItemClicked._id,
     title: '',
     checked: false,
   };
 
   const clickedList = (list) => {
-    getList(list.title);
+    getList(list._id);
     setLastListClicked(list);
+  };
+
+  const clickedItem = (item) => {
+    setLastItemClicked(item);
   };
 
   const updateClicked = (item) => {
@@ -74,6 +87,13 @@ const Lists = ({
             initState={newItemInitState}
           />
         )}
+        {newNestedItemModal == true && (
+          <NewListModal
+            toggleModal={toggleNewNestedItemModal}
+            createListFunc={createListItem}
+            initState={newNestedItemInitState}
+          />
+        )}
         <TitleBox name='Lists' />
         <div className='Nav'>
           {lists.map((list) => (
@@ -98,23 +118,92 @@ const Lists = ({
               </div>
             </div>
             <div className='Items'>
-              {list.map((item) => (
-                <div className='Item'>
-                  <div className='Label'>{item.title}</div>
-                  <div className='Btn' onClick={() => updateClicked(item)}>
-                    Check
-                  </div>
-                  <div className='Btn' onClick={() => deleteListItem(item._id)}>
-                    Delete
-                  </div>
-                  {item.checked && <div className='Checked' />}
-                </div>
-              ))}
+              {list.map((item) => {
+                if (item.parentId === item.listId)
+                  return (
+                    <>
+                      <div className='Item' onClick={() => clickedItem(item)}>
+                        <div className='Label'>{item.title}</div>
+                        <div className='Btn' onClick={() => toggleNewNestedItemModal(true)}>
+                          Add
+                        </div>
+                        <div className='Btn' onClick={() => updateClicked(item)}>
+                          Check
+                        </div>
+                        <div className='Btn' onClick={() => deleteListItem(item._id)}>
+                          Delete
+                        </div>
+                        {item.checked && <div className='Checked' />}
+                      </div>
+                      {list.map((item2) => {
+                        if (item2.parentId == item._id)
+                          return (
+                            <NestedLists
+                              item2={item2}
+                              list={list}
+                              clickedItem={clickedItem}
+                              toggleNewNestedItemModal={toggleNewNestedItemModal}
+                              updateClicked={updateClicked}
+                              depth={1}
+                            />
+                          );
+                      })}
+                    </>
+                  );
+              })}
             </div>
           </div>
         )}
       </div>
     </div>
+  );
+};
+
+const NestedLists = ({
+  item2,
+  list,
+  clickedItem,
+  toggleNewNestedItemModal,
+  updateClicked,
+  depth,
+}) => {
+  const nextDepth = depth + 1;
+
+  const labelStyle = {
+    marginLeft: depth * 15,
+  };
+
+  return (
+    <>
+      <div className='Item' onClick={() => clickedItem(item2)}>
+        <div className='Label' style={labelStyle}>
+          {item2.title}
+        </div>
+        <div className='Btn' onClick={() => toggleNewNestedItemModal(true)}>
+          Add
+        </div>
+        <div className='Btn' onClick={() => updateClicked(item2)}>
+          Check
+        </div>
+        <div className='Btn' onClick={() => deleteListItem(item2._id)}>
+          Delete
+        </div>
+        {item2.checked && <div className='Checked' />}
+      </div>
+      {list.map((itemx) => {
+        if (itemx.parentId == item2._id)
+          return (
+            <NestedLists
+              item2={itemx}
+              list={list}
+              clickedItem={clickedItem}
+              toggleNewNestedItemModal={toggleNewNestedItemModal}
+              updateClicked={updateClicked}
+              depth={nextDepth}
+            />
+          );
+      })}
+    </>
   );
 };
 

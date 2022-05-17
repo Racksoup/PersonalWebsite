@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const ListItemSchema = new mongoose.Schema({
-  listTitle: { type: String, required: true },
+  listId: { type: String, required: true },
+  parentId: { type: String, required: true },
   title: { type: String, required: true },
   checked: { type: Boolean, default: false },
 });

@@ -2,9 +2,9 @@ import { CREATED_LISTITEM, GOT_LIST, DELETED_LISTITEM, UPDATED_LISTITEM } from '
 
 import axios from 'axios';
 
-export const getList = (title) => async (dispatch) => {
+export const getList = (listId) => async (dispatch) => {
   try {
-    const res = await axios.get(`api/listItem/${title}`);
+    const res = await axios.get(`api/listItem/${listId}`);
     dispatch({ type: GOT_LIST, payload: res.data });
   } catch (err) {
     console.log(err);
