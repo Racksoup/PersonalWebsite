@@ -129,7 +129,7 @@ const Lists = ({
             </div>
             <div className='Items'>
               {list.map((item) => {
-                if (item.parentId === item.listId) {
+                if (item.parentId === item.listId && !item.checked) {
                   const labelStyle = {};
 
                   if (item.checked) {
@@ -159,7 +159,83 @@ const Lists = ({
                         </div>
                       </div>
                       {list.map((item2) => {
-                        if (item2.parentId == item._id)
+                        if (item2.parentId == item._id && !item2.checked)
+                          return (
+                            <NestedLists
+                              item2={item2}
+                              list={list}
+                              clickedItem={clickedItem}
+                              toggleNewNestedItemModal={toggleNewNestedItemModal}
+                              updateClicked={updateClicked}
+                              deleteListItem={deleteListItem}
+                              depth={1}
+                            />
+                          );
+                      })}
+                      {list.map((item2) => {
+                        if (item2.parentId == item._id && item2.checked)
+                          return (
+                            <NestedLists
+                              item2={item2}
+                              list={list}
+                              clickedItem={clickedItem}
+                              toggleNewNestedItemModal={toggleNewNestedItemModal}
+                              updateClicked={updateClicked}
+                              deleteListItem={deleteListItem}
+                              depth={1}
+                            />
+                          );
+                      })}
+                    </>
+                  );
+                }
+              })}
+              {list.map((item) => {
+                if (item.parentId === item.listId && item.checked) {
+                  const labelStyle = {};
+
+                  if (item.checked) {
+                    labelStyle.textDecorationLine = 'line-through';
+                    labelStyle.textDecorationThickness = '4px';
+                    labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
+                  }
+                  return (
+                    <>
+                      <div className='Item' onClick={() => clickedItem(item)}>
+                        <div className='Label' style={labelStyle}>
+                          {item.title}
+                        </div>
+                        <div className='Item-Btns'>
+                          <div
+                            className='Btn Btn-Add'
+                            onClick={() => toggleNewNestedItemModal(true)}
+                          >
+                            <FontAwesomeIcon icon={faPlus} />
+                          </div>
+                          <div className='Btn' onClick={() => updateClicked(item)}>
+                            <FontAwesomeIcon icon={faCheck} />
+                          </div>
+                          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
+                            <FontAwesomeIcon icon={faX} />
+                          </div>
+                        </div>
+                      </div>
+                      {list.map((item2) => {
+                        if (item2.parentId == item._id && !item2.checked)
+                          return (
+                            <NestedLists
+                              item2={item2}
+                              list={list}
+                              clickedItem={clickedItem}
+                              toggleNewNestedItemModal={toggleNewNestedItemModal}
+                              updateClicked={updateClicked}
+                              deleteListItem={deleteListItem}
+                              depth={1}
+                            />
+                          );
+                      })}
+                      {list.map((item2) => {
+                        if (item2.parentId == item._id && item2.checked)
                           return (
                             <NestedLists
                               item2={item2}
@@ -236,7 +312,21 @@ const NestedLists = ({
         </div>
       </div>
       {list.map((itemx) => {
-        if (itemx.parentId == item2._id)
+        if (itemx.parentId == item2._id && !itemx.checked)
+          return (
+            <NestedLists
+              item2={itemx}
+              list={list}
+              clickedItem={clickedItem}
+              toggleNewNestedItemModal={toggleNewNestedItemModal}
+              updateClicked={updateClicked}
+              deleteListItem={deleteListItem}
+              depth={nextDepth}
+            />
+          );
+      })}
+      {list.map((itemx) => {
+        if (itemx.parentId == item2._id && itemx.checked)
           return (
             <NestedLists
               item2={itemx}
