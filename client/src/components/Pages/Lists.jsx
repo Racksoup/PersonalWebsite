@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faX,
-  faCheck,
   faMinus,
   faStar,
   faAngleRight,
@@ -145,7 +144,7 @@ const Lists = ({
                 if (item.parentId === item.listId && !item.checked) {
                   return (
                     <NestedLists
-                      item2={item}
+                      item={item}
                       list={list}
                       clickedItem={clickedItem}
                       toggleNewNestedItemModal={toggleNewNestedItemModal}
@@ -161,7 +160,7 @@ const Lists = ({
                 if (item.parentId === item.listId && item.checked) {
                   return (
                     <NestedLists
-                      item2={item}
+                      item={item}
                       list={list}
                       clickedItem={clickedItem}
                       toggleNewNestedItemModal={toggleNewNestedItemModal}
@@ -182,7 +181,7 @@ const Lists = ({
 };
 
 const NestedLists = ({
-  item2,
+  item,
   list,
   clickedItem,
   toggleNewNestedItemModal,
@@ -197,7 +196,7 @@ const NestedLists = ({
     marginLeft: depth * 10,
   };
 
-  if (item2.checked) {
+  if (item.checked) {
     labelStyle.textDecorationLine = 'line-through';
     labelStyle.textDecorationThickness = '4px';
     labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
@@ -216,25 +215,25 @@ const NestedLists = ({
 
   return (
     <>
-      <div className='Item' onClick={() => clickedItem(item2)}>
+      <div className='Item' onClick={() => clickedItem(item)}>
         <div className='Label' style={labelStyle}>
           <Indent />
-          {item2.title}
+          {item.title}
         </div>
         <div className='Item-Btns'>
-          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item2)}>
+          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
             <FontAwesomeIcon icon={faPlus} />
           </div>
-          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item2._id)}>
+          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
             <FontAwesomeIcon icon={faX} />
           </div>
         </div>
       </div>
-      {list.map((itemx) => {
-        if (itemx.parentId == item2._id && !itemx.checked)
+      {list.map((newItem) => {
+        if (newItem.parentId == item._id && !newItem.checked)
           return (
             <NestedLists
-              item2={itemx}
+              item={newItem}
               list={list}
               clickedItem={clickedItem}
               toggleNewNestedItemModal={toggleNewNestedItemModal}
@@ -245,11 +244,11 @@ const NestedLists = ({
             />
           );
       })}
-      {list.map((itemx) => {
-        if (itemx.parentId == item2._id && itemx.checked)
+      {list.map((newItem) => {
+        if (newItem.parentId == item._id && newItem.checked)
           return (
             <NestedLists
-              item2={itemx}
+              item={newItem}
               list={list}
               clickedItem={clickedItem}
               toggleNewNestedItemModal={toggleNewNestedItemModal}
