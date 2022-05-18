@@ -35,11 +35,13 @@
     }
 
     .Btn {
-      min-width: 5rem;
       height: 2rem;
       font-size: 1rem;
       border-radius: 0.5rem;
-      flex-basis: 1;
+    }
+
+    .sppof {
+      width: 100%;
     }
 
     .Items {
@@ -79,36 +81,5 @@
         }
       }
     }
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .Lists {
-    .Nav {
-      width: 320px;
-    }
-    .List {
-      width: 320px;
-
-      .Item {
-        .Label {
-          font-size: 0.8rem;
-        }
-
-        .Btn {
-          width: 4rem;
-          margin: 0 0.2rem;
-        }
-      }
-    }
-  }
-
-  .Modal {
-    width: 320px;
-  }
-
-  .Modal-Input {
-    width: 280px;
-    font-size: 0.8rem;
   }
 }

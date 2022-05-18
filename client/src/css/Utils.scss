@@ -31,8 +31,7 @@
   }
 }
 
-.Btn {
-  width: 7rem;
+@mixin btn() {
   height: 2rem;
   font-size: 1rem;
   font-weight: 700;
@@ -52,6 +51,16 @@
   }
 }
 
+.Btn {
+  @include btn;
+  width: 7rem;
+
+  &-1 {
+    @include btn;
+    min-width: 4rem;
+  }
+}
+
 .Link {
   text-decoration: none;
   color: black;
@@ -67,11 +76,11 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  .Btn {
+  .Btn-1 {
     margin: 0.3rem;
-    width: 4rem;
     font-size: 0.8rem;
     font-weight: 500;
+    padding: 3px;
   }
 }
 
