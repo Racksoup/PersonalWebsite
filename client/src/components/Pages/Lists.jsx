@@ -88,6 +88,7 @@ const Lists = ({
             toggleModal={toggleModal}
             createListFunc={createList}
             initState={newListInitState}
+            title='Create New List'
           />
         )}
         {newItemModal == true && (
@@ -95,6 +96,7 @@ const Lists = ({
             toggleModal={toggleNewItemModal}
             createListFunc={createListItem}
             initState={newItemInitState}
+            title='Create New Item'
           />
         )}
         {newNestedItemModal == true && (
@@ -102,6 +104,7 @@ const Lists = ({
             toggleModal={toggleNewNestedItemModal}
             createListFunc={createListItem}
             initState={newNestedItemInitState}
+            title='Create New Item'
           />
         )}
         <TitleBox name='Lists' />

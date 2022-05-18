@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Modal.scss';
 
-const NewListModal = ({ toggleModal, createListFunc, initState }) => {
+const NewListModal = ({ toggleModal, createListFunc, initState, title }) => {
   const [list, setList] = useState(initState);
 
   const submitClicked = (e) => {
@@ -17,7 +17,7 @@ const NewListModal = ({ toggleModal, createListFunc, initState }) => {
   return (
     <div className='Modal-Background' onClick={() => toggleModal(false)}>
       <div className='Modal' onClick={(e) => e.stopPropagation()}>
-        <h2 className='Title'>Create New List</h2>
+        <h2 className='Title'>{title}</h2>
         <input
           className='Input'
           value={list.title}
