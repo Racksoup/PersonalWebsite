@@ -89,6 +89,7 @@ const Lists = ({
             createListFunc={createList}
             initState={newListInitState}
             title='Create New List'
+            resize={false}
           />
         )}
         {newItemModal == true && (
@@ -97,6 +98,7 @@ const Lists = ({
             createListFunc={createListItem}
             initState={newItemInitState}
             title='Create New Item'
+            resize={true}
           />
         )}
         {newNestedItemModal == true && (
@@ -105,6 +107,7 @@ const Lists = ({
             createListFunc={createListItem}
             initState={newNestedItemInitState}
             title='Create New Item'
+            resize={true}
           />
         )}
         <TitleBox name='Lists' />

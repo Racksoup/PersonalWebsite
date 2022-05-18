@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Modal.scss';
 
-const NewListModal = ({ toggleModal, createListFunc, initState, title }) => {
+const NewListModal = ({ toggleModal, createListFunc, initState, title, resize }) => {
   const [list, setList] = useState(initState);
 
   const submitClicked = (e) => {
@@ -18,12 +18,22 @@ const NewListModal = ({ toggleModal, createListFunc, initState, title }) => {
     <div className='Modal-Background' onClick={() => toggleModal(false)}>
       <div className='Modal' onClick={(e) => e.stopPropagation()}>
         <h2 className='Title'>{title}</h2>
-        <input
-          className='Input'
-          value={list.title}
-          onChange={(e) => inputChanged(e)}
-          name='title'
-        />
+        {resize == false && (
+          <input
+            className='Input'
+            value={list.title}
+            onChange={(e) => inputChanged(e)}
+            name='title'
+          />
+        )}
+        {resize == true && (
+          <textarea
+            className='Input'
+            value={list.title}
+            onChange={(e) => inputChanged(e)}
+            name='title'
+          />
+        )}
         <div className='Btn' onClick={(e) => submitClicked(e)}>
           Submit
         </div>
