@@ -119,12 +119,12 @@ const Lists = ({
         {lastListClicked && (
           <div className='List'>
             <div className='ListNav'>
-              <div className='Btn' onClick={() => deleteListClicked()}>
-                Delete List
+              <div className='Btn Btn-Add' onClick={() => deleteListClicked()}>
+                <FontAwesomeIcon icon={faPlus} className='Icon' />
               </div>
               <h3 className='Title'>{lastListClicked.title}</h3>
-              <div className='Btn' onClick={() => toggleNewItemModal(true)}>
-                Add Item
+              <div className='Btn Btn-Delete' onClick={() => toggleNewItemModal(true)}>
+                <FontAwesomeIcon icon={faX} className='Icon' />
               </div>
             </div>
             <div className='Items'>
