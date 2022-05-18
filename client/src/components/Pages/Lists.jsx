@@ -63,9 +63,10 @@ const Lists = ({
 
   const clickedItem = (item) => {
     setLastItemClicked(item);
+    checkClicked(item);
   };
 
-  const updateClicked = (item) => {
+  const checkClicked = (item) => {
     const newItem = item;
     newItem.checked = !newItem.checked;
     updateListItem(newItem);
@@ -74,6 +75,12 @@ const Lists = ({
   const deleteListClicked = () => {
     deleteList(lastListClicked);
     setLastListClicked('');
+  };
+
+  const addItemClicked = (e, item) => {
+    e.stopPropagation();
+    setLastItemClicked(item);
+    toggleNewNestedItemModal(true);
   };
 
   if (!isAuthenticated && !loading) {
@@ -150,14 +157,8 @@ const Lists = ({
                           {item.title}
                         </div>
                         <div className='Item-Btns'>
-                          <div
-                            className='Btn Btn-Add'
-                            onClick={() => toggleNewNestedItemModal(true)}
-                          >
+                          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
                             <FontAwesomeIcon icon={faPlus} />
-                          </div>
-                          <div className='Btn' onClick={() => updateClicked(item)}>
-                            <FontAwesomeIcon icon={faCheck} />
                           </div>
                           <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
                             <FontAwesomeIcon icon={faX} />
@@ -172,9 +173,10 @@ const Lists = ({
                               list={list}
                               clickedItem={clickedItem}
                               toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              updateClicked={updateClicked}
+                              checkClicked={checkClicked}
                               deleteListItem={deleteListItem}
                               depth={1}
+                              addItemClicked={addItemClicked}
                             />
                           );
                       })}
@@ -186,9 +188,10 @@ const Lists = ({
                               list={list}
                               clickedItem={clickedItem}
                               toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              updateClicked={updateClicked}
+                              checkClicked={checkClicked}
                               deleteListItem={deleteListItem}
                               depth={1}
+                              addItemClicked={addItemClicked}
                             />
                           );
                       })}
@@ -212,14 +215,8 @@ const Lists = ({
                           {item.title}
                         </div>
                         <div className='Item-Btns'>
-                          <div
-                            className='Btn Btn-Add'
-                            onClick={() => toggleNewNestedItemModal(true)}
-                          >
+                          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
                             <FontAwesomeIcon icon={faPlus} />
-                          </div>
-                          <div className='Btn' onClick={() => updateClicked(item)}>
-                            <FontAwesomeIcon icon={faCheck} />
                           </div>
                           <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
                             <FontAwesomeIcon icon={faX} />
@@ -234,9 +231,10 @@ const Lists = ({
                               list={list}
                               clickedItem={clickedItem}
                               toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              updateClicked={updateClicked}
+                              checkClicked={checkClicked}
                               deleteListItem={deleteListItem}
                               depth={1}
+                              addItemClicked={addItemClicked}
                             />
                           );
                       })}
@@ -248,9 +246,10 @@ const Lists = ({
                               list={list}
                               clickedItem={clickedItem}
                               toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              updateClicked={updateClicked}
+                              checkClicked={checkClicked}
                               deleteListItem={deleteListItem}
                               depth={1}
+                              addItemClicked={addItemClicked}
                             />
                           );
                       })}
@@ -271,9 +270,10 @@ const NestedLists = ({
   list,
   clickedItem,
   toggleNewNestedItemModal,
-  updateClicked,
+  checkClicked,
   deleteListItem,
   depth,
+  addItemClicked,
 }) => {
   const nextDepth = depth + 1;
 
@@ -306,11 +306,8 @@ const NestedLists = ({
           {item2.title}
         </div>
         <div className='Item-Btns'>
-          <div className='Btn Btn-Add' onClick={() => toggleNewNestedItemModal(true)}>
+          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item2)}>
             <FontAwesomeIcon icon={faPlus} />
-          </div>
-          <div className='Btn' onClick={() => updateClicked(item2)}>
-            <FontAwesomeIcon icon={faCheck} />
           </div>
           <div className='Btn Btn-Delete' onClick={() => deleteListItem(item2._id)}>
             <FontAwesomeIcon icon={faX} />
@@ -325,9 +322,10 @@ const NestedLists = ({
               list={list}
               clickedItem={clickedItem}
               toggleNewNestedItemModal={toggleNewNestedItemModal}
-              updateClicked={updateClicked}
+              checkClicked={checkClicked}
               deleteListItem={deleteListItem}
               depth={nextDepth}
+              addItemClicked={addItemClicked}
             />
           );
       })}
@@ -339,9 +337,10 @@ const NestedLists = ({
               list={list}
               clickedItem={clickedItem}
               toggleNewNestedItemModal={toggleNewNestedItemModal}
-              updateClicked={updateClicked}
+              checkClicked={checkClicked}
               deleteListItem={deleteListItem}
               depth={nextDepth}
+              addItemClicked={addItemClicked}
             />
           );
       })}
