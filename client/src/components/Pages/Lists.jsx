@@ -272,7 +272,7 @@ const NestedLists = ({
   const nextDepth = depth + 1;
 
   const labelStyle = {
-    marginLeft: (depth - 1) * 10,
+    marginLeft: depth * 10,
   };
 
   if (item2.checked) {
