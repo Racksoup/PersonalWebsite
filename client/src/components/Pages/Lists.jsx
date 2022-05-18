@@ -143,117 +143,33 @@ const Lists = ({
             <div className='Items'>
               {list.map((item) => {
                 if (item.parentId === item.listId && !item.checked) {
-                  const labelStyle = {};
-
-                  if (item.checked) {
-                    labelStyle.textDecorationLine = 'line-through';
-                    labelStyle.textDecorationThickness = '4px';
-                    labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
-                  }
                   return (
-                    <>
-                      <div className='Item' onClick={() => clickedItem(item)}>
-                        <div className='Label' style={labelStyle}>
-                          {item.title}
-                        </div>
-                        <div className='Item-Btns'>
-                          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
-                            <FontAwesomeIcon icon={faPlus} />
-                          </div>
-                          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
-                            <FontAwesomeIcon icon={faX} />
-                          </div>
-                        </div>
-                      </div>
-                      {list.map((item2) => {
-                        if (item2.parentId == item._id && !item2.checked)
-                          return (
-                            <NestedLists
-                              item2={item2}
-                              list={list}
-                              clickedItem={clickedItem}
-                              toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              checkClicked={checkClicked}
-                              deleteListItem={deleteListItem}
-                              depth={1}
-                              addItemClicked={addItemClicked}
-                            />
-                          );
-                      })}
-                      {list.map((item2) => {
-                        if (item2.parentId == item._id && item2.checked)
-                          return (
-                            <NestedLists
-                              item2={item2}
-                              list={list}
-                              clickedItem={clickedItem}
-                              toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              checkClicked={checkClicked}
-                              deleteListItem={deleteListItem}
-                              depth={1}
-                              addItemClicked={addItemClicked}
-                            />
-                          );
-                      })}
-                    </>
+                    <NestedLists
+                      item2={item}
+                      list={list}
+                      clickedItem={clickedItem}
+                      toggleNewNestedItemModal={toggleNewNestedItemModal}
+                      checkClicked={checkClicked}
+                      deleteListItem={deleteListItem}
+                      depth={0}
+                      addItemClicked={addItemClicked}
+                    />
                   );
                 }
               })}
               {list.map((item) => {
                 if (item.parentId === item.listId && item.checked) {
-                  const labelStyle = {};
-
-                  if (item.checked) {
-                    labelStyle.textDecorationLine = 'line-through';
-                    labelStyle.textDecorationThickness = '4px';
-                    labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
-                  }
                   return (
-                    <>
-                      <div className='Item' onClick={() => clickedItem(item)}>
-                        <div className='Label' style={labelStyle}>
-                          {item.title}
-                        </div>
-                        <div className='Item-Btns'>
-                          <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
-                            <FontAwesomeIcon icon={faPlus} />
-                          </div>
-                          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
-                            <FontAwesomeIcon icon={faX} />
-                          </div>
-                        </div>
-                      </div>
-                      {list.map((item2) => {
-                        if (item2.parentId == item._id && !item2.checked)
-                          return (
-                            <NestedLists
-                              item2={item2}
-                              list={list}
-                              clickedItem={clickedItem}
-                              toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              checkClicked={checkClicked}
-                              deleteListItem={deleteListItem}
-                              depth={1}
-                              addItemClicked={addItemClicked}
-                            />
-                          );
-                      })}
-                      {list.map((item2) => {
-                        if (item2.parentId == item._id && item2.checked)
-                          return (
-                            <NestedLists
-                              item2={item2}
-                              list={list}
-                              clickedItem={clickedItem}
-                              toggleNewNestedItemModal={toggleNewNestedItemModal}
-                              checkClicked={checkClicked}
-                              deleteListItem={deleteListItem}
-                              depth={1}
-                              addItemClicked={addItemClicked}
-                            />
-                          );
-                      })}
-                    </>
+                    <NestedLists
+                      item2={item}
+                      list={list}
+                      clickedItem={clickedItem}
+                      toggleNewNestedItemModal={toggleNewNestedItemModal}
+                      checkClicked={checkClicked}
+                      deleteListItem={deleteListItem}
+                      depth={0}
+                      addItemClicked={addItemClicked}
+                    />
                   );
                 }
               })}
