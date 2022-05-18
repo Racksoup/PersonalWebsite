@@ -143,7 +143,7 @@ const Lists = ({
               {list.map((item) => {
                 if (item.parentId === item.listId && !item.checked) {
                   return (
-                    <NestedLists
+                    <ItemChain
                       item={item}
                       list={list}
                       clickedItem={clickedItem}
@@ -159,7 +159,7 @@ const Lists = ({
               {list.map((item) => {
                 if (item.parentId === item.listId && item.checked) {
                   return (
-                    <NestedLists
+                    <ItemChain
                       item={item}
                       list={list}
                       clickedItem={clickedItem}
@@ -180,7 +180,7 @@ const Lists = ({
   );
 };
 
-const NestedLists = ({
+const ItemChain = ({
   item,
   list,
   clickedItem,
@@ -193,8 +193,12 @@ const NestedLists = ({
   const nextDepth = depth + 1;
 
   const labelStyle = {
-    marginLeft: depth * 10,
+    marginLeft: depth * 14,
   };
+
+  if (depth <= 0) {
+    labelStyle.marginLeft = '0';
+  }
 
   if (item.checked) {
     labelStyle.textDecorationLine = 'line-through';
@@ -203,8 +207,8 @@ const NestedLists = ({
   }
 
   const Indent = () => {
-    let shapes = [faAngleRight, faMinus, faPlus, faAsterisk, faStar, faSquare, faCircle];
-    let shapesInd = (depth - 1) % 7;
+    let shapes = [faCircle, faAngleRight, faMinus, faPlus, faAsterisk, faStar, faSquare];
+    let shapesInd = depth % 7;
     let myString = shapes[shapesInd];
     return (
       <div className='Indents'>
@@ -232,7 +236,7 @@ const NestedLists = ({
       {list.map((newItem) => {
         if (newItem.parentId == item._id && !newItem.checked)
           return (
-            <NestedLists
+            <ItemChain
               item={newItem}
               list={list}
               clickedItem={clickedItem}
@@ -247,7 +251,7 @@ const NestedLists = ({
       {list.map((newItem) => {
         if (newItem.parentId == item._id && newItem.checked)
           return (
-            <NestedLists
+            <ItemChain
               item={newItem}
               list={list}
               clickedItem={clickedItem}
