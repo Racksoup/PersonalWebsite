@@ -40,10 +40,6 @@
       border-radius: 0.5rem;
     }
 
-    .sppof {
-      width: 100%;
-    }
-
     .Items {
       width: 100%;
       display: flex;
@@ -51,33 +47,60 @@
 
       .Item {
         width: 100%;
-        height: 3rem;
+        min-height: 3rem;
+        padding: 0 1rem 0 1.5rem;
         border-top: solid 0.1rem rgba(255, 255, 255, 0.2);
         display: flex;
-        padding: 0 2rem;
+        justify-content: space-between;
         align-items: center;
 
         .Label {
-          width: 25rem;
-          font-size: 1.6rem;
+          max-width: 80%;
+          font-size: 1rem;
+          line-height: 1.3rem;
           overflow: hidden;
+
+          .Indents {
+            display: inline;
+
+            .Icon {
+              width: 1.5rem;
+            }
+          }
         }
 
-        .Label-2 {
-          margin: 0 0 0 15px;
-        }
+        &-Btns {
+          display: flex;
 
-        .Checked {
-          margin: 0.3rem 0 0 0;
-          position: fixed;
-          width: 24rem;
-          background: rgba(75, 75, 75, 1);
-          height: 0.15rem;
-        }
+          .Btn {
+            width: 2rem;
+            margin: 0 0.3rem;
+            border: 2px solid black;
+            font-size: 1.6rem;
 
-        .Btn {
-          width: 5rem;
-          margin: 0 0.3rem;
+            &:hover {
+              color: black;
+              font-size: 2rem;
+              border: cyan;
+            }
+
+            &-Add {
+              background-color: rgb(0, 128, 32);
+
+              &:hover {
+                border: rgb(0, 128, 32);
+              }
+            }
+
+            &-Delete {
+              background-color: rgb(128, 15, 0);
+              margin: 0 0.3rem 0 1.2rem;
+
+              &:hover {
+                border: rgb(128, 15, 0);
+              }
+            }
+          }
         }
       }
     }

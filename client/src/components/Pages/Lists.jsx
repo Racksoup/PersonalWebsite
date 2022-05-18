@@ -6,7 +6,17 @@ import NewListModal from '../NewListModal';
 
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faX,
+  faCheck,
+  faMinus,
+  faStar,
+  faAngleRight,
+  faAsterisk,
+  faSquare,
+  faCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import TitleBox from '../TitleBox';
 
@@ -102,7 +112,7 @@ const Lists = ({
         <div className='Nav'>
           {lists.map((list) => (
             <div className='Btn-1' onClick={() => clickedList(list)}>
-              <div className='sppof'>{list.title}</div>
+              {list.title}
             </div>
           ))}
         </div>
@@ -119,21 +129,34 @@ const Lists = ({
             </div>
             <div className='Items'>
               {list.map((item) => {
-                if (item.parentId === item.listId)
+                if (item.parentId === item.listId) {
+                  const labelStyle = {};
+
+                  if (item.checked) {
+                    labelStyle.textDecorationLine = 'line-through';
+                    labelStyle.textDecorationThickness = '4px';
+                    labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
+                  }
                   return (
                     <>
                       <div className='Item' onClick={() => clickedItem(item)}>
-                        <div className='Label'>{item.title}</div>
-                        <div className='Btn' onClick={() => toggleNewNestedItemModal(true)}>
-                          Add
+                        <div className='Label' style={labelStyle}>
+                          {item.title}
                         </div>
-                        <div className='Btn' onClick={() => updateClicked(item)}>
-                          Check
+                        <div className='Item-Btns'>
+                          <div
+                            className='Btn Btn-Add'
+                            onClick={() => toggleNewNestedItemModal(true)}
+                          >
+                            <FontAwesomeIcon icon={faPlus} />
+                          </div>
+                          <div className='Btn' onClick={() => updateClicked(item)}>
+                            <FontAwesomeIcon icon={faCheck} />
+                          </div>
+                          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
+                            <FontAwesomeIcon icon={faX} />
+                          </div>
                         </div>
-                        <div className='Btn' onClick={() => deleteListItem(item._id)}>
-                          Delete
-                        </div>
-                        {item.checked && <div className='Checked' />}
                       </div>
                       {list.map((item2) => {
                         if (item2.parentId == item._id)
@@ -151,6 +174,7 @@ const Lists = ({
                       })}
                     </>
                   );
+                }
               })}
             </div>
           </div>
@@ -172,25 +196,44 @@ const NestedLists = ({
   const nextDepth = depth + 1;
 
   const labelStyle = {
-    marginLeft: depth * 15,
+    marginLeft: (depth - 1) * 10,
+  };
+
+  if (item2.checked) {
+    labelStyle.textDecorationLine = 'line-through';
+    labelStyle.textDecorationThickness = '4px';
+    labelStyle.textDecorationColor = 'rgba(0, 0, 0, 1)';
+  }
+
+  const Indent = () => {
+    let shapes = [faAngleRight, faMinus, faPlus, faAsterisk, faStar, faSquare, faCircle];
+    let shapesInd = (depth - 1) % 7;
+    let myString = shapes[shapesInd];
+    return (
+      <div className='Indents'>
+        <FontAwesomeIcon icon={myString} className='Icon' />
+      </div>
+    );
   };
 
   return (
     <>
       <div className='Item' onClick={() => clickedItem(item2)}>
         <div className='Label' style={labelStyle}>
+          <Indent />
           {item2.title}
         </div>
-        <div className='Btn' onClick={() => toggleNewNestedItemModal(true)}>
-          Add
+        <div className='Item-Btns'>
+          <div className='Btn Btn-Add' onClick={() => toggleNewNestedItemModal(true)}>
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
+          <div className='Btn' onClick={() => updateClicked(item2)}>
+            <FontAwesomeIcon icon={faCheck} />
+          </div>
+          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item2._id)}>
+            <FontAwesomeIcon icon={faX} />
+          </div>
         </div>
-        <div className='Btn' onClick={() => updateClicked(item2)}>
-          Check
-        </div>
-        <div className='Btn' onClick={() => deleteListItem(item2._id)}>
-          Delete
-        </div>
-        {item2.checked && <div className='Checked' />}
       </div>
       {list.map((itemx) => {
         if (itemx.parentId == item2._id)
