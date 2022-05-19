@@ -30,19 +30,15 @@ export default function lists(state = initialState, action) {
         list: state.list.filter((item) => item.title !== payload.title),
       };
     case UPDATED_LISTITEM:
-      let newList = state.list.filter((item) => {
-        if (item._id !== payload._id) {
-          return item;
-        } else {
-          item.title = payload.title;
-          item.checked = payload.checked;
-          return item;
-        }
-      });
-
       return {
         ...state,
-        list: newList,
+        list: state.list.map((item) => {
+          if (item._id !== payload._id) {
+            return item;
+          } else {
+            return payload;
+          }
+        }),
       };
     case DELETED_LIST:
       return {
