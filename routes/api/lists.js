@@ -51,4 +51,25 @@ router.post('/', Auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route   PUT api/lists/:_id
+// @desc    Update one list
+// @access  Private
+router.put('/:_id', Auth, async (req, res) => {
+  const { title } = req.body;
+  const postItem = {};
+  if (title) postItem.title = title;
+  console.log(postItem.title);
+
+  try {
+    const item = await List.findOneAndUpdate({ _id: req.params._id }, postItem, {
+      returnDocument: 'after',
+    });
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;

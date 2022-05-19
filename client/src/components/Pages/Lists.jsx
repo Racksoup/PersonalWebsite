@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/Lists.scss';
-import { getLists, createList, deleteList } from '../../actions/lists';
+import { getLists, createList, deleteList, updateList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
 import Modal from '../Modal';
 import DeleteModal from '../DeleteModal';
@@ -25,6 +25,7 @@ const Lists = ({
   getLists,
   createList,
   deleteList,
+  updateList,
   getList,
   createListItem,
   deleteListItem,
@@ -42,6 +43,7 @@ const Lists = ({
   const [newItemModal, toggleNewItemModal] = useState(false);
   const [newNestedItemModal, toggleNewNestedItemModal] = useState(false);
   const [updateItemModal, toggleUpdateItemModal] = useState(false);
+  const [updateListModal, toggleUpdateListModal] = useState(false);
   const [deleteItemModal, toggleDeleteItemModal] = useState(false);
   const [deleteListModal, toggleDeleteListModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
@@ -108,6 +110,11 @@ const Lists = ({
     }
   };
 
+  const updateListClicked = (list) => {
+    updateList(list);
+    setLastListClicked(list);
+  };
+
   if (!isAuthenticated && !loading) {
     return <Redirect to='/' />;
   }
@@ -165,6 +172,15 @@ const Lists = ({
             state={lastListClicked}
           />
         )}
+        {updateListModal == true && (
+          <Modal
+            toggleModal={toggleUpdateListModal}
+            createListFunc={updateListClicked}
+            initState={lastListClicked}
+            title='Update List'
+            resize={false}
+          />
+        )}
 
         <TitleBox name='Lists' />
         <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
@@ -189,7 +205,7 @@ const Lists = ({
                 <div className='Btn Btn-Add' onClick={() => toggleNewItemModal(true)}>
                   <FontAwesomeIcon icon={faPlus} className='Icon' />
                 </div>
-                <div className='Btn'>
+                <div className='Btn' onClick={() => toggleUpdateListModal(true)}>
                   <FontAwesomeIcon icon={faArrowUp} />
                 </div>
               </div>
@@ -346,6 +362,7 @@ export default connect(mapStateToProps, {
   getLists,
   createList,
   deleteList,
+  updateList,
   getList,
   createListItem,
   deleteListItem,
