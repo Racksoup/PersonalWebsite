@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/Modal.scss';
 
-const DeleteModal = ({ toggleModal, delFunc, state }) => {
+const DeleteModal = ({ toggleModal, delFunc, state, title }) => {
   const submitClicked = (e) => {
     e.stopPropagation();
     delFunc(state._id);
@@ -11,7 +11,7 @@ const DeleteModal = ({ toggleModal, delFunc, state }) => {
   return (
     <div className='Modal-Background' onClick={() => toggleModal(false)}>
       <div className='Modal' onClick={(e) => e.stopPropagation()}>
-        <h2 className='Title'>Delete Item?</h2>
+        <h2 className='Title'>{title}</h2>
         <div className='Btn Btn-Del' onClick={(e) => submitClicked(e)}>
           Delete
         </div>

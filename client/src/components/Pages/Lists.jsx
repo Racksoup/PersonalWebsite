@@ -163,6 +163,7 @@ const Lists = ({
             toggleModal={toggleDeleteItemModal}
             delFunc={deleteListItem}
             state={lastItemClicked}
+            title='Delete Item?'
           />
         )}
         {deleteListModal == true && (
@@ -170,6 +171,7 @@ const Lists = ({
             toggleModal={toggleDeleteListModal}
             delFunc={deleteListClicked}
             state={lastListClicked}
+            title='Delete List?'
           />
         )}
         {updateListModal == true && (
