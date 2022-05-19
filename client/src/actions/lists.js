@@ -20,10 +20,10 @@ export const createList = (list) => async (dispatch) => {
   }
 };
 
-export const deleteList = (list) => async (dispatch) => {
+export const deleteList = (id) => async (dispatch) => {
   try {
-    axios.delete(`api/lists/${list._id}`);
-    dispatch({ type: DELETED_LIST, payload: list });
+    const res = await axios.delete(`api/lists/${id}`);
+    dispatch({ type: DELETED_LIST, payload: res.data });
   } catch (err) {
     console.log(err);
   }

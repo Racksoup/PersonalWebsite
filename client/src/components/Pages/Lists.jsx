@@ -43,6 +43,7 @@ const Lists = ({
   const [newNestedItemModal, toggleNewNestedItemModal] = useState(false);
   const [updateItemModal, toggleUpdateItemModal] = useState(false);
   const [deleteItemModal, toggleDeleteItemModal] = useState(false);
+  const [deleteListModal, toggleDeleteListModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
   const [lastItemClicked, setLastItemClicked] = useState('');
   const newListInitState = { title: '' };
@@ -75,8 +76,8 @@ const Lists = ({
     updateListItem(newItem);
   };
 
-  const deleteListClicked = () => {
-    deleteList(lastListClicked);
+  const deleteListClicked = (list) => {
+    deleteList(list);
     setLastListClicked('');
   };
 
@@ -157,6 +158,13 @@ const Lists = ({
             state={lastItemClicked}
           />
         )}
+        {deleteListModal == true && (
+          <DeleteModal
+            toggleModal={toggleDeleteListModal}
+            delFunc={deleteListClicked}
+            state={lastListClicked}
+          />
+        )}
 
         <TitleBox name='Lists' />
         <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
@@ -173,7 +181,7 @@ const Lists = ({
         {lastListClicked && (
           <div className='List'>
             <div className='ListNav'>
-              <div className='Btn Btn-Delete' onClick={() => deleteListClicked()}>
+              <div className='Btn Btn-Delete' onClick={() => toggleDeleteListModal(true)}>
                 <FontAwesomeIcon icon={faX} className='Icon' />
               </div>
               <h3 className='Title'>{lastListClicked.title}</h3>
