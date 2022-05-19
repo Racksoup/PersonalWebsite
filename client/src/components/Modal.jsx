@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import '../css/Modal.scss';
 
-const NewListModal = ({ toggleModal, createListFunc, initState, title, resize }) => {
-  const [list, setList] = useState(initState);
+const Modal = ({ toggleModal, createListFunc, initState, title, resize }) => {
+  const [item, setList] = useState(initState);
 
   const submitClicked = (e) => {
     e.stopPropagation();
-    createListFunc(list);
+    createListFunc(item);
     toggleModal(false);
   };
 
   const inputChanged = (e) => {
-    setList({ ...list, [e.target.name]: e.target.value });
+    setList({ ...item, [e.target.name]: e.target.value });
   };
 
   return (
@@ -21,7 +21,7 @@ const NewListModal = ({ toggleModal, createListFunc, initState, title, resize })
         {resize == false && (
           <input
             className='Input'
-            value={list.title}
+            value={item.title}
             onChange={(e) => inputChanged(e)}
             name='title'
           />
@@ -29,7 +29,7 @@ const NewListModal = ({ toggleModal, createListFunc, initState, title, resize })
         {resize == true && (
           <textarea
             className='Input'
-            value={list.title}
+            value={item.title}
             onChange={(e) => inputChanged(e)}
             name='title'
           />
@@ -42,4 +42,4 @@ const NewListModal = ({ toggleModal, createListFunc, initState, title, resize })
   );
 };
 
-export default NewListModal;
+export default Modal;

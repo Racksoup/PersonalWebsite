@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../css/Lists.scss';
 import { getLists, createList, deleteList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
-import NewListModal from '../NewListModal';
+import Modal from '../Modal';
 
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -98,7 +98,7 @@ const Lists = ({
     <div className='Section'>
       <div className='Lists'>
         {modal == true && (
-          <NewListModal
+          <Modal
             toggleModal={toggleModal}
             createListFunc={createList}
             initState={newListInitState}
@@ -107,7 +107,7 @@ const Lists = ({
           />
         )}
         {newItemModal == true && (
-          <NewListModal
+          <Modal
             toggleModal={toggleNewItemModal}
             createListFunc={createListItem}
             initState={newItemInitState}
@@ -116,7 +116,7 @@ const Lists = ({
           />
         )}
         {newNestedItemModal == true && (
-          <NewListModal
+          <Modal
             toggleModal={toggleNewNestedItemModal}
             createListFunc={createListItem}
             initState={newNestedItemInitState}
@@ -125,7 +125,7 @@ const Lists = ({
           />
         )}
         {updateItemModal == true && (
-          <NewListModal
+          <Modal
             toggleModal={toggleUpdateItemModal}
             createListFunc={updateListItem}
             initState={lastItemClicked}
