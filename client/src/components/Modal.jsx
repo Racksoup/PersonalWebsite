@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/Modal.scss';
 
 const Modal = ({ toggleModal, createListFunc, initState, title, resize }) => {
-  const [item, setList] = useState(initState);
+  const [item, setItem] = useState(initState);
 
   const submitClicked = (e) => {
     e.stopPropagation();
@@ -11,7 +11,7 @@ const Modal = ({ toggleModal, createListFunc, initState, title, resize }) => {
   };
 
   const inputChanged = (e) => {
-    setList({ ...item, [e.target.name]: e.target.value });
+    setItem({ ...item, [e.target.name]: e.target.value });
   };
 
   return (
