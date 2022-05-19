@@ -76,7 +76,9 @@ router.put('/:_id', Auth, async (req, res) => {
   postItem.checked = checked;
 
   try {
-    const item = await ListItem.findOneAndUpdate({ _id: req.params._id }, postItem);
+    const item = await ListItem.findOneAndUpdate({ _id: req.params._id }, postItem, {
+      returnDocument: 'after',
+    });
     await item.save();
     res.json(item);
   } catch (err) {

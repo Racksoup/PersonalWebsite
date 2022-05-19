@@ -33,10 +33,10 @@ export default function lists(state = initialState, action) {
       return {
         ...state,
         list: state.list.filter((item) => {
-          if (item.title !== payload.title) {
+          if (item._id !== payload._id) {
             return item;
           } else {
-            return payload;
+            return item;
           }
         }),
       };

@@ -15,6 +15,7 @@ import {
   faAsterisk,
   faSquare,
   faCircle,
+  faArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
 import TitleBox from '../TitleBox';
@@ -39,6 +40,7 @@ const Lists = ({
   const [modal, toggleModal] = useState(false);
   const [newItemModal, toggleNewItemModal] = useState(false);
   const [newNestedItemModal, toggleNewNestedItemModal] = useState(false);
+  const [updateItemModal, toggleUpdateItemModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
   const [lastItemClicked, setLastItemClicked] = useState('');
   const newListInitState = { title: '' };
@@ -82,6 +84,12 @@ const Lists = ({
     toggleNewNestedItemModal(true);
   };
 
+  const updateItemClicked = (e, item) => {
+    e.stopPropagation();
+    setLastItemClicked(item);
+    toggleUpdateItemModal(true);
+  };
+
   if (!isAuthenticated && !loading) {
     return <Redirect to='/' />;
   }
@@ -116,6 +124,16 @@ const Lists = ({
             resize={true}
           />
         )}
+        {updateItemModal == true && (
+          <NewListModal
+            toggleModal={toggleUpdateItemModal}
+            createListFunc={updateListItem}
+            initState={lastItemClicked}
+            title='Update Item'
+            resize={true}
+          />
+        )}
+
         <TitleBox name='Lists' />
         <div className='Btn NewListBtn' onClick={() => toggleModal(true)}>
           <FontAwesomeIcon className='Icon' icon={faPlus} />
@@ -135,8 +153,13 @@ const Lists = ({
                 <FontAwesomeIcon icon={faX} className='Icon' />
               </div>
               <h3 className='Title'>{lastListClicked.title}</h3>
-              <div className='Btn Btn-Add' onClick={() => toggleNewItemModal(true)}>
-                <FontAwesomeIcon icon={faPlus} className='Icon' />
+              <div className='Btns'>
+                <div className='Btn Btn-Add' onClick={() => toggleNewItemModal(true)}>
+                  <FontAwesomeIcon icon={faPlus} className='Icon' />
+                </div>
+                <div className='Btn'>
+                  <FontAwesomeIcon icon={faArrowUp} />
+                </div>
               </div>
             </div>
             <div className='Items'>
@@ -152,6 +175,7 @@ const Lists = ({
                       deleteListItem={deleteListItem}
                       depth={0}
                       addItemClicked={addItemClicked}
+                      updateItemClicked={updateItemClicked}
                     />
                   );
                 }
@@ -168,6 +192,7 @@ const Lists = ({
                       deleteListItem={deleteListItem}
                       depth={0}
                       addItemClicked={addItemClicked}
+                      updateItemClicked={updateItemClicked}
                     />
                   );
                 }
@@ -189,6 +214,7 @@ const ItemChain = ({
   deleteListItem,
   depth,
   addItemClicked,
+  updateItemClicked,
 }) => {
   const nextDepth = depth + 1;
 
@@ -228,6 +254,9 @@ const ItemChain = ({
           <div className='Btn Btn-Add' onClick={(e) => addItemClicked(e, item)}>
             <FontAwesomeIcon icon={faPlus} />
           </div>
+          <div className='Btn' onClick={(e) => updateItemClicked(e, item)}>
+            <FontAwesomeIcon icon={faArrowUp} />
+          </div>
           <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
             <FontAwesomeIcon icon={faX} />
           </div>
@@ -245,6 +274,7 @@ const ItemChain = ({
               deleteListItem={deleteListItem}
               depth={nextDepth}
               addItemClicked={addItemClicked}
+              updateItemClicked={updateItemClicked}
             />
           );
       })}
@@ -260,6 +290,7 @@ const ItemChain = ({
               deleteListItem={deleteListItem}
               depth={nextDepth}
               addItemClicked={addItemClicked}
+              updateItemClicked={updateItemClicked}
             />
           );
       })}
