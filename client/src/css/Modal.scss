@@ -42,6 +42,10 @@
 
   .Btn {
     margin: 1rem 0 1rem 0;
+
+    &-Del {
+      background-color: rgb(180, 0, 0);
+    }
   }
 }
 

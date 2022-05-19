@@ -3,6 +3,7 @@ import '../../css/Lists.scss';
 import { getLists, createList, deleteList } from '../../actions/lists';
 import { getList, createListItem, deleteListItem, updateListItem } from '../../actions/listItem';
 import Modal from '../Modal';
+import DeleteModal from '../DeleteModal';
 
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,6 +42,7 @@ const Lists = ({
   const [newItemModal, toggleNewItemModal] = useState(false);
   const [newNestedItemModal, toggleNewNestedItemModal] = useState(false);
   const [updateItemModal, toggleUpdateItemModal] = useState(false);
+  const [deleteItemModal, toggleDeleteItemModal] = useState(false);
   const [lastListClicked, setLastListClicked] = useState('');
   const [lastItemClicked, setLastItemClicked] = useState('');
   const newListInitState = { title: '' };
@@ -90,6 +92,21 @@ const Lists = ({
     toggleUpdateItemModal(true);
   };
 
+  const itemDeleteClicked = (e, item) => {
+    e.stopPropagation();
+    let hasChildren = false;
+    list.map((listItem) => {
+      if (item._id === listItem.parentId) {
+        hasChildren = true;
+      }
+    });
+    if (!hasChildren) {
+      deleteListItem(item._id);
+    } else {
+      toggleDeleteItemModal(true);
+    }
+  };
+
   if (!isAuthenticated && !loading) {
     return <Redirect to='/' />;
   }
@@ -131,6 +148,13 @@ const Lists = ({
             initState={lastItemClicked}
             title='Update Item'
             resize={true}
+          />
+        )}
+        {deleteItemModal == true && (
+          <DeleteModal
+            toggleModal={toggleDeleteItemModal}
+            delFunc={deleteListItem}
+            state={lastItemClicked}
           />
         )}
 
@@ -176,6 +200,7 @@ const Lists = ({
                       depth={0}
                       addItemClicked={addItemClicked}
                       updateItemClicked={updateItemClicked}
+                      itemDeleteClicked={itemDeleteClicked}
                     />
                   );
                 }
@@ -193,6 +218,7 @@ const Lists = ({
                       depth={0}
                       addItemClicked={addItemClicked}
                       updateItemClicked={updateItemClicked}
+                      itemDeleteClicked={itemDeleteClicked}
                     />
                   );
                 }
@@ -215,6 +241,7 @@ const ItemChain = ({
   depth,
   addItemClicked,
   updateItemClicked,
+  itemDeleteClicked,
 }) => {
   const nextDepth = depth + 1;
 
@@ -257,7 +284,7 @@ const ItemChain = ({
           <div className='Btn' onClick={(e) => updateItemClicked(e, item)}>
             <FontAwesomeIcon icon={faArrowUp} />
           </div>
-          <div className='Btn Btn-Delete' onClick={() => deleteListItem(item._id)}>
+          <div className='Btn Btn-Delete' onClick={(e) => itemDeleteClicked(e, item)}>
             <FontAwesomeIcon icon={faX} />
           </div>
         </div>
@@ -275,6 +302,7 @@ const ItemChain = ({
               depth={nextDepth}
               addItemClicked={addItemClicked}
               updateItemClicked={updateItemClicked}
+              itemDeleteClicked={itemDeleteClicked}
             />
           );
       })}
@@ -291,6 +319,7 @@ const ItemChain = ({
               depth={nextDepth}
               addItemClicked={addItemClicked}
               updateItemClicked={updateItemClicked}
+              itemDeleteClicked={itemDeleteClicked}
             />
           );
       })}
